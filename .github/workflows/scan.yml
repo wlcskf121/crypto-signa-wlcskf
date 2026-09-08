@@ -1,0 +1,175 @@
+name: Crypto Signal Engine — Scan
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+    inputs:
+      send_test_alert:
+        description: "Invia alert di TEST con dati finti (non fa scan)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: signal-engine-scan
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          # fetch-depth ridotto da 0 (storia completa) a 1.
+          # Causa del checkout lento (~2m49s): la storia git contiene
+          # migliaia di versioni dei .db committati ad ogni scan.
+          # fetch-depth: 1 scarica solo l'ultimo stato.
+          # Se il "git pull --rebase" in fondo fallisce, alza a 20.
+          fetch-depth: 1
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt --break-system-packages || pip install -r requirements.txt
+
+      - name: Fetch candele H4/H1 (BTC_USDT + PAXG_USDT)
+        env:
+          TWELVEDATA_API_KEY: ${{ secrets.TWELVEDATA_API_KEY }}
+        run: python3 candles_runner.py
+
+      - name: Daily Brief (08:00 UTC)
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: |
+          HOUR=$(date -u +%H)
+          MINUTE=$(date -u +%M)
+          if [ "$HOUR" = "04" ] && [ "$MINUTE" -lt "5" ]; then
+            python3 daily_brief_runner.py
+          fi
+
+      - name: Fetch candele M15/D1 (BTC_USDT + PAXG_USDT)
+        env:
+          TWELVEDATA_API_KEY: ${{ secrets.TWELVEDATA_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python3 v3_scanner_runner.py
+
+      - name: Institutional Scanner V4.1 Intraday Wave (PAXG_USDT + BTC_USDT)
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python3 v41_scanner_runner.py
+
+      - name: Institutional Scanner V4.1 Phase 1 (PAXG_USDT + BTC_USDT)
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python3 v41p1_scanner_runner.py
+
+      - name: Liquidity Hunter (BTC_USDT + PAXG_USDT)
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python3 lh_scanner_runner.py
+
+      - name: TT Scanner (BTC_USDT + XAU_USD)
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python3 tt_scanner_runner.py
+
+      - name: LH Overnight Digest (19:00 UTC)
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: |
+          HOUR=$(date -u +%H)
+          MINUTE=$(date -u +%M)
+          if [ "$HOUR" = "19" ] && [ "$MINUTE" -lt "5" ]; then
+            python3 lh_digest_runner.py
+          fi
+
+      # ── RIATTIVATO il 24/08: questo step probabilmente genera
+      # ANCHE TRB (config.yaml: "Edge Lab (OTE-SC) + Trend Rider —
+      # condividono il market context"). Disattivarlo per il vecchio
+      # OTE-SC il 21/08 ha spento TRB per errore, senza saperlo --
+      # market_context_snapshots e' rimasta vuota da allora e TRB
+      # silenzioso per 3 giorni. OTE-SC tornera' a mandare notifiche
+      # (rumore, non dannoso) insieme a TRB -- da verificare con
+      # core/edge_lab_runner.py se si possono separare i due.
+      - name: Institutional Edge Lab — OTE-SC (BTC_USDT + PAXG_USDT)
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python3 edge_lab_runner.py
+
+      - name: OTE Scanner (BTC_USDT + XAU_USD)
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python3 ote_scanner_runner.py
+
+      - name: Market Radar V1 (BTC_USDT + XAU_USD)
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python3 market_radar_scanner_runner.py
+
+      - name: Cleanup old snapshots
+        run: python3 cleanup_snapshots.py
+
+      - name: Commit database e dashboard
+        run: |
+          git config user.name "signal-engine-bot"
+          git config user.email "actions@github.com"
+
+          # Sprint 0: il Decision Ledger (data/decision_ledger.db) persiste
+          # con lo stesso meccanismo di signals.db.
+          git add data/signals.db data/decision_ledger.db
+
+          DB_CHANGED=false
+          git diff --staged --quiet || DB_CHANGED=true
+
+          if [ "$DB_CHANGED" = "true" ]; then
+            python3 generate_unified_dashboard.py
+            python3 generate_analytics_dashboard.py
+            python3 generate_engine_edge_dashboard.py
+            python3 generate_radar_lab_dashboard.py
+
+            git add data/signals.db data/decision_ledger.db \
+                    docs/unified_dashboard.html \
+                    docs/analytics_dashboard.html \
+                    docs/engine_edge_dashboard.html \
+                    docs/radar_lab_dashboard.html
+
+            git commit -m "Scanner + Dashboard $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+            git pull --rebase origin main && git push
+          else
+            echo "DB non cambiato, nessun commit"
+          fi
