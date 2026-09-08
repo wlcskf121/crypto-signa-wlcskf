@@ -1,0 +1,247 @@
+# ============================================================
+# Crypto Signal Engine - Institutional Adaptive Framework V2.1
+# ============================================================
+
+FRAMEWORK_NAME: "Crypto Signal Engine"
+FRAMEWORK_VERSION: "V2.1"
+
+# ============================================================
+# ASSET ATTIVI — fonte di verità unica
+# ============================================================
+# Prima gli asset erano duplicati in 7 punti (qui, nei singoli scanner,
+# e hardcoded in candles_runner.py). Ora candles_runner legge ASSETS.
+#
+# PAXG_USDT RIMOSSO: non replica i movimenti dell'oro. Verificato:
+#   oro spot a 4174 mentre PAXG massimo 4118 nello stesso momento;
+#   crollo di 60$ in 45 min sull'oro, compresso su PAXG.
+# La metodologia SMC cerca impronte istituzionali che su un token
+# ERC-20 con book sottile, scambiato da retail crypto, non esistono.
+#
+# XAU_USD: oro spot vero, via Twelve Data (vedi core/data_source.py).
+# ATTENZIONE: XAU_USD non ha volume (mercato OTC). Gli engine
+# volume-dependent producono valori privi di significato su questo
+# asset — vedi data_source.has_volume().
+ASSETS:
+  - BTC_USDT
+  - XAU_USD
+
+# ============================================================
+# Strategie abilitate
+# ============================================================
+STRATEGIES:
+  pullback_ema:
+    enabled: true     # V1.0 Frozen - sempre attiva, benchmark
+
+  breakout_retest:
+    enabled: true
+
+  liquidity_sweep:
+    enabled: true
+
+  compression_breakout:
+    enabled: true
+
+  pivot_reversal:
+    enabled: true
+
+  zone_confirmation:
+    enabled: true     # Zone + Confirmation V1.0
+
+# ============================================================
+# Correlation Engine
+# ============================================================
+CORRELATION_THRESHOLD: 0.80
+CORRELATION_LOOKBACK: 100
+CORRELATION_TIMEFRAME: H1
+
+# ============================================================
+# Scoring e notifiche
+# ============================================================
+NOTIFY_FINAL_SCORE_THRESHOLD: 8
+
+# ============================================================
+# Parametri operativi V1 (invariati, usati da PullbackEMAFrozen)
+# ============================================================
+STRATEGY_NAME: "Pullback EMA Trend Strategy"
+STRATEGY_VERSION: "V1.0"
+
+ATR_MULTIPLIER: 1.5
+MIN_RR: 2.0
+DB_SCORE_THRESHOLD: 8
+TELEGRAM_SCORE_THRESHOLD: 8
+
+COOLDOWN_HOURS: 12
+TRADE_EXPIRY_BARS: 72
+
+SCAN_INTERVAL_MINUTES: 15
+PIVOT_LOOKBACK: 5
+
+# ============================================================
+# Exchange / dati
+# ============================================================
+# EXCHANGE_BASE_URL vale per gli asset Crypto.com.
+# Per XAU_USD il provider è Twelve Data (endpoint fisso nel modulo)
+# e la chiave arriva da GitHub Secrets: TWELVEDATA_API_KEY
+EXCHANGE_BASE_URL: "https://api.crypto.com/exchange/v1"
+MAX_CANDLES_PER_CALL: 300
+REQUEST_DELAY_SECONDS: 0.75
+BOOTSTRAP_TARGET_CANDLES: 300
+
+# ============================================================
+# Notifiche (da GitHub Secrets, NON committare i valori reali)
+# ============================================================
+TELEGRAM_BOT_TOKEN: ""
+TELEGRAM_CHAT_ID: ""
+DISCORD_WEBHOOK_URL: ""
+NTFY_TOPIC: ""
+
+# ============================================================
+# Macro
+# ============================================================
+MACRO_EVENTS_FILE: "macro_events.yaml"
+MACRO_WINDOW_MINUTES: 60
+
+# ============================================================
+# Database e logging
+# ============================================================
+DB_PATH: "data/signals.db"
+LOG_FILE: "logs/engine.log"
+
+# ============================================================
+# Watchlist
+# ============================================================
+WATCHLIST:
+  - BTC_USDT
+  - ETH_USDT
+  - ADA_USDT
+  - SOL_USDT
+  - LINK_USDT
+  - XRP_USDT
+  - DOGE_USDT
+  - LTC_USDT
+  - DOT_USDT
+  - FIL_USDT
+  - BCH_USDT
+  - WIF_USDT
+  - XLM_USDT
+
+# ============================================================
+# Timeframe
+# ============================================================
+TIMEFRAMES:
+  H4: "4h"
+  H1: "1h"
+
+EMA_PERIODS: [21, 50, 100, 200]
+ATR_PERIOD: 14
+
+# ============================================================
+# Institutional Scanner Framework V3.2 Frozen (benchmark)
+# ============================================================
+V3_SCANNER:
+  enabled: true
+  assets:
+    - BTC_USDT
+    - XAU_USD
+
+# ============================================================
+# Institutional Scanner Framework V3.2 Dynamic (sperimentale)
+# ============================================================
+V3D_SCANNER:
+  enabled: true
+  assets:
+    - BTC_USDT
+    - XAU_USD
+
+# ============================================================
+# Institutional Scanner Framework V4.0 Daily Edition (isolato)
+# ============================================================
+V4_SCANNER:
+  enabled: true
+  assets:
+    - BTC_USDT
+    - XAU_USD
+
+# ============================================================
+# TT Scanner
+# ============================================================
+TT_SCANNER:
+  enabled: true
+  assets:
+    - BTC_USDT
+    - XAU_USD
+    
+# ============================================================
+# Institutional Scanner V4.1 Intraday Wave Edition.
+# ============================================================
+V41_SCANNER:
+  enabled: false
+  assets:
+    - BTC_USDT
+    - XAU_USD
+
+# ============================================================
+# Institutional Scanner V4.1 Phase 1 — Money Flow & Intraday Edge
+# ============================================================
+V41P1_SCANNER:
+  enabled: true
+  assets:
+    - BTC_USDT
+    - XAU_USD
+
+# ============================================================
+# Edge Lab (OTE-SC) + Trend Rider — condividono il market context
+# NOTA: questa chiave prima MANCAVA e i runner usavano il fallback
+# hardcoded ["BTC_USDT", "PAXG_USDT"] nel codice.
+# ============================================================
+EDGE_LAB:
+  assets:
+    - BTC_USDT
+    - XAU_USD
+
+# ============================================================
+# OTE Scanner — "Zona prima, direzione dopo"
+# Sostituisce la logica attiva di Edge Lab OTE-SC.
+# Edge Lab resta nel config ma il suo step in scan.yml e' commentato.
+# ============================================================
+OTE_SCANNER:
+  enabled: true
+  assets:
+    - BTC_USDT
+    - XAU_USD
+
+# ============================================================
+# Liquidity Hunter
+# NOTA: anche questa chiave prima MANCAVA (fallback hardcoded).
+# ============================================================
+LH_SCANNER:
+  assets:
+    - BTC_USDT
+    - XAU_USD
+
+# ============================================================
+# Market Radar V1 — riconoscimento esaurimenti (SOLA REGISTRAZIONE)
+# Il radar NON genera BUY/SELL: registra "Entry Zone da osservare" e ne
+# misura il comportamento (respiro MFE/MAE, stop, TP scalp, BE) nella
+# tabella radar_zones. La validazione avviene dalla dashboard Radar Lab (beta).
+# ============================================================
+MARKET_RADAR:
+  enabled: true
+  assets:
+    - BTC_USDT
+    - XAU_USD
+  # Soglie di transizione della macchina a stati (LARGHE all'inizio,
+  # da restringere sui dati). velocity 0.6 = calibrata sui dati M15 reali.
+  velocity_min: 0.6            # impulso "veloce" (ROC/candela in ATR)
+  amplitude_atr_min: 2.0       # impulso "ampio" (da structure_state)
+  context_zone_max_atr: 1.0    # prezzo entro N ATR da una zona tecnica
+  exhaustion_atr_ratio: 0.7    # contrazione ATR sotto cui = esaurimento
+  observe_window_bars: 30      # candele su cui misurare respiro dopo la zona
+  # "Fotografia" allo scatto — livelli suggeriti (notifiche future + validazione).
+  # Tarati sul trading reale: scalp veloce 1 ATR, BE 1 ATR, stop equilibrato 1 ATR.
+  # Solo registrati: il monitor dice se il respiro li raggiunge, non chiude nulla.
+  stop_loss_atr: 1.0
+  tp_scalp_atr: 1.0
+  be_trigger_atr: 1.0
+  # V1: notifiche SPENTE (sola registrazione). true per gli alert "zona da osservare".
+  notify: false
