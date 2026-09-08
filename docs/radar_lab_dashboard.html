@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="it"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Radar Lab (beta)</title><style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;600&display=swap');
+:root{--bg:#0d0f14;--surface:#141720;--border:#1e2330;--accent:#4fffb0;--accent2:#ff6b6b;
+--accent3:#ffd166;--accent5:#38bdf8;--text:#e2e8f0;--dim:#5a6478;--buy:#4fffb0;--sell:#ff6b6b;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',sans-serif;font-size:14px;line-height:1.6}
+header{border-bottom:1px solid var(--border);padding:18px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+header h1{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent5)}
+.beta{font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(255,209,102,.15);color:var(--accent3);margin-left:8px;letter-spacing:.08em}
+header .meta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)}
+header a{color:var(--accent5);text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:11px}
+.container{max-width:1100px;margin:0 auto;padding:24px 32px}
+.intro{font-size:13px;color:var(--dim);max-width:720px;margin-bottom:24px;line-height:1.7}
+.intro strong{color:var(--text)}
+.summary-grid{display:grid;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:20px}
+.summary-grid.c4{grid-template-columns:repeat(4,1fr)}
+.summary-grid.c5{grid-template-columns:repeat(5,1fr)}
+.summary-grid>div{background:var(--surface);padding:16px 8px;text-align:center}
+.big{font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:600}
+.big.pos{color:var(--buy)}.big.neg{color:var(--sell)}.big.warn{color:var(--accent3)}
+.lbl{font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);display:block;margin-top:4px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:16px}
+.ch{padding:12px 16px;border-bottom:1px solid var(--border);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse}
+th{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap}
+td{padding:10px 14px;border-bottom:1px solid var(--border);font-size:13px;white-space:nowrap}
+tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)}
+.mono{font-family:'IBM Plex Mono',monospace;font-size:12px}
+.pos{color:var(--buy);font-weight:600}.neg{color:var(--sell)}.warn{color:var(--accent3)}
+.prov{font-size:10px;color:var(--dim);font-style:italic}
+.empty{text-align:center;padding:32px 16px;color:var(--dim);font-size:13px;line-height:1.7}
+.note{font-size:11px;color:var(--dim);padding:10px 16px;border-top:1px solid var(--border);line-height:1.6}
+@media(max-width:640px){
+  header{padding:14px 16px}.container{padding:12px}
+  .intro{font-size:12px}
+  .summary-grid.c4{grid-template-columns:repeat(2,1fr)}
+  .summary-grid.c5{grid-template-columns:repeat(2,1fr)}
+  .big{font-size:18px}
+  .ch{font-size:10px;padding:10px 12px}
+  th,td{padding:9px 12px;font-size:12px}
+}
+</style></head>
+<body>
+<header>
+  <h1>Radar Lab<span class="beta">BETA</span></h1>
+  <div class="meta">2026-09-08 13:40 UTC &nbsp;|&nbsp; <a href="engine_edge_dashboard.html">&larr; Engine Edge Lab</a></div>
+</header>
+<div class="container">
+  <p class="intro">
+    Validazione del <strong>Market Radar</strong> in sola osservazione. Il radar non compra
+    e non vende: segnala «zone da osservare» dopo un impulso esteso che perde forza.
+    Qui misuriamo <strong>cosa fa il prezzo dopo</strong> ogni zona — quanto rimbalza (MFE) e
+    quanto soffre prima (MAE), in unita' di ATR. <strong>Nessuna soglia di successo e' imposta:</strong>
+    i dati grezzi mostrano se e quanto esiste un edge. Le conclusioni arrivano dopo 300–500 zone.
+  </p>
+  <div class="summary-grid c4">
+  <div><span class="big ">217</span><span class="lbl">Zone emesse</span></div>
+  <div><span class="big ">217</span><span class="lbl">Chiuse</span></div>
+  <div><span class="big pos">1.879</span><span class="lbl">MFE medio (ATR)</span></div>
+  <div><span class="big neg">1.712</span><span class="lbl">MAE medio (ATR)</span></div>
+</div><div class="card"><div class="ch">Per Asset</div>
+  <div class="table-scroll"><table><thead><tr>
+    <th>Asset</th><th>Emesse</th><th>Chiuse</th><th>MFE atr</th><th>MAE atr</th><th>Candele al MFE</th>
+  </tr></thead><tbody><tr><td><strong>BTC_USDT</strong></td>
+  <td class="mono">155</td><td class="mono">155</td>
+  <td class="mono"><span class="pos">+2.007</span></td><td class="mono"><span class="neg">1.786</span></td>
+  <td class="mono">17.14</td></tr><tr><td><strong>XAU_USD</strong></td>
+  <td class="mono">62</td><td class="mono">62</td>
+  <td class="mono"><span class="pos">+1.559</span></td><td class="mono"><span class="neg">1.525</span></td>
+  <td class="mono">14.226</td></tr></tbody></table></div></div><div class="card"><div class="ch">Ipotesi velocità — rimbalzo per fascia di impulso</div>
+  <div class="table-scroll"><table><thead><tr>
+    <th>Velocità impulso</th><th>N</th><th>MFE atr</th><th>MAE atr</th>
+  </tr></thead><tbody><tr><td>sotto soglia (< 0.6) ⚠</td><td class="mono">0</td><td class="empty" colspan="2" style="text-align:left">nessun dato</td></tr><tr><td>normale (0.6–0.8)</td><td class="mono">147</td><td class="mono"><span class="pos">+1.838</span></td><td class="mono"><span class="neg">1.655</span></td></tr><tr><td>veloce (0.8–1.0)</td><td class="mono">43</td><td class="mono"><span class="pos">+1.824</span></td><td class="mono"><span class="neg">1.729</span></td></tr><tr><td>molto veloce (≥ 1.0) <span class="prov">(provv.)</span></td><td class="mono">11</td><td class="mono"><span class="pos">+1.247</span></td><td class="mono"><span class="neg">2.319</span></td></tr></tbody></table></div>
+  <div class="note">Se il radar ha edge sulla velocità, le fasce più veloci mostrano un MFE medio più alto.
+  Numeri sotto 30 campioni sono provvisori: rumore, non conclusioni.</div></div><div class="card"><div class="ch">WR Reale — SL 1 ATR vs TP 2 ATR (chi arriva primo)</div>
+  <div class="summary-grid c5" style="border:none;margin:0">
+    <div><span class="big ">107</span><span class="lbl">Zone con esito</span></div>
+    <div><span class="big pos">34</span><span class="lbl">TP primo</span></div>
+    <div><span class="big neg">73</span><span class="lbl">SL primo</span></div>
+    <div><span class="big warn">31.8%</span><span class="lbl">Win Rate reale</span></div>
+    <div><span class="big neg">-0.047R</span><span class="lbl">Expectancy (1:2)</span></div>
+  </div>
+  <div class="table-scroll"><table><thead><tr><th>Asset</th><th>N</th><th>TP primo</th><th>SL primo</th><th>WR</th><th>Exp (1:2)</th></tr></thead><tbody><tr>
+  <td><strong>BTC_USDT</strong></td>
+  <td class="mono">84</td>
+  <td class="mono pos">30</td>
+  <td class="mono neg">54</td>
+  <td class="mono warn">35.7%</td>
+  <td class="mono pos">+0.071R</td>
+</tr><tr>
+  <td><strong>XAU_USD</strong> <span class="prov">(provv.)</span></td>
+  <td class="mono">23</td>
+  <td class="mono pos">4</td>
+  <td class="mono neg">19</td>
+  <td class="mono neg">17.4%</td>
+  <td class="mono neg">-0.478R</td>
+</tr></tbody></table></div>
+  <div class="note">Il numero che conta: se il TP (2 ATR) viene toccato prima dello SL (1 ATR)
+  il trade sarebbe vincente a +2R; se lo SL arriva prima, perdente a -1R.
+  Breakeven a 33.3% WR. Zone senza tocco di nessuno dei due non sono conteggiate.</div></div><div class="card"><div class="ch">Gestione — TP target / BE / lascia-correre</div>
+  <div class="summary-grid c4" style="border:none;margin:0">
+    <div><span class="big pos">43.3%</span><span class="lbl">zone che colpiscono il TP (2 ATR)</span></div>
+    <div><span class="big ">94</span><span class="lbl">TP colpiti su 217</span></div>
+    <div><span class="big ">62.2%</span><span class="lbl">che raggiungono il BE</span></div>
+    <div><span class="big pos">1.777</span><span class="lbl">respiro OLTRE il TP (ATR)</span></div>
+  </div>
+  <div class="note">Il numero chiave e' l'ultimo: quanto il respiro continua <strong>oltre</strong> il TP target (2 ATR).
+  Se e' alto, il trailing batteva il target secco. Se e' ~0, chiudere a 2 ATR bastava.
+  Tutti i livelli sono registrati: nulla viene chiuso, si misura solo cosa fa il prezzo.</div></div><div class="card"><div class="ch">Stop Loss — equilibrio respiro/stop</div>
+  <div class="summary-grid c4" style="border:none;margin:0">
+    <div><span class="big warn">58.5%</span><span class="lbl">zone che toccano lo stop</span></div>
+    <div><span class="big ">127</span><span class="lbl">tocchi su 217</span></div>
+    <div><span class="big pos">29.1%</span><span class="lbl">di cui rimbalza dopo (≥1 ATR)</span></div>
+    <div><span class="big ">37</span><span class="lbl">respiro recuperato</span></div>
+  </div>
+  <div class="note">Se molte zone toccano lo stop <strong>ma poi rimbalzano</strong>, lo stop e'
+  troppo stretto e taglierebbe il guadagno. Se quasi nessuna rimbalza dopo il tocco, lo stop e'
+  equilibrato. Lo stop e' solo registrato: non interrompe la misura del respiro.</div></div><div class="card"><div class="ch">Funnel della macchina a stati</div>
+  <div class="table-scroll"><table><tbody><tr><td>Ingressi in Osservazione</td><td class="mono">261</td></tr><tr><td>→ diventate Entry Zone</td><td class="mono">217</td></tr><tr><td>→ invalidate (tornate a Riposo)</td><td class="mono">261</td></tr></tbody></table></div>
+  <div class="note">Quante osservazioni si trasformano davvero in Entry Zone, e quante
+  vengono invalidate. Un funnel sano non emette su ogni osservazione.</div></div>
+</div>
+</body></html>
