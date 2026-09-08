@@ -12,39 +12,6 @@ from datetime import datetime, timezone
 DB_PATH = "data/signals.db"
 OUT_PATH = "docs/index.html"
 
-STATUS_ZH = {
-    "TP":        "止盈",
-    "SL":        "止损",
-    "OPEN":      "持仓中",
-    "EXPIRED":   "已过期",
-    "GENERATED": "已生成",
-    "REJECTED":  "已过滤",
-}
-
-REGIME_ZH = {
-    "RANGING":    "震荡",
-    "TRENDING":   "趋势",
-    "TREND_UP":   "上行趋势",
-    "TREND_DOWN": "下行趋势",
-    "HIGH_VOL":   "高波动",
-    "LOW_VOL":    "低波动",
-    "LOW_VOLA":   "低波动",
-    "VOLATILE":   "剧烈波动",
-    "QUIET":      "平静",
-}
-
-MONTH_ZH = {
-    "Jan": "1月", "Feb": "2月", "Mar": "3月", "Apr": "4月",
-    "May": "5月", "Jun": "6月", "Jul": "7月", "Aug": "8月",
-    "Sep": "9月", "Oct": "10月", "Nov": "11月", "Dec": "12月",
-}
-
-
-def zh_date(s):
-    for en, cn in MONTH_ZH.items():
-        s = s.replace(en, cn)
-    return s
-
 
 def load_data():
     if not os.path.exists(DB_PATH):
@@ -131,20 +98,13 @@ def status_badge(status):
         "REJECTED":  ("var(--bg-muted)",   "var(--tx-muted)"),
     }
     bg, col = colors.get(status, ("var(--bg-muted)", "var(--tx-muted)"))
-    label = STATUS_ZH.get(status, status)
-    return f'<span class="badge" style="background:{bg};color:{col};">{label}</span>'
+    return f'<span class="badge" style="background:{bg};color:{col};">{status}</span>'
 
 
 def direction_badge(direction):
     if direction == "LONG":
-        return '<span class="badge" style="background:var(--bg-info);color:var(--tx-info);">做多</span>'
-    return '<span class="badge" style="background:var(--bg-danger);color:var(--tx-danger);">做空</span>'
-
-
-def regime_display(regime):
-    if not regime:
-        return "—"
-    return REGIME_ZH.get(regime, regime[:8])
+        return '<span class="badge" style="background:var(--bg-info);color:var(--tx-info);">LONG</span>'
+    return '<span class="badge" style="background:var(--bg-danger);color:var(--tx-danger);">SHORT</span>'
 
 
 def fmt_ts(ts_str):
@@ -152,13 +112,13 @@ def fmt_ts(ts_str):
         return "—"
     try:
         dt = datetime.fromisoformat(ts_str.replace("Z", "+00:00"))
-        return zh_date(dt.strftime("%d %b %H:%M"))
+        return dt.strftime("%d %b %H:%M")
     except Exception:
         return ts_str[:16]
 
 
 def generate(signals, stats):
-    now = zh_date(datetime.now(timezone.utc).strftime("%d %b %Y %H:%M UTC"))
+    now = datetime.now(timezone.utc).strftime("%d %b %Y %H:%M UTC")
 
     total_signals = sum(s["total"] for s in stats)
     total_open    = sum(s["open_count"] for s in stats)
@@ -184,12 +144,12 @@ def generate(signals, stats):
           </div>
           <div class="grid2">
             <div class="metric-sm">
-              <div class="metric-label">信号数</div>
+              <div class="metric-label">Signals</div>
               <div class="metric-value">{s['total']}</div>
-              <div class="muted small">止盈 {s['tp_count']} / 止损 {s['sl_count']} / 持仓 {s['open_count']}</div>
+              <div class="muted small">TP {s['tp_count']} / SL {s['sl_count']} / Open {s['open_count']}</div>
             </div>
             <div class="metric-sm">
-              <div class="metric-label">胜率</div>
+              <div class="metric-label">Win rate</div>
               <div class="metric-value" style="color:var(--tx-success);">{wr}</div>
               <div class="muted small">PF {pf} / R/R {avg_rr_str}</div>
             </div>
@@ -197,7 +157,7 @@ def generate(signals, stats):
         </div>"""
 
     if not strat_cards:
-        strat_cards = '<div class="empty">暂无产生信号的策略。</div>'
+        strat_cards = '<div class="empty">Nessuna strategia con segnali ancora.</div>'
 
     sig_cards = ""
     for s in signals:
@@ -218,7 +178,7 @@ def generate(signals, stats):
           <div class="divider"></div>
           <div class="grid4">
             <div>
-              <div class="metric-label">入场价</div>
+              <div class="metric-label">Entry</div>
               <div class="small fw500">{fmt_price(s['entry'])}</div>
             </div>
             <div>
@@ -226,22 +186,22 @@ def generate(signals, stats):
               <div class="small fw500">{float(s['rr']):.2f}</div>
             </div>
             <div>
-              <div class="metric-label">评分</div>
+              <div class="metric-label">Score</div>
               <div class="small fw500">{fmt_score(s['raw_score'], s['final_score'])}</div>
             </div>
             <div>
-              <div class="metric-label">市场状态</div>
-              <div class="small fw500">{regime_display(s['market_regime'])}</div>
+              <div class="metric-label">Regime</div>
+              <div class="small fw500">{(s['market_regime'] or '—')[:8]}</div>
             </div>
           </div>
           <div class="muted small" style="margin-top:6px;">{fmt_ts(s['timestamp_setup'])}</div>
         </div>"""
 
     if not sig_cards:
-        sig_cards = '<div class="empty">暂无信号。系统每 15 分钟扫描一次。</div>'
+        sig_cards = '<div class="empty">Nessun segnale ancora. Il sistema scansiona ogni 15 minuti.</div>'
 
     html = f"""<!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="it">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -299,19 +259,19 @@ body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgro
     <div class="header-title">Signal Engine V2.1</div>
     <div class="header-sub"><i class="ti ti-refresh" aria-hidden="true"></i> {now}</div>
   </div>
-  <span class="live">实时</span>
+  <span class="live">LIVE</span>
 </div>
 <div class="container">
-  <div class="section">总览</div>
+  <div class="section">Overview</div>
   <div class="grid2">
-    <div class="metric"><div class="metric-label">信号总数</div><div class="metric-value">{total_signals}</div></div>
-    <div class="metric"><div class="metric-label">持仓中</div><div class="metric-value" style="color:var(--tx-info);">{total_open}</div></div>
-    <div class="metric"><div class="metric-label">胜率</div><div class="metric-value" style="color:var(--tx-success);">{global_wr}</div></div>
-    <div class="metric"><div class="metric-label">盈利因子</div><div class="metric-value">{global_pf}</div></div>
+    <div class="metric"><div class="metric-label">Total signals</div><div class="metric-value">{total_signals}</div></div>
+    <div class="metric"><div class="metric-label">Open</div><div class="metric-value" style="color:var(--tx-info);">{total_open}</div></div>
+    <div class="metric"><div class="metric-label">Win rate</div><div class="metric-value" style="color:var(--tx-success);">{global_wr}</div></div>
+    <div class="metric"><div class="metric-label">Profit factor</div><div class="metric-value">{global_pf}</div></div>
   </div>
-  <div class="section">分策略统计</div>
+  <div class="section">Per strategy</div>
   {strat_cards}
-  <div class="section">最新信号</div>
+  <div class="section">Recent signals</div>
   {sig_cards}
 </div>
 </body>
