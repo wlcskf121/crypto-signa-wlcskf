@@ -60,7 +60,8 @@ LEVEL_SIGNIFICANCE = {
 }
 
 # Baseline non calibrate -- da validare via backtest (spec sezione 9, 25).
-PROXIMITY_POINTS = {"XAU_USD": 12.5, "BTC_USDT": 150.0}
+PROXIMITY_POINTS = {"XAU_USD": 12.5, "BTC_USDT": 150.0,
+                    "ETH_USDT": 5.0, "SOL_USDT": 0.20}
 MIN_RR = 1.5
 SL_BUFFER_ATR = 1.0  # ricalibrato il 25/08: la location e' un PUNTO (lo
                       # swing HL/LH), senza ampiezza propria -- 0.3x dava
