@@ -24,6 +24,8 @@ FRAMEWORK_VERSION: "V2.1"
 ASSETS:
   - BTC_USDT
   - XAU_USD
+  - ETH_USDT
+  - SOL_USDT
 
 # ============================================================
 # Strategie abilitate
@@ -143,6 +145,8 @@ V3_SCANNER:
   assets:
     - BTC_USDT
     - XAU_USD
+    - ETH_USDT
+    - SOL_USDT
 
 # ============================================================
 # Institutional Scanner Framework V3.2 Dynamic (sperimentale)
@@ -152,6 +156,8 @@ V3D_SCANNER:
   assets:
     - BTC_USDT
     - XAU_USD
+    - ETH_USDT
+    - SOL_USDT
 
 # ============================================================
 # Institutional Scanner Framework V4.0 Daily Edition (isolato)
@@ -161,6 +167,8 @@ V4_SCANNER:
   assets:
     - BTC_USDT
     - XAU_USD
+    - ETH_USDT
+    - SOL_USDT
 
 # ============================================================
 # TT Scanner
@@ -170,6 +178,8 @@ TT_SCANNER:
   assets:
     - BTC_USDT
     - XAU_USD
+    - ETH_USDT
+    - SOL_USDT
     
 # ============================================================
 # Institutional Scanner V4.1 Intraday Wave Edition.
@@ -179,6 +189,8 @@ V41_SCANNER:
   assets:
     - BTC_USDT
     - XAU_USD
+    - ETH_USDT
+    - SOL_USDT
 
 # ============================================================
 # Institutional Scanner V4.1 Phase 1 — Money Flow & Intraday Edge
@@ -188,6 +200,8 @@ V41P1_SCANNER:
   assets:
     - BTC_USDT
     - XAU_USD
+    - ETH_USDT
+    - SOL_USDT
 
 # ============================================================
 # Edge Lab (OTE-SC) + Trend Rider — condividono il market context
@@ -198,6 +212,8 @@ EDGE_LAB:
   assets:
     - BTC_USDT
     - XAU_USD
+    - ETH_USDT
+    - SOL_USDT
 
 # ============================================================
 # OTE Scanner — "Zona prima, direzione dopo"
@@ -209,6 +225,8 @@ OTE_SCANNER:
   assets:
     - BTC_USDT
     - XAU_USD
+    - ETH_USDT
+    - SOL_USDT
 
 # ============================================================
 # Liquidity Hunter
@@ -218,6 +236,8 @@ LH_SCANNER:
   assets:
     - BTC_USDT
     - XAU_USD
+    - ETH_USDT
+    - SOL_USDT
 
 # ============================================================
 # Market Radar V1 — riconoscimento esaurimenti (SOLA REGISTRAZIONE)
@@ -230,6 +250,8 @@ MARKET_RADAR:
   assets:
     - BTC_USDT
     - XAU_USD
+    - ETH_USDT
+    - SOL_USDT
   # Soglie di transizione della macchina a stati (LARGHE all'inizio,
   # da restringere sui dati). velocity 0.6 = calibrata sui dati M15 reali.
   velocity_min: 0.6            # impulso "veloce" (ROC/candela in ATR)
