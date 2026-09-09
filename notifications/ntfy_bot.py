@@ -39,10 +39,10 @@ def format_signal_alert(signal) -> tuple:
 
     body = (
         f"{direction_emoji} {signal.asset} {signal.direction}\n"
-        f"Entry: {signal.entry:.6f}\n"
-        f"SL: {signal.stop_loss:.6f}\n"
-        f"TP: {signal.take_profit:.6f}\n"
-        f"R/R: {signal.rr:.2f}\n"
+        f"进场价： {signal.entry:.6f}\n"
+        f"止损： {signal.stop_loss:.6f}\n"
+        f"止盈： {signal.take_profit:.6f}\n"
+        f"盈亏比： {signal.rr:.2f}\n"
         f"Raw: {signal.raw_score:.0f} | Final: {signal.final_score:.0f}\n"
         f"Regime: {signal.market_regime or 'N/A'}"
     )
@@ -72,10 +72,10 @@ def format_alert(setup: dict, score: int, label: str) -> tuple:
     title = f"{label} - {setup['asset']} {setup['direzione']}"
     body = (
         f"{direction_emoji} {setup['asset']} {setup['direzione']} | Score {score}/10\n"
-        f"Entry: {setup['entry']:.6f}\n"
-        f"SL: {setup['stop_loss']:.6f}\n"
-        f"TP: {setup['take_profit']:.6f}\n"
-        f"R/R: {setup['rr']:.2f}"
+        f"进场价： {setup['entry']:.6f}\n"
+        f"止损： {setup['stop_loss']:.6f}\n"
+        f"止盈： {setup['take_profit']:.6f}\n"
+        f"盈亏比： {setup['rr']:.2f}"
     )
     macro_info = setup.get("macro_event")
     if macro_info:
