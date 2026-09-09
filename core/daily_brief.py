@@ -221,34 +221,34 @@ def _build_brief_message(asset: str, df_h1, df_h4, conn=None) -> str:
 
     if "RIALZISTA" in bias:
         if sup_list:
-            hint = f"→ Cercare LONG sui pullback verso {_fmt_price(sup_list[0]['price'])}"
+            hint = f"→ 在回调至 {_fmt_price(sup_list[0]['price'])}"
         else:
-            hint = "→ Trend rialzista, attendere pullback"
+            hint = "→ 多头趋势，等待回调"
     elif "RIBASSISTA" in bias:
         if res_list:
-            hint = f"→ Cercare SHORT sui rimbalzi verso {_fmt_price(res_list[0]['price'])}"
+            hint = f"→ 在反弹至 {_fmt_price(res_list[0]['price'])}"
         else:
-            hint = "→ Trend ribassista, attendere rimbalzo"
+            hint = "→ 空头趋势，等待反弹"
     else:
-        hint = "→ Mercato neutrale, attendere direzionalità"
+        hint = "→ 中性市场，等待方向明朗"
 
     lines = [
-        f"📊 *DAILY BRIEF — {datetime.now(timezone.utc).strftime('%d %b %Y 08:00 UTC')}*",
+        f"📊 *每日简报 —— {datetime.now(timezone.utc).strftime('%d %b %Y 08:00 UTC')}*",
         "",
         f"*{asset.replace('_', ' ')}*",
-        f"Prezzo: `{_fmt_price(price)}`",
-        f"Bias H4: {bias}",
+        f"价格： `{_fmt_price(price)}`",
+        f"H4 偏向： {bias}",
     ]
 
     if mie_bias:
         bias_emoji = "🟢" if mie_bias == "BULLISH" else ("🔴" if mie_bias == "BEARISH" else "⚪")
-        lines.append(f"Bias MIE: {bias_emoji} {mie_bias} (quality {mie_quality}/100)")
+        lines.append(f"MIE 偏向： {bias_emoji} {mie_bias} (质量 {mie_quality}/100)")
 
     if pd_zone:
-        lines.append(f"Zona: {pd_zone}")
+        lines.append(f"区域： {pd_zone}")
 
     lines.extend([
-        f"ATR Daily: `{_fmt_price(atr_day)}`",
+        f"ATR(日)： `{_fmt_price(atr_day)}`",
         f"EMA50: `{_fmt_price(ema50)}` | EMA200: `{_fmt_price(ema200)}`",
     ])
 
@@ -260,7 +260,7 @@ def _build_brief_message(asset: str, df_h1, df_h4, conn=None) -> str:
     # ── OB vicini al prezzo (entro 2%) ───────────────────────
     ob_fresh_tested = [ob for ob in ob_zones if ob["status"] in ("FRESH", "TESTED")]
     if ob_fresh_tested:
-        lines.append("*🟧 Order Block:*")
+        lines.append("*🟧 订单区块：*")
         for ob in ob_fresh_tested:
             dir_emoji = "🟢" if ob["dir"] == "BULLISH" else "🔴"
             lines.append(
@@ -271,20 +271,20 @@ def _build_brief_message(asset: str, df_h1, df_h4, conn=None) -> str:
     lines.append("")
 
     if sup_list:
-        lines.append("*Supporti:*")
+        lines.append("*支撑位：*")
         for z in sup_list:
-            lines.append(f"  `{_fmt_price(z['price'])}` ({z['count']} tocchi)")
+            lines.append(f"  `{_fmt_price(z['price'])}` ({z['count']} 次触碰)")
     else:
-        lines.append("*Supporti:* nessuno significativo")
+        lines.append("*支撑位：* 无显著支撑")
 
     lines.append("")
 
     if res_list:
-        lines.append("*Resistenze:*")
+        lines.append("*阻力位：*")
         for z in res_list:
-            lines.append(f"  `{_fmt_price(z['price'])}` ({z['count']} tocchi)")
+            lines.append(f"  `{_fmt_price(z['price'])}` ({z['count']} 次触碰)")
     else:
-        lines.append("*Resistenze:* nessuna significativa")
+        lines.append("*阻力位：* 无显著阻力")
 
     lines.extend(["", hint])
 
@@ -345,7 +345,7 @@ def send_daily_brief(conn, config: dict):
         logger.info("Daily Brief Telegram: %s", sent)
 
     if ntfy_topic:
-        title = f"Daily Brief — {datetime.now(timezone.utc).strftime('%d %b %Y')}"
+        title = f"每日简报 —— {datetime.now(timezone.utc).strftime('%d %b %Y')}"
         plain = full_message.replace("*", "").replace("`", "")
         ntfy_bot.send_message(ntfy_topic, title, plain)
         logger.info("Daily Brief ntfy inviato")
