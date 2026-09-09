@@ -350,10 +350,10 @@ def kpi_row(s, color):
     wc = "pos" if s["win"]>=40 else ("neg" if s["win"]<25 else "warn")
     ec = "pos" if s["exp_r"]>0 else "neg"
     return f"""<div class="kpi-row" style="border-top:2px solid {color};margin-bottom:16px">
-  <div><span class="big">{s['open']}</span><span class="lbl">Aperti ora</span></div>
-  <div><span class="big">{s['n']}</span><span class="lbl">Chiusi totale</span></div>
-  <div><span class="big {wc}">{s['win']}%</span><span class="lbl">Win Rate</span></div>
-  <div><span class="big {ec}">{s['exp_r']:+.2f}R</span><span class="lbl">Expectancy</span></div>
+  <div><span class="big">{s['open']}</span><span class="lbl">当前未平仓</span></div>
+  <div><span class="big">{s['n']}</span><span class="lbl">累计已平仓</span></div>
+  <div><span class="big {wc}">{s['win']}%</span><span class="lbl">胜率</span></div>
+  <div><span class="big {ec}">{s['exp_r']:+.2f}R</span><span class="lbl">期望值</span></div>
 </div>"""
 
 
@@ -365,13 +365,13 @@ CSS = """
   --text:#e2e8f0;--dim:#5a6478;--buy:#4fffb0;--sell:#ff6b6b;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',sans-serif;font-size:14px;line-height:1.6}
+body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans','PingFang SC','Microsoft YaHei','Noto Sans SC',sans-serif;font-size:14px;line-height:1.6}
 header{border-bottom:1px solid var(--border);padding:18px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
-header h1{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
-.meta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)}
+header h1{font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.meta{font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:11px;color:var(--dim)}
 .meta a{color:var(--accent);text-decoration:none}
 .container{max-width:1320px;margin:0 auto;padding:24px 32px}
-.section-title{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin:28px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.section-title{font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin:28px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--border)}
 .section-title.el{color:var(--accent)}
 .section-title.tt{color:#f472b6}
 .pulse-tt{background:#f472b6}
@@ -381,21 +381,21 @@ header h1{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;l
 .section-title.v41p1{color:var(--accent3);opacity:.8}
 .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:20px}
 .kpi-row>div{background:var(--surface);padding:16px 12px;text-align:center}
-.big{font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:600}
+.big{font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:22px;font-weight:600}
 .big.pos{color:var(--buy)} .big.neg{color:var(--sell)} .big.warn{color:var(--accent3)}
 .lbl{font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);display:block;margin-top:3px}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:16px}
-.ch{padding:10px 16px;border-bottom:1px solid var(--border);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);display:flex;align-items:center;gap:8px}
+.ch{padding:10px 16px;border-bottom:1px solid var(--border);font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);display:flex;align-items:center;gap:8px}
 .pulse{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite;flex-shrink:0}
 .pulse-trb{background:var(--accent4)} .pulse-lh{background:var(--accent5)}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 table{width:100%;border-collapse:collapse}
-th{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);padding:9px 14px;text-align:left;border-bottom:1px solid var(--border)}
+th{font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);padding:9px 14px;text-align:left;border-bottom:1px solid var(--border)}
 td{padding:9px 14px;border-bottom:1px solid var(--border);font-size:13px}
 tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02)}
-.mono{font-family:'IBM Plex Mono',monospace;font-size:12px}
+.mono{font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:12px}
 .pos{color:var(--buy);font-weight:600} .neg{color:var(--sell)}
-.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:'IBM Plex Mono',monospace;font-weight:600}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-weight:600}
 .b-buy{background:rgba(79,255,176,.15);color:var(--buy)}
 .b-sell{background:rgba(255,107,107,.15);color:var(--sell)}
 .b-tp{background:rgba(79,255,176,.15);color:var(--buy)}
@@ -422,14 +422,14 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
 
 def tt_open_table(rows):
     if not rows:
-        return """<div class="card"><div class="ch"><span class="pulse pulse-tt"></span>Segnali Attivi — TT</div>
-  <table><tbody><tr class="empty-row"><td colspan="10">Nessun segnale attivo. In attesa di un Early Signal.</td></tr></tbody></table></div>"""
+        return """<div class="card"><div class="ch"><span class="pulse pulse-tt"></span>活跃信号 — TT</div>
+  <table><tbody><tr class="empty-row"><td colspan="10">暂无活跃信号。等待 Early Signal。</td></tr></tbody></table></div>"""
     body = ""
     for r in rows:
         asset = r["asset"].replace("_USDT","")
-        status_badge = (f'<span class="badge b-waiting">IN ATTESA</span>' if r["status"] == "SETUP"
+        status_badge = (f'<span class="badge b-waiting">等待中</span>' if r["status"] == "SETUP"
                         else f'<span class="badge b-buy">ENTRY</span>')
-        bars_label = f"{r['bars_waiting']} cicli" if r["status"] == "SETUP" else f"{r['bars_open']} cicli"
+        bars_label = f"{r['bars_waiting']} 根 K 线" if r["status"] == "SETUP" else f"{r['bars_open']} 根 K 线"
         body += f"""<tr>
   <td class="mono" style="color:var(--dim);font-size:11px">{fmt_ts(r['ts'])}</td>
   <td><strong>{asset}</strong></td>
@@ -442,17 +442,17 @@ def tt_open_table(rows):
   <td style="font-size:12px;color:var(--dim)">{r['poi_type']} · {r['pd_zone']}</td>
   <td class="mono" style="color:var(--dim)">{r['elapsed_h']}h ({bars_label})</td>
 </tr>"""
-    return f"""<div class="card"><div class="ch"><span class="pulse pulse-tt"></span>Segnali Attivi — TT ({len(rows)})</div>
+    return f"""<div class="card"><div class="ch"><span class="pulse pulse-tt"></span>活跃信号 — TT ({len(rows)})</div>
   <div style="overflow-x:auto"><table><thead><tr>
-    <th>Data</th><th>Asset</th><th>Dir</th><th>Stato</th><th>Entry</th><th>SL</th><th>TP</th>
-    <th>R/R</th><th>POI · PD</th><th>Tempo</th>
+    <th>日期</th><th>资产</th><th>方向</th><th>状态</th><th>入场</th><th>SL</th><th>TP</th>
+    <th>R/R</th><th>POI · PD</th><th>耗时</th>
   </tr></thead><tbody>{body}</tbody></table></div></div>"""
 
 
 def ote_open_table(rows):
     if not rows:
-        return """<div class="card"><div class="ch"><span class="pulse"></span>Segnali Attivi — OTE</div>
-  <table><tbody><tr class="empty-row"><td colspan="9">Nessun segnale attivo. In attesa di zone calde.</td></tr></tbody></table></div>"""
+        return """<div class="card"><div class="ch"><span class="pulse"></span>活跃信号 — OTE</div>
+  <table><tbody><tr class="empty-row"><td colspan="9">暂无活跃信号。等待热点区间出现。</td></tr></tbody></table></div>"""
     body = ""
     for r in rows:
         asset = r["asset"].replace("_USDT","")
@@ -474,17 +474,17 @@ def ote_open_table(rows):
   <td style="font-size:12px;color:var(--dim)">{r.get('zone_strength','—')}</td>
   <td class="mono" style="color:var(--dim)">{r['elapsed_h']}h</td>
 </tr>"""
-    return f"""<div class="card"><div class="ch"><span class="pulse"></span>Segnali Attivi — OTE ({len(rows)})</div>
+    return f"""<div class="card"><div class="ch"><span class="pulse"></span>活跃信号 — OTE ({len(rows)})</div>
   <div style="overflow-x:auto"><table><thead><tr>
-    <th>Data</th><th>Asset</th><th>Dir</th><th>Stato</th><th>Entry</th><th>SL</th><th>TP</th>
-    <th>Zona</th><th>Tempo</th>
+    <th>日期</th><th>资产</th><th>方向</th><th>状态</th><th>入场</th><th>SL</th><th>TP</th>
+    <th>区间</th><th>耗时</th>
   </tr></thead><tbody>{body}</tbody></table></div></div>"""
 
 
 def v41p1_open_table(rows):
     if not rows:
-        return """<div class="card"><div class="ch">Segnali Aperti — V4.1 Phase 1</div>
-  <table><tbody><tr class="empty-row"><td colspan="10">Nessun segnale aperto.</td></tr></tbody></table></div>"""
+        return """<div class="card"><div class="ch">未平仓信号 — V4.1 Phase 1</div>
+  <table><tbody><tr class="empty-row"><td colspan="10">暂无未平仓信号。</td></tr></tbody></table></div>"""
     body = ""
     for r in rows:
         asset = r["asset"].replace("_USDT","")
@@ -501,17 +501,17 @@ def v41p1_open_table(rows):
   <td class="mono neg">{fp(r['mae'])}</td>
   <td class="mono" style="color:var(--dim)">{r['elapsed_h']}h</td>
 </tr>"""
-    return f"""<div class="card"><div class="ch">Segnali Aperti — V4.1 Phase 1 ({len(rows)})</div>
+    return f"""<div class="card"><div class="ch">未平仓信号 — V4.1 Phase 1 ({len(rows)})</div>
   <div style="overflow-x:auto"><table><thead><tr>
-    <th>Asset</th><th>Dir</th><th>Entry</th><th>SL</th><th>TP1</th><th>TP2</th>
-    <th>Quality</th><th>Trigger</th><th>MAE</th><th>Aperto</th>
+    <th>资产</th><th>方向</th><th>入场</th><th>SL</th><th>TP1</th><th>TP2</th>
+    <th>质量</th><th>触发</th><th>MAE</th><th>开仓时间</th>
   </tr></thead><tbody>{body}</tbody></table></div></div>"""
 
 
 def trb_open_table(rows):
     if not rows:
-        return """<div class="card"><div class="ch"><span class="pulse pulse-trb"></span>Segnali Aperti — Trend Rider Balanced</div>
-  <table><tbody><tr class="empty-row"><td colspan="11">Nessun segnale aperto. In attesa di pullback verso EMA20 H1.</td></tr></tbody></table></div>"""
+        return """<div class="card"><div class="ch"><span class="pulse pulse-trb"></span>未平仓信号 — Trend Rider Balanced</div>
+  <table><tbody><tr class="empty-row"><td colspan="11">暂无未平仓信号。等待价格回撤至 H1 EMA20。</td></tr></tbody></table></div>"""
     body = ""
     for r in rows:
         asset = r["asset"].replace("_USDT","")
@@ -529,17 +529,17 @@ def trb_open_table(rows):
   <td style="font-size:12px;color:var(--dim)">{r['trend_h1'] or '—'}</td>
   <td class="mono" style="color:var(--dim)">{r['elapsed_h']}h</td>
 </tr>"""
-    return f"""<div class="card"><div class="ch"><span class="pulse pulse-trb"></span>Segnali Aperti — Trend Rider Balanced ({len(rows)})</div>
+    return f"""<div class="card"><div class="ch"><span class="pulse pulse-trb"></span>未平仓信号 — Trend Rider Balanced ({len(rows)})</div>
   <div style="overflow-x:auto"><table><thead><tr>
-    <th>Data</th><th>Asset</th><th>Dir</th><th>Entry</th><th>SL</th><th>TP1</th><th>TP2</th>
-    <th>Quality</th><th>ADX</th><th>H1</th><th>Aperto</th>
+    <th>日期</th><th>资产</th><th>方向</th><th>入场</th><th>SL</th><th>TP1</th><th>TP2</th>
+    <th>质量</th><th>ADX</th><th>H1</th><th>开仓时间</th>
   </tr></thead><tbody>{body}</tbody></table></div></div>"""
 
 
 def lh_open_table(rows):
     if not rows:
-        return """<div class="card"><div class="ch"><span class="pulse pulse-lh"></span>Segnali Aperti — Liquidity Hunter v1.0</div>
-  <table><tbody><tr class="empty-row"><td colspan="11">Nessun segnale aperto. In attesa di sweep su Liquidity Pool.</td></tr></tbody></table></div>"""
+        return """<div class="card"><div class="ch"><span class="pulse pulse-lh"></span>未平仓信号 — Liquidity Hunter v1.0</div>
+  <table><tbody><tr class="empty-row"><td colspan="11">暂无未平仓信号。等待流动性池被扫。</td></tr></tbody></table></div>"""
     body = ""
     for r in rows:
         asset = r["asset"].replace("_USDT","")
@@ -556,10 +556,10 @@ def lh_open_table(rows):
   <td style="font-size:12px;color:var(--dim)">{r['sweep']} → {r['trigger']}</td>
   <td class="mono neg">{fp(r['mae'])}</td>
 </tr>"""
-    return f"""<div class="card"><div class="ch"><span class="pulse pulse-lh"></span>Segnali Aperti — Liquidity Hunter v1.0 ({len(rows)})</div>
+    return f"""<div class="card"><div class="ch"><span class="pulse pulse-lh"></span>未平仓信号 — Liquidity Hunter v1.0 ({len(rows)})</div>
   <div style="overflow-x:auto"><table><thead><tr>
-    <th>Data</th><th>Asset</th><th>Dir</th><th>Entry</th><th>SL</th><th>TP</th>
-    <th>R/R</th><th>Quality</th><th>Livello</th><th>Sweep → Trigger</th><th>MAE</th>
+    <th>日期</th><th>资产</th><th>方向</th><th>入场</th><th>SL</th><th>TP</th>
+    <th>R/R</th><th>质量</th><th>价位</th><th>Sweep → Trigger</th><th>MAE</th>
   </tr></thead><tbody>{body}</tbody></table></div></div>"""
 
 
@@ -587,17 +587,17 @@ def generate():
     generated = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 
     html = f"""<!DOCTYPE html>
-<html lang="it">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Crypto Signal Engine — Dashboard</title>
+<title>加密信号引擎 — 总览</title>
 <style>{CSS}</style>
 </head>
 <body>
 <header>
-  <h1>Crypto Signal Engine — Dashboard</h1>
-  <div class="meta">{generated} &nbsp;|&nbsp; <a href="analytics_dashboard.html">Analytics Lab →</a></div>
+  <h1>加密信号引擎 — 总览</h1>
+  <div class="meta">{generated} &nbsp;|&nbsp; <a href="analytics_dashboard.html">分析实验室 →</a></div>
 </header>
 <div class="container">
 
@@ -607,7 +607,7 @@ def generate():
 
   <div class="divider"></div>
 
-  <div class="section-title el">⚡ OTE — Zona prima, direzione dopo</div>
+  <div class="section-title el">⚡ OTE — 先找区间，再定方向</div>
   {kpi_row(ote_stats, "var(--accent)")}
   {ote_open_table(ote_open)}
 
@@ -625,7 +625,7 @@ def generate():
 
   <div class="divider"></div>
 
-  <div class="section-title v41p1">V4.1 Phase 1 — Money Flow Benchmark</div>
+  <div class="section-title v41p1">V4.1 Phase 1 — 资金流基准</div>
   {kpi_row(v41p1_stats, "var(--accent3)")}
   {v41p1_open_table(v41p1_open)}
 
