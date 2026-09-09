@@ -28,27 +28,27 @@ def format_v4_signal_alert(signal: dict) -> str:
     label_emoji = {"HIGH": "⭐", "STANDARD": "▫️", "LOW": "🔹"}.get(label, "▫️")
 
     lines = [
-        f"{emoji} *INSTITUTIONAL SCANNER V4.0 — Daily Edition*",
+        f"{emoji} *机构扫描器 V4.0 —— 日线版*",
         "",
-        f"Asset: *{asset_display}*",
+        f"资产： *{asset_display}*",
         f"方向： *{direction}*",
         "",
-        f"Entry: `{_fmt(signal['entry'])}`",
-        f"Stop Loss: `{_fmt(signal['stop_loss'])}`",
+        f"进场价： `{_fmt(signal['entry'])}`",
+        f"止损价： `{_fmt(signal['stop_loss'])}`",
         "",
-        f"TP1: `{_fmt(signal.get('tp1'))}`",
-        f"TP2: `{_fmt(signal.get('tp2'))}`",
-        f"TP3: `{_fmt(signal.get('tp3'))}`",
+        f"止盈1： `{_fmt(signal.get('tp1'))}`",
+        f"止盈2： `{_fmt(signal.get('tp2'))}`",
+        f"止盈3： `{_fmt(signal.get('tp3'))}`",
         "",
-        f"R/R: *{signal['rr']:.2f}*",
-        f"Signal Quality: {label_emoji} *{quality:.0f}/5* ({label})",
+        f"盈亏比： *{signal['rr']:.2f}*",
+        f"Signal 质量： {label_emoji} *{quality:.0f}/5* ({label})",
         "",
-        f"Daily Context: {signal.get('daily_context_status', 'N/A')}",
-        f"H4 Structure: {signal.get('h4_structure_status', 'N/A')}",
-        f"H4 Zone: {signal.get('h4_zone_status', 'N/A')}",
-        f"OTE: {'✓' if signal.get('ote_present') else '✗'}",
-        f"Pullback: {signal.get('pullback_type', 'N/A')}",
-        f"M30 Transition: {signal.get('m30_transition_status', 'N/A')}",
+        f"每日背景： {signal.get('daily_context_status', 'N/A')}",
+        f"H4 结构： {signal.get('h4_structure_status', 'N/A')}",
+        f"H4 区域： {signal.get('h4_zone_status', 'N/A')}",
+        f"OTE： {'✓' if signal.get('ote_present') else '✗'}",
+        f"回调： {signal.get('pullback_type', 'N/A')}",
+        f"M30 转换： {signal.get('m30_transition_status', 'N/A')}",
         f"时段： {signal.get('session', 'N/A')}",
     ]
     return "\n".join(lines)
@@ -65,13 +65,13 @@ def format_v4_signal_alert_plain(signal: dict) -> tuple:
     asset_display = signal["asset"].replace("_", " ")
     quality = signal["signal_quality"]
     label = signal.get("quality_label", "STANDARD")
-    title = f"V4.0 {asset_display} {direction} | Quality {quality:.0f}/5 ({label})"
+    title = f"V4.0 {asset_display} {direction} | 质量 {quality:.0f}/5 ({label})"
     body = (
-        f"Entry: {_fmt(signal['entry'])}\n"
-        f"Stop Loss: {_fmt(signal['stop_loss'])}\n"
-        f"TP1: {_fmt(signal.get('tp1'))} | TP2: {_fmt(signal.get('tp2'))}\n"
-        f"R/R: {signal['rr']:.2f}\n"
-        f"H4 Structure: {signal.get('h4_structure_status', 'N/A')}\n"
+        f"进场价： {_fmt(signal['entry'])}\n"
+        f"止损价： {_fmt(signal['stop_loss'])}\n"
+        f"止盈1： {_fmt(signal.get('tp1'))} | 止盈2： {_fmt(signal.get('tp2'))}\n"
+        f"盈亏比： {signal['rr']:.2f}\n"
+        f"H4 结构： {signal.get('h4_structure_status', 'N/A')}\n"
         f"时段： {signal.get('session', 'N/A')}"
     )
     return title, body
