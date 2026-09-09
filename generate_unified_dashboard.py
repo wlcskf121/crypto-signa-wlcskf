@@ -444,7 +444,7 @@ def tt_open_table(rows):
 </tr>"""
     return f"""<div class="card"><div class="ch"><span class="pulse pulse-tt"></span>活跃信号 — TT ({len(rows)})</div>
   <div style="overflow-x:auto"><table><thead><tr>
-    <th>日期</th><th>资产</th><th>方向</th><th>状态</th><th>入场</th><th>SL</th><th>TP</th>
+    <th>日期</th><th>资产</th><th>方向</th><th>状态</th><th>入场</th><th>止损</th><th>止盈</th>
     <th>R/R</th><th>POI · PD</th><th>耗时</th>
   </tr></thead><tbody>{body}</tbody></table></div></div>"""
 
@@ -476,7 +476,7 @@ def ote_open_table(rows):
 </tr>"""
     return f"""<div class="card"><div class="ch"><span class="pulse"></span>活跃信号 — OTE ({len(rows)})</div>
   <div style="overflow-x:auto"><table><thead><tr>
-    <th>日期</th><th>资产</th><th>方向</th><th>状态</th><th>入场</th><th>SL</th><th>TP</th>
+    <th>日期</th><th>资产</th><th>方向</th><th>状态</th><th>入场</th><th>止损</th><th>止盈</th>
     <th>区间</th><th>耗时</th>
   </tr></thead><tbody>{body}</tbody></table></div></div>"""
 
@@ -503,7 +503,7 @@ def v41p1_open_table(rows):
 </tr>"""
     return f"""<div class="card"><div class="ch">未平仓信号 — V4.1 Phase 1 ({len(rows)})</div>
   <div style="overflow-x:auto"><table><thead><tr>
-    <th>资产</th><th>方向</th><th>入场</th><th>SL</th><th>TP1</th><th>TP2</th>
+    <th>资产</th><th>方向</th><th>入场</th><th>止损</th><th>止盈1</th><th>止盈2</th>
     <th>质量</th><th>触发</th><th>MAE</th><th>开仓时间</th>
   </tr></thead><tbody>{body}</tbody></table></div></div>"""
 
@@ -515,7 +515,7 @@ def trb_open_table(rows):
     body = ""
     for r in rows:
         asset = r["asset"].replace("_USDT","")
-        tp1_badge = '<span class="badge b-tp" style="font-size:10px">TP1✓</span>' if r["tp1_hit"] else ""
+        tp1_badge = '<span class="badge b-tp" style="font-size:10px">止盈1✓</span>' if r["tp1_hit"] else ""
         body += f"""<tr>
   <td class="mono" style="color:var(--dim);font-size:11px">{fmt_ts(r['ts'])}</td>
   <td><strong>{asset}</strong></td>
@@ -531,7 +531,7 @@ def trb_open_table(rows):
 </tr>"""
     return f"""<div class="card"><div class="ch"><span class="pulse pulse-trb"></span>未平仓信号 — Trend Rider Balanced ({len(rows)})</div>
   <div style="overflow-x:auto"><table><thead><tr>
-    <th>日期</th><th>资产</th><th>方向</th><th>入场</th><th>SL</th><th>TP1</th><th>TP2</th>
+    <th>日期</th><th>资产</th><th>方向</th><th>入场</th><th>止损</th><th>止盈1</th><th>止盈2</th>
     <th>质量</th><th>ADX</th><th>H1</th><th>开仓时间</th>
   </tr></thead><tbody>{body}</tbody></table></div></div>"""
 
@@ -558,8 +558,8 @@ def lh_open_table(rows):
 </tr>"""
     return f"""<div class="card"><div class="ch"><span class="pulse pulse-lh"></span>未平仓信号 — Liquidity Hunter v1.0 ({len(rows)})</div>
   <div style="overflow-x:auto"><table><thead><tr>
-    <th>日期</th><th>资产</th><th>方向</th><th>入场</th><th>SL</th><th>TP</th>
-    <th>R/R</th><th>质量</th><th>价位</th><th>Sweep → Trigger</th><th>MAE</th>
+    <th>日期</th><th>资产</th><th>方向</th><th>入场</th><th>止损</th><th>止盈</th>
+    <th>R/R</th><th>质量</th><th>价位</th><th>扫描 → 触发</th><th>MAE</th>
   </tr></thead><tbody>{body}</tbody></table></div></div>"""
 
 
@@ -601,7 +601,7 @@ def generate():
 </header>
 <div class="container">
 
-  <div class="section-title tt">⚡ TT — Direction · Location · Liquidity</div>
+  <div class="section-title tt">⚡ TT — 方向 · 位置 · 流动性</div>
   {kpi_row(tt_stats, "#f472b6")}
   {tt_open_table(tt_open)}
 
@@ -619,7 +619,7 @@ def generate():
 
   <div class="divider"></div>
 
-  <div class="section-title lh">🎯 Liquidity Hunter v1.0</div>
+  <div class="section-title lh">🎯 流动性猎取 v1.0</div>
   {kpi_row(lh_stats, "var(--accent5)")}
   {lh_open_table(lh_open)}
 
