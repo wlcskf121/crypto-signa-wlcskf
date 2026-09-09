@@ -51,7 +51,8 @@ except Exception:
 logger = logging.getLogger("ote.runner")
 
 OTE_ASSETS = ["BTC_USDT", "XAU_USD"]
-PROXIMITY_POINTS = {"XAU_USD": 12.5, "BTC_USDT": 150.0}
+PROXIMITY_POINTS = {"XAU_USD": 12.5, "BTC_USDT": 150.0,
+                    "ETH_USDT": 5.0, "SOL_USDT": 0.20}
 MIN_ZONE_SCORE = 40          # sotto questo score la zona non diventa candidate
 MIN_RR = 1.2                 # RR minimo per emettere un segnale
 SL_BUFFER_ATR = 0.5          # buffer ATR sotto/sopra il punto di sweep
