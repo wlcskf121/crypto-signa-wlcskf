@@ -1,9 +1,9 @@
 """
 notifications/v3_telegram.py
-Notifica Telegram dedicata all'Institutional Scanner Framework V3.2.
+Telegram 推送：专用于 Institutional Scanner Framework V3.2。
 
-Formato isolato da notifications/telegram_bot.py esistente,
-riusa solo la funzione di base send_message.
+格式独立于现有 notifications/telegram_bot.py，
+仅复用底层 send_message 函数。
 """
 
 import logging
@@ -31,7 +31,7 @@ def format_v3_signal_alert(signal: dict) -> str:
         f"{emoji} *INSTITUTIONAL SCANNER V3.2*",
         "",
         f"Asset: *{asset_display}*",
-        f"Direzione: *{direction}*",
+        f"方向： *{direction}*",
         "",
         f"Entry: `{_fmt(signal['entry'])}`",
         f"Stop Loss: `{_fmt(signal['stop_loss'])}`",
@@ -50,7 +50,7 @@ def format_v3_signal_alert(signal: dict) -> str:
         f"Pullback: {signal.get('pullback_type', 'N/A')}",
         f"M30 Transition: {signal.get('m30_transition_status', 'N/A')}",
         f"M15 BOS: {'✓' if signal.get('m15_bos_confirmed') else '✗'}",
-        f"Sessione: {signal.get('session', 'N/A')}",
+        f"时段： {signal.get('session', 'N/A')}",
     ]
     return "\n".join(lines)
 
@@ -61,7 +61,7 @@ def send_v3_signal_alert(bot_token: str, chat_id: str, signal: dict) -> bool:
 
 
 def format_v3_signal_alert_plain(signal: dict) -> tuple:
-    """Formato plain-text per ntfy (senza Markdown). Ritorna (title, body)."""
+    """ntfy 纯文本格式（无 Markdown）。返回 (title, body)。"""
     direction = signal["direction"]
     asset_display = signal["asset"].replace("_", " ")
     quality = signal["signal_quality"]
@@ -72,7 +72,7 @@ def format_v3_signal_alert_plain(signal: dict) -> tuple:
         f"TP1: {_fmt(signal.get('tp1'))} | TP2: {_fmt(signal.get('tp2'))}\n"
         f"R/R: {signal['rr']:.2f}\n"
         f"H4 Structure: {signal.get('h4_structure_status', 'N/A')}\n"
-        f"Sessione: {signal.get('session', 'N/A')}"
+        f"时段： {signal.get('session', 'N/A')}"
     )
     return title, body
 
