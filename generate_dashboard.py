@@ -1,7 +1,7 @@
 """
 generate_dashboard.py
 Legge signals.db e genera docs/index.html — dashboard mobile-first
-per Crypto Signal Engine V2.1.
+per Crypto 信号引擎 V2.1.
 Eseguito da GitHub Actions ad ogni scan.
 """
 
@@ -157,7 +157,7 @@ def generate(signals, stats):
         </div>"""
 
     if not strat_cards:
-        strat_cards = '<div class="empty">Nessuna strategia con segnali ancora.</div>'
+        strat_cards = '<div class="empty">暂无任何策略产生信号。</div>'
 
     sig_cards = ""
     for s in signals:
@@ -178,7 +178,7 @@ def generate(signals, stats):
           <div class="divider"></div>
           <div class="grid4">
             <div>
-              <div class="metric-label">Entry</div>
+              <div class="metric-label">入场</div>
               <div class="small fw500">{fmt_price(s['entry'])}</div>
             </div>
             <div>
@@ -190,7 +190,7 @@ def generate(signals, stats):
               <div class="small fw500">{fmt_score(s['raw_score'], s['final_score'])}</div>
             </div>
             <div>
-              <div class="metric-label">Regime</div>
+              <div class="metric-label">市场状态</div>
               <div class="small fw500">{(s['market_regime'] or '—')[:8]}</div>
             </div>
           </div>
@@ -198,14 +198,14 @@ def generate(signals, stats):
         </div>"""
 
     if not sig_cards:
-        sig_cards = '<div class="empty">Nessun segnale ancora. Il sistema scansiona ogni 15 minuti.</div>'
+        sig_cards = '<div class="empty">暂无信号。系统每 15 分钟扫描一次。</div>'
 
     html = f"""<!DOCTYPE html>
-<html lang="it">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Signal Engine V2.1</title>
+<title>信号引擎 V2.1</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
 <style>
 :root{{
@@ -229,7 +229,7 @@ def generate(signals, stats):
   }}
 }}
 *{{box-sizing:border-box;margin:0;padding:0;}}
-body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;padding-bottom:3rem;}}
+body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei','Noto Sans SC',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;padding-bottom:3rem;}}
 .header{{background:var(--surface);border-bottom:0.5px solid var(--border);padding:1rem 1.25rem;position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;}}
 .header-title{{font-size:17px;font-weight:500;}}
 .header-sub{{font-size:12px;color:var(--tx2);margin-top:2px;}}
@@ -256,20 +256,20 @@ body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgro
 <body>
 <div class="header">
   <div>
-    <div class="header-title">Signal Engine V2.1</div>
+    <div class="header-title">信号引擎 V2.1</div>
     <div class="header-sub"><i class="ti ti-refresh" aria-hidden="true"></i> {now}</div>
   </div>
   <span class="live">LIVE</span>
 </div>
 <div class="container">
-  <div class="section">Overview</div>
+  <div class="section">概览</div>
   <div class="grid2">
     <div class="metric"><div class="metric-label">Total signals</div><div class="metric-value">{total_signals}</div></div>
     <div class="metric"><div class="metric-label">Open</div><div class="metric-value" style="color:var(--tx-info);">{total_open}</div></div>
     <div class="metric"><div class="metric-label">Win rate</div><div class="metric-value" style="color:var(--tx-success);">{global_wr}</div></div>
     <div class="metric"><div class="metric-label">Profit factor</div><div class="metric-value">{global_pf}</div></div>
   </div>
-  <div class="section">Per strategy</div>
+  <div class="section">按策略</div>
   {strat_cards}
   <div class="section">Recent signals</div>
   {sig_cards}
