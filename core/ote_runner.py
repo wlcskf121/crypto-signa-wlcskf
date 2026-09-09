@@ -5,7 +5,7 @@ OTE Fase A — Runner ("zona prima, direzione dopo")
 Principio: NON predice la direzione. La OSSERVA.
 
 Ciclo per asset:
-    1. Legge le LH Restart Zone attive (lh_db, riuso diretto)
+    1. Legge le LH 重启区域 attive (lh_db, riuso diretto)
     2. Calcola Liquidity Map sopra E sotto ogni zona (neutrale)
     3. Zona entro 12.5pt? → CANDIDATE (neutro, nessuna direzione)
     4. Prezzo tocca la zona? → TOUCHED → osserva M5
@@ -289,14 +289,14 @@ def _compute_trade_plan(direction: str, df_h1, zone_high: float,
     """
     Calcola Entry/SL/TP solo DOPO che il mercato ha mostrato la direzione.
 
-    Entry: close corrente (market entry — la conferma e' gia' avvenuta)
+    进场价： close corrente (market entry — la conferma e' gia' avvenuta)
            Nota: in un sistema live sarebbe il prezzo di mercato al momento
            della conferma, qui usiamo il close M5 piu' recente come proxy.
 
-    SL: oltre il punto estremo dello sweep + buffer ATR
+    止损： oltre il punto estremo dello sweep + buffer ATR
         (il punto piu' lontano raggiunto dal mercato prima di rigettare)
 
-    TP: prossimo livello significativo nella direzione del trade
+    止盈： prossimo livello significativo nella direzione del trade
         (calcolato dall'entry, non dal prezzo — stessa correzione di LH)
     """
     atr = _manual_atr(df_h1)
@@ -313,7 +313,7 @@ def _compute_trade_plan(direction: str, df_h1, zone_high: float,
     if risk <= 0:
         return None
 
-    # TP: prossimo livello significativo nella direzione del trade
+    # 止盈： prossimo livello significativo nella direzione del trade
     relevant = liq_data.get("above", []) if direction == "BUY" else liq_data.get("below", [])
     target = _find_best_target(relevant, entry, sl, direction, atr=atr)
     if target is None:
@@ -391,16 +391,16 @@ def _notify_candidate(asset: str, zone: dict, liq: dict, trade_plans: dict, conf
         sell_plan = trade_plans.get("SELL")
 
         text = (
-            f"\U0001f7e1 *OTE — SEGNALE*\n"
+            f"\U0001f7e1 *OTE —— 信号*\n"
             f"*{asset.replace('_',' ')}*\n\n"
-            f"Zona: `{fp(zone.get('zone_low'))}` - `{fp(zone.get('zone_high'))}` "
+            f"区域： `{fp(zone.get('zone_low'))}` - `{fp(zone.get('zone_high'))}` "
             f"(score {zone.get('restart_score', 0):.0f}/100, {zone.get('zone_strength', '?')})\n"
-            f"Ricorrenza: {zone.get('confirmed_restarts', 0)} restart confermati\n\n"
+            f"重复次数： {zone.get('confirmed_restarts', 0)} 次重启确认\n\n"
         )
 
         if buy_plan:
             text += (
-                f"\U0001f7e2 *Se sweep SOTTO + rigetto:*\n"
+                f"\U0001f7e2 *若向下扫流动性后拒绝：*\n"
                 f"  BUY entry `{fp(buy_plan['planned_entry'])}` "
                 f"SL `{fp(buy_plan['planned_sl'])}` "
                 f"TP `{fp(buy_plan['planned_tp'])}` "
@@ -409,7 +409,7 @@ def _notify_candidate(asset: str, zone: dict, liq: dict, trade_plans: dict, conf
 
         if sell_plan:
             text += (
-                f"\U0001f534 *Se sweep SOPRA + rigetto:*\n"
+                f"\U0001f534 *若向上扫流动性后拒绝：*\n"
                 f"  SELL entry `{fp(sell_plan['planned_entry'])}` "
                 f"SL `{fp(sell_plan['planned_sl'])}` "
                 f"TP `{fp(sell_plan['planned_tp'])}` "
@@ -417,9 +417,9 @@ def _notify_candidate(asset: str, zone: dict, liq: dict, trade_plans: dict, conf
             )
 
         if not buy_plan and not sell_plan:
-            text += f"_Nessun scenario con RR sufficiente._\n\n"
+            text += f"_无满足盈亏比的情景。_\n\n"
 
-        text += f"_Preparati — osserva la reazione alla zona._"
+        text += f"_准备就绪 —— 观察价格对该区域反应。_"
 
         bot_token = config.get("TELEGRAM_BOT_TOKEN", "")
         chat_id = config.get("TELEGRAM_CHAT_ID", "")
@@ -427,7 +427,7 @@ def _notify_candidate(asset: str, zone: dict, liq: dict, trade_plans: dict, conf
         if bot_token and chat_id:
             telegram_bot.send_message(bot_token, chat_id, text)
         if ntfy_topic:
-            title = f"OTE Segnale {asset.replace('_',' ')} (score {zone.get('restart_score', 0):.0f})"
+            title = f"OTE 信号 {asset.replace('_',' ')} (score {zone.get('restart_score', 0):.0f})"
             ntfy_bot.send_message(ntfy_topic, title, text.replace("*", "").replace("`", ""))
     except Exception as e:
         logger.warning("OTE _notify_candidate: %s", e)
@@ -447,12 +447,12 @@ def _notify_signal(asset: str, direction: str, trade_plan: dict, zone: dict, con
         text = (
             f"{emoji} *OTE — {direction}*\n"
             f"*{asset.replace('_',' ')}*\n\n"
-            f"Entry: `{fp(trade_plan['planned_entry'])}`\n"
-            f"SL: `{fp(trade_plan['planned_sl'])}`\n"
-            f"TP: `{fp(trade_plan['planned_tp'])}` ({trade_plan.get('tp_type', '?')})\n"
-            f"RR: {trade_plan['planned_rr']:.2f}\n\n"
-            f"Zona: {zone.get('zone_strength', '?')} (score {zone.get('restart_score', 0):.0f})\n"
-            f"_Direzione confermata da sweep+reaction M5._"
+            f"进场价： `{fp(trade_plan['planned_entry'])}`\n"
+            f"止损： `{fp(trade_plan['planned_sl'])}`\n"
+            f"止盈： `{fp(trade_plan['planned_tp'])}` ({trade_plan.get('tp_type', '?')})\n"
+            f"盈亏比： {trade_plan['planned_rr']:.2f}\n\n"
+            f"区域： {zone.get('zone_strength', '?')} (score {zone.get('restart_score', 0):.0f})\n"
+            f"_方向由 M5 扫流动性 + 反应确认。_"
         )
 
         bot_token = config.get("TELEGRAM_BOT_TOKEN", "")
@@ -774,7 +774,7 @@ def _run_for_asset(conn, asset: str, config: dict, now: datetime):
             # (sviluppo su meta' dati, applicato a meta' MAI vista):
             # +0.056R -> +0.224R su validazione, +0.106R -> +0.263R
             # sull'intero campione (106 segnali). zone_score>=80: zone
-            # probabilmente "consumate" da troppi tocchi -- principio
+            # probabilmente "consumate" da troppi 次触碰 -- principio
             # di trading tecnico, piu' un livello e' testato piu' e'
             # probabile che ceda, non che tenga (spiega anche perche'
             # quality_label=HIGH andava peggio di LOW: zone_score e' la
