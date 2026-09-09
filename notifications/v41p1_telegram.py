@@ -1,7 +1,7 @@
 """
 notifications/v41p1_telegram.py
-Notifiche Telegram e ntfy per Institutional Scanner V4.1 Phase 1.
-Formato dedicato che mostra la Money Flow Map con Priority Score.
+Telegram 与 ntfy 推送：用于 Institutional Scanner V4.1 Phase 1。
+专用格式，展示带优先级评分的资金流向图。
 """
 
 from notifications.telegram_bot import send_message
@@ -77,7 +77,7 @@ def format_v41p1_signal_alert(signal: dict) -> str:
         f"{emoji} *INSTITUTIONAL SCANNER V4.1 — Phase 1*",
         "",
         f"Asset: *{asset_display}*",
-        f"Direzione: *{direction}*",
+        f"方向： *{direction}*",
         "",
         f"Entry: `{_fmt(signal['entry'])}`",
         f"Stop Loss: `{_fmt(signal['stop_loss'])}`",
@@ -100,7 +100,7 @@ def format_v41p1_signal_alert(signal: dict) -> str:
         f"EMA H1: {signal.get('ema_h1', 'N/A')}",
         f"Dow Theory H4: {signal.get('dow_theory_h4', 'N/A')}",
         f"Momentum: {signal.get('momentum', 'N/A')}",
-        f"Sessione: {signal.get('session', 'N/A')}",
+        f"时段： {signal.get('session', 'N/A')}",
     ]
     return "\n".join(lines)
 
@@ -111,7 +111,7 @@ def send_v41p1_signal_alert(bot_token: str, chat_id: str, signal: dict) -> bool:
 
 
 def format_v41p1_signal_alert_plain(signal: dict) -> tuple:
-    """Formato plain-text per ntfy. Ritorna (title, body)."""
+    """ntfy 纯文本格式。返回 (title, body)。"""
     direction = signal["direction"]
     asset_display = signal["asset"].replace("_", " ")
     quality = signal["quality_score"]
@@ -149,7 +149,7 @@ def format_v41p1_signal_alert_plain(signal: dict) -> tuple:
         f"  Target: {tgt_label} [{tgt_prio}]\n"
         f"  Expected Move: {em_str}\n"
         f"\n"
-        f"Sessione: {signal.get('session', 'N/A')}"
+        f"时段： {signal.get('session', 'N/A')}"
     )
     return title, body
 
@@ -160,7 +160,7 @@ def send_v41p1_signal_alert_ntfy(ntfy_topic: str, signal: dict) -> bool:
 
 
 # ============================================================
-# Watchlist Alert (riusa formato V4.1 con Priority Score aggiunto)
+# 观察列表预警（复用 V4.1 格式并附加优先级评分）
 # ============================================================
 
 def format_v41p1_watchlist_alert(asset: str, level: dict) -> str:
@@ -179,11 +179,11 @@ def format_v41p1_watchlist_alert(asset: str, level: dict) -> str:
         f"Distanza: *{level['distance_pct']*100:.2f}%*",
         f"Priority: {pe} *{level.get('priority_label','N/A')}* "
         f"({level.get('priority_score', 0):.2f})",
-        f"Tocchi storici (30gg): {level.get('historical_touches', 0)}",
+        f"历史触碰 (30天): {level.get('historical_touches', 0)}",
         "",
-        f"Scenario potenziale: {emoji} *{direction}*",
+        f"潜在情景： {emoji} *{direction}*",
         "",
-        "_Alert preparatorio: nessuna conferma trigger ancora presente._",
+        "_预备预警：尚未出现触发器确认。_",
     ]
     return "\n".join(lines)
 
