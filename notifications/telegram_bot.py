@@ -1,7 +1,7 @@
 """
 notifications/telegram_bot.py  (V2.2)
-Notifiche Telegram multi-strategia.
-Fix: fallback plain text se Markdown fallisce (400 Bad Request).
+Telegram 多策略推送。
+修复：Markdown 失败时回退纯文本 (400 Bad Request)。
 """
 
 import logging
@@ -13,12 +13,12 @@ TELEGRAM_API_BASE = "https://api.telegram.org"
 
 def send_message(bot_token: str, chat_id: str, text: str) -> bool:
     if not bot_token or not chat_id:
-        logger.warning("TELEGRAM_BOT_TOKEN o TELEGRAM_CHAT_ID non configurati.")
+        logger.warning("TELEGRAM_BOT_TOKEN 或 TELEGRAM_CHAT_ID 未配置。")
         return False
 
     url = f"{TELEGRAM_API_BASE}/bot{bot_token}/sendMessage"
 
-    # Tentativo 1: con Markdown
+    # 尝试 1：使用 Markdown
     payload = {
         "chat_id": chat_id,
         "text": text,
@@ -29,10 +29,10 @@ def send_message(bot_token: str, chat_id: str, text: str) -> bool:
         resp = requests.post(url, json=payload, timeout=10)
         if resp.status_code == 200 and resp.json().get("ok"):
             return True
-        # Se 400 Bad Request → riprova senza parse_mode
+        # 若 400 Bad Request → 去掉 parse_mode 重试
         if resp.status_code == 400:
             logger.warning(
-                "Telegram Markdown fallito (400), riprovo in plain text: %s",
+                "Telegram Markdown 失败 (400)，改用纯文本重试: %s",
                 resp.text[:200],
             )
             plain_text = text.replace("*", "").replace("`", "").replace("_", " ")
@@ -55,12 +55,12 @@ def send_message(bot_token: str, chat_id: str, text: str) -> bool:
             return False
         return True
     except requests.RequestException as e:
-        logger.error("Errore invio Telegram: %s", e)
+        logger.error("发送 Telegram 出错: %s", e)
         return False
 
 
 def format_signal_alert(signal, label: str) -> str:
-    """Formato V2 multi-strategia."""
+    """V2 多策略格式。"""
     direction_emoji = "🟢" if signal.direction == "LONG" else "🔴"
     ctx = signal.additional_context or {}
     asset_display = signal.asset.replace("_", " ")
@@ -179,9 +179,9 @@ def format_zone_signal_alert(signal, label: str) -> str:
 
     text = (
         f"{label}\n\n"
-        f"Strategia: *Zone + Confirmation V1.0*\n"
+        f"策略： *Zone + Confirmation V1.0*\n"
         f"{direction_emoji} Asset: *{asset_display}*\n"
-        f"Direzione: *{signal.direction}*\n\n"
+        f"方向： *{signal.direction}*\n\n"
         f"Entry:       `{fp(signal.entry)}`\n"
         f"Stop Loss:   `{fp(signal.stop_loss)}`\n"
         f"Take Profit: `{fp(signal.take_profit)}`\n"
@@ -189,10 +189,10 @@ def format_zone_signal_alert(signal, label: str) -> str:
         f"Raw Score:   *{signal.raw_score:.0f}/11*\n"
         f"Final Score: *{signal.final_score:.0f}/11*\n\n"
         f"Bias H4: {bias_h4}\n"
-        f"Zona: `{fp(zone_level)}` ({zone_touches} tocchi)\n"
+        f"区域： `{fp(zone_level)}` ({zone_touches} 次触碰)\n"
         f"ATR Daily: `{fp(atr_daily)}`\n"
         f"Macro Risk: {macro_risk}\n"
-        f"Sessione: {session}\n"
+        f"时段： {session}\n"
         f"Momentum: {momentum_arrow} {momentum}\n"
         f"Pattern: {pattern}"
     )
