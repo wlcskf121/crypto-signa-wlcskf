@@ -36,7 +36,7 @@ def format_v41p1_signal_alert(signal: dict) -> str:
     triggers = signal.get("trigger_types", [])
     triggers_str = " + ".join(triggers) if triggers else "N/A"
 
-    # Money Flow Map
+    # 资金流向图
     na_label = signal.get("nearest_above_label") or "N/A"
     na_price = signal.get("nearest_above_price")
     na_prio  = signal.get("nearest_above_priority") or ""
@@ -74,32 +74,32 @@ def format_v41p1_signal_alert(signal: dict) -> str:
         return f" ({sign}{d*100:.2f}%)"
 
     lines = [
-        f"{emoji} *INSTITUTIONAL SCANNER V4.1 — Phase 1*",
+        f"{emoji} *机构扫描器 V4.1 —— 第一阶段*",
         "",
-        f"Asset: *{asset_display}*",
+        f"资产： *{asset_display}*",
         f"方向： *{direction}*",
         "",
-        f"Entry: `{_fmt(signal['entry'])}`",
-        f"Stop Loss: `{_fmt(signal['stop_loss'])}`",
-        f"TP1 (1R): `{_fmt(signal.get('tp1'))}`",
-        f"TP2 (2R): `{_fmt(signal.get('tp2'))}`",
-        f"R/R: *{signal.get('rr', 0):.2f}*",
+        f"进场价： `{_fmt(signal['entry'])}`",
+        f"止损价： `{_fmt(signal['stop_loss'])}`",
+        f"止盈1 (1R): `{_fmt(signal.get('tp1'))}`",
+        f"止盈2 (2R): `{_fmt(signal.get('tp2'))}`",
+        f"盈亏比： *{signal.get('rr', 0):.2f}*",
         "",
-        f"Trigger: *{triggers_str}*",
-        f"Quality: {label_emoji} *{quality}/12* ({label})",
+        f"触发条件： *{triggers_str}*",
+        f"质量： {label_emoji} *{quality}/12* ({label})",
         "",
-        "💧 *Money Flow Map*",
-        f"Nearest Above: {na_label} @ `{_fmt(na_price)}`{dist_str(na_dist,'+')} {prio_str(na_prio, na_score)}",
-        f"Nearest Below: {nb_label} @ `{_fmt(nb_price)}`{dist_str(nb_dist,'-')} {prio_str(nb_prio, nb_score)}",
+        "💧 *资金流向图*",
+        f"上方最近： {na_label} @ `{_fmt(na_price)}`{dist_str(na_dist,'+')} {prio_str(na_prio, na_score)}",
+        f"下方最近： {nb_label} @ `{_fmt(nb_price)}`{dist_str(nb_dist,'-')} {prio_str(nb_prio, nb_score)}",
         "",
-        f"Source: {src_label} {prio_str(src_prio, src_score)}",
-        f"Target: {tgt_label} @ `{_fmt(tgt_price)}` {prio_str(tgt_prio, tgt_score)}",
-        f"Expected Move: *{em_str}*",
+        f"来源： {src_label} {prio_str(src_prio, src_score)}",
+        f"目标： {tgt_label} @ `{_fmt(tgt_price)}` {prio_str(tgt_prio, tgt_score)}",
+        f"预期波动： *{em_str}*",
         "",
-        f"EMA H4: {signal.get('ema_h4', 'N/A')}",
-        f"EMA H1: {signal.get('ema_h1', 'N/A')}",
-        f"Dow Theory H4: {signal.get('dow_theory_h4', 'N/A')}",
-        f"Momentum: {signal.get('momentum', 'N/A')}",
+        f"EMA H4： {signal.get('ema_h4', 'N/A')}",
+        f"EMA H1： {signal.get('ema_h1', 'N/A')}",
+        f"道氏理论 H4： {signal.get('dow_theory_h4', 'N/A')}",
+        f"动量： {signal.get('momentum', 'N/A')}",
         f"时段： {signal.get('session', 'N/A')}",
     ]
     return "\n".join(lines)
@@ -133,21 +133,21 @@ def format_v41p1_signal_alert_plain(signal: dict) -> tuple:
     tgt_label = signal.get("liquidity_target") or "N/A"
     tgt_prio  = signal.get("liquidity_target_priority") or ""
 
-    title = f"V4.1P1 {asset_display} {direction} | Q {quality}/12 ({label}) | EM {em_str}"
+    title = f"V4.1P1 {asset_display} {direction} | 质量 {quality}/12 ({label}) | 预期波动 {em_str}"
 
     body = (
-        f"Entry: {_fmt(signal['entry'])}\n"
-        f"Stop Loss: {_fmt(signal['stop_loss'])}\n"
-        f"TP1 (1R): {_fmt(signal.get('tp1'))}\n"
-        f"TP2 (2R): {_fmt(signal.get('tp2'))}\n"
-        f"R/R: {signal.get('rr', 0):.2f}\n"
-        f"Trigger: {triggers_str}\n"
+        f"进场价： {_fmt(signal['entry'])}\n"
+        f"止损价： {_fmt(signal['stop_loss'])}\n"
+        f"止盈1 (1R): {_fmt(signal.get('tp1'))}\n"
+        f"止盈2 (2R): {_fmt(signal.get('tp2'))}\n"
+        f"盈亏比： {signal.get('rr', 0):.2f}\n"
+        f"触发条件： {triggers_str}\n"
         f"\n"
-        f"Money Flow Map:\n"
-        f"  Above: {na_label} @ {_fmt(na_price)} [{na_prio}]\n"
-        f"  Below: {nb_label} @ {_fmt(nb_price)} [{nb_prio}]\n"
-        f"  Target: {tgt_label} [{tgt_prio}]\n"
-        f"  Expected Move: {em_str}\n"
+        f"资金流向图:\n"
+        f"  上方： {na_label} @ {_fmt(na_price)} [{na_prio}]\n"
+        f"  下方： {nb_label} @ {_fmt(nb_price)} [{nb_prio}]\n"
+        f"  目标： {tgt_label} [{tgt_prio}]\n"
+        f"  预期波动： {em_str}\n"
         f"\n"
         f"时段： {signal.get('session', 'N/A')}"
     )
@@ -170,14 +170,14 @@ def format_v41p1_watchlist_alert(asset: str, level: dict) -> str:
     pe = _priority_emoji(level.get("priority_label", ""))
 
     lines = [
-        f"👀 *WATCHLIST — V4.1 Phase 1*",
+        f"👀 *观察列表 — V4.1 第一阶段*",
         "",
-        f"Asset: *{asset_display}*",
+        f"资产： *{asset_display}*",
         "",
-        f"Livello: *{level['label']}*",
-        f"Prezzo: `{_fmt(level['price'])}`",
-        f"Distanza: *{level['distance_pct']*100:.2f}%*",
-        f"Priority: {pe} *{level.get('priority_label','N/A')}* "
+        f"档位： *{level['label']}*",
+        f"价格： `{_fmt(level['price'])}`",
+        f"距离： *{level['distance_pct']*100:.2f}%*",
+        f"优先级： {pe} *{level.get('priority_label','N/A')}* "
         f"({level.get('priority_score', 0):.2f})",
         f"历史触碰 (30天): {level.get('historical_touches', 0)}",
         "",
