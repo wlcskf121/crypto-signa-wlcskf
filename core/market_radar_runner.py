@@ -14,9 +14,9 @@ FLUSSO:
 Il radar RIUSA i dati che il sistema gia' produce, invece di ricalcolarli:
 
   IMPULSE
-    - ampiezza  : CALCOLATA dalle candele M15 (= velocity x lookback).
+    - 宽度  : CALCOLATA dalle candele M15 (= velocity x lookback).
                   NON piu' da structure_state: quella fonte si aggiorna ogni
-                  4-6 ore mentre impulso→calma dura ~2h, e ampiezza/velocita'
+                  4-6 ore mentre impulso→calma dura ~2h, e 宽度/velocita'
                   non hanno mai coinciso (0 su 13 impulsi in 46h di dati).
     - velocita' : CALCOLATA dalle candele M15   (duration_bars in impulses_json
                   e' SEMPRE 0 nel DB reale → inutilizzabile, verificato su tutti
@@ -79,12 +79,12 @@ RADAR_CFG = {
     # IMPULSE_LOOKBACK_BARS barre. Se le due misure guardano momenti diversi,
     # la congiunzione "ampio E veloce" non scatta mai per pura asincronia.
     # Verificato sui dati del 15/07: BTC ha avuto 4 impulsi (vel 0.6-0.89) ma
-    # l'ampiezza in structure_state era timbrata 16:31 mentre l'ultimo picco
+    # l'宽度 in structure_state era timbrata 16:31 mentre l'ultimo picco
     # di velocita' era alle 13:00-13:30 → mai coincidenti → BTC sempre in
     # RIPOSO, zero zone, nonostante amplitude_atr=2.935 superasse il gate.
     # Default = la stessa finestra della velocity (6 barre x 15 min = 90 min):
     # cosi' le due misure parlano dello stesso movimento.
-    # NON PIU' USATA: serviva a non accoppiare un'ampiezza vecchia di
+    # NON PIU' USATA: serviva a non accoppiare un'宽度 vecchia di
     # structure_state con la velocity di adesso. Ora entrambe escono dalle
     # stesse candele, nella stessa finestra: l'asincronia non esiste piu'.
     "IMPULSE_MAX_AGE_MIN":       90,    # (inattiva)
@@ -144,7 +144,7 @@ def read_last_impulse(conn, asset: str, now=None, max_age_min: float = None):
     """
     NON PIU' USATA dalla state machine (resta per compatibilita'/debug).
 
-    Il radar ricava impulso, direzione e ampiezza dalle proprie candele M15
+    Il radar ricava impulso, direzione e 宽度 dalle proprie candele M15
     (vedi feat_impulse_direction / feat_velocity / compute_features). Questa
     funzione leggeva structure_state, che si aggiorna ogni 4-6 ore: troppo
     lenta per un fenomeno che dura ~2 ore.
@@ -188,7 +188,7 @@ def read_last_impulse(conn, asset: str, now=None, max_age_min: float = None):
                 age_min = None          # timestamp illeggibile → non scartare
             if age_min is not None and age_min > max_age_min:
                 logger.info("Radar [%s]: impulso stantio (%.0f min > %.0f), "
-                            "ampiezza ignorata.", asset, age_min, max_age_min)
+                            "宽度 ignorata.", asset, age_min, max_age_min)
                 return None
 
         return {
@@ -449,15 +449,15 @@ def next_state(cur_state: str, f: dict, cfg,
     #     velocity = |close[-1] - close[-6]| / (6 * ATR)
     #     velocity >= 0.6  <=>  il prezzo ha percorso >= 3.6 ATR in 6 candele
     #
-    # Il gate ampiezza chiedeva >= 2.0 ATR, cioe' MENO di quanto la velocita'
+    # Il gate 宽度 chiedeva >= 2.0 ATR, cioe' MENO di quanto la velocita'
     # garantisce gia': non filtrava nulla. In compenso portava una dipendenza
     # da structure_state, e i dati dicono che gli costava tutto:
     #
-    #   - ampiezza e velocita' non hanno MAI coinciso: 0 su 13 impulsi in 46h
+    #   - 宽度 e velocita' non hanno MAI coinciso: 0 su 13 impulsi in 46h
     #   - perche' misurano cose diverse su finestre diverse: amplitude_atr e'
     #     una gamba strutturale (svolta anche in ore, duration_bars e' sempre 0),
     #     velocity sono le ultime 6 candele M15
-    #   - esempio reale: amp=8.86 ATR con velocity=0.203 nello stesso istante
+    #   - esempio reale: 振幅=8.86 ATR con velocity=0.203 nello stesso istante
     #   - e structure_state produce un impulso ogni 4-6 ore (gap mediano 374 min
     #     su BTC), mentre impulso→calma dura ~2 ore: la fonte arriva DOPO che
     #     il fenomeno e' finito
@@ -698,7 +698,7 @@ def _run_for_asset(conn, asset: str, config: dict, now: datetime):
             return
 
         logger.info("Radar [%s]: ⚡ ENTRY ZONE dir=%s price=%.4f zone=%s "
-                    "amp=%.2f vel=%.2f exh=%.2f (id=%s)",
+                    "振幅=%.2f 速度=%.2f 耗尽=%.2f (id=%s)",
                     asset, f["direction"], price, zref or "-",
                     f.get("amplitude_atr") or 0, f.get("velocity") or 0,
                     f.get("exhaustion") or 0, zone_id)
@@ -713,13 +713,13 @@ def _notify(asset: str, f: dict, price: float, config: dict):
     try:
         from notifications import telegram_bot, ntfy_bot
         text = (
-            f"👀 *MARKET RADAR — Zona da osservare*\n\n"
+            f"👀 *市场雷达 —— 观察区域*\n\n"
             f"*{asset.replace('_',' ')}*\n"
-            f"Possibile esaurimento · rimbalzo atteso: {f.get('direction')}\n\n"
-            f"Prezzo: `{price:.4f}`\n"
-            f"amp={f.get('amplitude_atr') or 0:.2f} vel={f.get('velocity') or 0:.2f} "
-            f"exh={f.get('exhaustion') or 0:.2f}\n\n"
-            f"_Da questo momento osserva il grafico. Decide il trader._"
+            f"可能耗尽 · 预计反弹： {f.get('direction')}\n\n"
+            f"价格： `{price:.4f}`\n"
+            f"振幅={f.get('amplitude_atr') or 0:.2f} 速度={f.get('velocity') or 0:.2f} "
+            f"耗尽={f.get('exhaustion') or 0:.2f}\n\n"
+            f"_从现在起观察图表，由交易者自行决策。_"
         )
         bot = config.get("TELEGRAM_BOT_TOKEN",""); chat = config.get("TELEGRAM_CHAT_ID","")
         topic = config.get("NTFY_TOPIC","")
