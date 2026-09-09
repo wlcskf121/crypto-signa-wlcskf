@@ -149,29 +149,29 @@ CSS = """
   --buy:#4fffb0;--sell:#ff6b6b;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',sans-serif;font-size:14px;line-height:1.6}
+body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans','PingFang SC','Microsoft YaHei','Noto Sans SC',sans-serif;font-size:14px;line-height:1.6}
 header{border-bottom:1px solid var(--border);padding:18px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
-header h1{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
-header .meta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)}
-header a{color:var(--accent);text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:11px}
+header h1{font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+header .meta{font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:11px;color:var(--dim)}
+header a{color:var(--accent);text-decoration:none;font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:11px}
 .container{max-width:1320px;margin:0 auto;padding:24px 32px}
 .summary-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:20px}
 .summary-grid>div{background:var(--surface);padding:16px 10px;text-align:center}
-.big{font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:600}
+.big{font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:20px;font-weight:600}
 .big.pos{color:var(--buy)} .big.neg{color:var(--sell)} .big.warn{color:var(--accent3)}
 .lbl{font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);display:block;margin-top:3px}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
 .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:16px}
-.ch{padding:10px 16px;border-bottom:1px solid var(--border);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.ch{padding:10px 16px;border-bottom:1px solid var(--border);font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
 table{width:100%;border-collapse:collapse}
-th{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);padding:9px 14px;text-align:left;border-bottom:1px solid var(--border)}
+th{font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);padding:9px 14px;text-align:left;border-bottom:1px solid var(--border)}
 td{padding:8px 14px;border-bottom:1px solid var(--border);font-size:13px}
 tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02)}
 tr.hl td{background:rgba(79,255,176,.06)}
-.mono{font-family:'IBM Plex Mono',monospace;font-size:12px}
+.mono{font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:12px}
 .pos{color:var(--buy);font-weight:600} .neg{color:var(--sell)} .warn{color:var(--accent3)}
-.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:'IBM Plex Mono',monospace;font-weight:600}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-weight:600}
 .b-buy{background:rgba(79,255,176,.15);color:var(--buy)}
 .b-sell{background:rgba(255,107,107,.15);color:var(--sell)}
 .b-tp{background:rgba(79,255,176,.15);color:var(--buy)}
@@ -180,7 +180,7 @@ tr.hl td{background:rgba(79,255,176,.06)}
 .b-high{background:rgba(79,255,176,.15);color:var(--buy)}
 .b-med{background:rgba(255,209,102,.15);color:var(--accent3)}
 .b-low{background:rgba(90,100,120,.2);color:var(--dim)}
-.section-title{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:28px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.section-title{font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:28px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--border)}
 .empty{text-align:center;padding:32px;color:var(--dim);font-size:13px}
 @media(max-width:900px){.grid-2,.grid-3{grid-template-columns:1fr}.summary-grid{grid-template-columns:repeat(4,1fr)}.container{padding:12px}}
 """
@@ -235,12 +235,12 @@ def perf_table(title, d, keys, key_label=""):
   <td class="mono pos">{v['avg_mfe']:.1f}</td>
 </tr>"""
     if not body:
-        body = '<tr><td colspan="8" class="empty">Nessun dato</td></tr>'
+        body = '<tr><td colspan="8" class="empty">无数据</td></tr>'
     return f"""<div class="card">
   <div class="ch">{title}</div>
   <table><thead><tr>
     <th>{key_label}</th><th>N</th><th>Win%</th><th>SL%</th>
-    <th>Expectancy</th><th>Avg R/R</th><th>Avg MAE</th><th>Avg MFE</th>
+    <th>期望值</th><th>Avg R/R</th><th>Avg MAE</th><th>Avg MFE</th>
   </tr></thead><tbody>{body}</tbody></table>
 </div>"""
 
@@ -249,10 +249,10 @@ def summary_boxes(s):
     win_cls  = "pos" if s["win"] >= 40 else ("neg" if s["win"] < 25 else "warn")
     expr_cls = "pos" if s["exp_r"] > 0 else "neg"
     return f"""<div class="summary-grid">
-  <div><span class="big">{s['n']}</span><span class="lbl">Segnali chiusi</span></div>
-  <div><span class="big {win_cls}">{s['win']}%</span><span class="lbl">Win Rate</span></div>
-  <div><span class="big neg">{s['sl']}%</span><span class="lbl">SL Rate</span></div>
-  <div><span class="big {expr_cls}">{s['exp_r']:+.2f}R</span><span class="lbl">Expectancy</span></div>
+  <div><span class="big">{s['n']}</span><span class="lbl">已平仓信号</span></div>
+  <div><span class="big {win_cls}">{s['win']}%</span><span class="lbl">胜率</span></div>
+  <div><span class="big neg">{s['sl']}%</span><span class="lbl">止损率</span></div>
+  <div><span class="big {expr_cls}">{s['exp_r']:+.2f}R</span><span class="lbl">期望值</span></div>
   <div><span class="big">{s['avg_rr']:.2f}</span><span class="lbl">Avg R/R</span></div>
   <div><span class="big neg">{s['avg_mae']:.1f}</span><span class="lbl">Avg MAE</span></div>
   <div><span class="big pos">{s['avg_mfe']:.1f}</span><span class="lbl">Avg MFE</span></div>
@@ -262,7 +262,7 @@ def summary_boxes(s):
 
 def recent_signals_table(rows):
     if not rows:
-        return '<div class="card"><div class="empty">Nessun segnale ancora.</div></div>'
+        return '<div class="card"><div class="empty">暂无信号。</div></div>'
     body = ""
     for r in rows:
         sid, asset, direction, entry, sl, tp, rr, qs, ql, sess, ref, liq_tgt, trend, outcome, mae, mfe, bars, ts = r
@@ -281,17 +281,17 @@ def recent_signals_table(rows):
   <td class="mono" style="color:var(--dim)">{int(bars or 0)}</td>
 </tr>"""
     return f"""<div class="card">
-  <div class="ch">Segnali Recenti (ultimi 30)</div>
+  <div class="ch">近期信号（最近 30 条）</div>
   <table><thead><tr>
-    <th>Data</th><th>Asset</th><th>Dir</th><th>Entry</th><th>SL</th><th>TP</th>
-    <th>R/R</th><th>Quality</th><th>Session</th><th>Target</th><th>Outcome</th><th>Bars</th>
+    <th>日期</th><th>资产</th><th>方向</th><th>入场</th><th>SL</th><th>TP</th>
+    <th>R/R</th><th>质量</th><th>Session</th><th>Target</th><th>结果</th><th>K 线数</th>
   </tr></thead><tbody>{body}</tbody></table>
 </div>"""
 
 
 def context_stats_table(rows):
     if not rows:
-        return '<div class="card"><div class="empty">Nessuno snapshot di contesto ancora.</div></div>'
+        return '<div class="card"><div class="empty">暂无上下文快照。</div></div>'
     body = ""
     for trend, sess, vol, n, trate in rows[:20]:
         trate_pct = round((trate or 0) * 100, 1)
@@ -304,9 +304,9 @@ def context_stats_table(rows):
   <td class="mono {tr_cls}">{trate_pct}%</td>
 </tr>"""
     return f"""<div class="card">
-  <div class="ch">Market Context Heatmap (top 20 combinazioni)</div>
+  <div class="ch">市场上下文热力图（前 20 组组合）</div>
   <table><thead><tr>
-    <th>Trend</th><th>Sessione</th><th>Volatilità M15</th><th>N Scan</th><th>Tradeable%</th>
+    <th>Trend</th><th>时段</th><th>M15 波动率</th><th>扫描次数</th><th>可交易%</th>
   </tr></thead><tbody>{body}</tbody></table>
 </div>"""
 
@@ -352,35 +352,34 @@ def generate():
         win_cls = "pos" if s["win"] >= 40 else ("neg" if s["win"] < 25 else "warn")
         return f"""<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border)">
   <div style="background:var(--surface);padding:12px 8px;text-align:center">
-    <div class="big">{s['n']}</div><div class="lbl">Segnali</div></div>
+    <div class="big">{s['n']}</div><div class="lbl">信号</div></div>
   <div style="background:var(--surface);padding:12px 8px;text-align:center">
-    <div class="big {win_cls}">{s['win']}%</div><div class="lbl">Win Rate</div></div>
+    <div class="big {win_cls}">{s['win']}%</div><div class="lbl">胜率</div></div>
   <div style="background:var(--surface);padding:12px 8px;text-align:center">
-    <div class="big {'pos' if s['exp_r']>0 else 'neg'}">{s['exp_r']:+.2f}R</div><div class="lbl">Expectancy</div></div>
+    <div class="big {'pos' if s['exp_r']>0 else 'neg'}">{s['exp_r']:+.2f}R</div><div class="lbl">期望值</div></div>
   <div style="background:var(--surface);padding:12px 8px;text-align:center">
     <div class="big">{s['avg_rr']:.2f}</div><div class="lbl">Avg R/R</div></div>
 </div>"""
 
     no_data_msg = "" if signals else """
 <div class="card" style="border-color:var(--accent3)">
-  <div class="ch" style="color:var(--accent3)">Dati non ancora disponibili</div>
+  <div class="ch" style="color:var(--accent3)">数据暂不可用</div>
   <div style="padding:20px;color:var(--dim)">
-    L'Edge Lab ha appena iniziato. Le sezioni analitiche si popoleranno
-    dopo i primi segnali chiusi (TP / SL / EXPIRED).
+    Edge Lab 刚刚起步。分析板块会在出现首批已平仓信号（TP / SL / EXPIRED）后填充数据。
   </div>
 </div>"""
 
     html = f"""<!DOCTYPE html>
-<html lang="it">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Edge Lab — OTE-SC Analytics</title>
+<title>Edge Lab — OTE-SC 分析</title>
 <style>{CSS}</style>
 </head>
 <body>
 <header>
-  <h1>⚡ Institutional Edge Lab — OTE-SC Analytics</h1>
+  <h1>⚡ Institutional Edge Lab — OTE-SC 分析</h1>
   <div class="meta">
     {generated} &nbsp;|&nbsp;
     <a href="unified_dashboard.html">&larr; Dashboard</a> &nbsp;|&nbsp;
@@ -391,7 +390,7 @@ def generate():
 
 {no_data_msg}
 
-<div class="section-title">Overview Globale</div>
+<div class="section-title">全局概览</div>
 {summary_boxes(s_all)}
 
 <div class="grid-2">
@@ -405,29 +404,29 @@ def generate():
   </div>
 </div>
 
-<div class="section-title">Performance per Dimensione</div>
+<div class="section-title">按维度表现</div>
 <div class="grid-2">
-  {perf_table("Per Asset", bd_asset, asset_keys, "Asset")}
-  {perf_table("Per Direzione", bd_dir, ["BUY","SELL"], "Direzione")}
+  {perf_table("按资产", bd_asset, asset_keys, "Asset")}
+  {perf_table("按方向", bd_dir, ["BUY","SELL"], "Direzione")}
 </div>
 <div class="grid-2">
-  {perf_table("Per Quality Label", bd_quality, quality_keys, "Quality")}
-  {perf_table("Per Trend Combined", bd_trend, trend_keys, "Trend")}
+  {perf_table("按质量标签", bd_quality, quality_keys, "Quality")}
+  {perf_table("按组合趋势", bd_trend, trend_keys, "趋势")}
 </div>
 
-<div class="section-title">Analisi Sessione</div>
+<div class="section-title">时段分析</div>
 <div class="grid-2">
-  {perf_table("Per Sessione Corrente", bd_sess, sess_keys, "Sessione")}
-  {perf_table("Per Sessione Riferimento", bd_ref, ref_keys, "Ref. Session")}
+  {perf_table("按当前时段", bd_sess, sess_keys, "时段")}
+  {perf_table("按参考时段", bd_ref, ref_keys, "Ref. Session")}
 </div>
 
 <div class="section-title">Liquidity Target Analysis</div>
-{perf_table("Performance per Target", bd_liq, liq_targets, "Target")}
+{perf_table("按目标表现", bd_liq, liq_targets, "Target")}
 
-<div class="section-title">Market Context Heatmap</div>
+<div class="section-title">市场上下文热力图</div>
 {context_stats_table(ctx_rows)}
 
-<div class="section-title">Segnali Recenti</div>
+<div class="section-title">近期信号</div>
 {recent_signals_table(recent)}
 
 </div>
