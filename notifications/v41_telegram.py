@@ -41,35 +41,35 @@ def format_v41_signal_alert(signal: dict) -> str:
 
     em_points = signal.get("expected_move_points")
     em_barrier = signal.get("expected_move_barrier") or "N/A"
-    em_str = f"{em_points:.1f}pt → {em_barrier}" if em_points is not None else "N/A"
+    em_str = f"{em_points:.1f}pt -> {em_barrier}" if em_points is not None else "N/A"
 
     lines = [
-        f"{emoji} *INSTITUTIONAL SCANNER V4.1 — Intraday Wave*",
+        f"{emoji} *机构扫描器 V4.1 —— 日内波段*",
         "",
-        f"Asset: *{asset_display}*",
+        f"资产： *{asset_display}*",
         f"方向： *{direction}*",
         "",
-        f"Entry: `{_fmt(signal['entry'])}`",
-        f"Stop Loss: `{_fmt(signal['stop_loss'])}`",
-        f"TP1 (1R): `{_fmt(signal.get('tp1'))}`",
-        f"TP2 (2R): `{_fmt(signal.get('tp2'))}`",
-        f"R/R: *{signal.get('rr', 0):.2f}*",
+        f"进场价： `{_fmt(signal['entry'])}`",
+        f"止损价： `{_fmt(signal['stop_loss'])}`",
+        f"止盈1 (1R): `{_fmt(signal.get('tp1'))}`",
+        f"止盈2 (2R): `{_fmt(signal.get('tp2'))}`",
+        f"盈亏比： *{signal.get('rr', 0):.2f}*",
         "",
-        f"Trigger: *{triggers_str}*",
-        f"Quality: {label_emoji} *{quality}/12* ({label})",
+        f"触发条件： *{triggers_str}*",
+        f"质量： {label_emoji} *{quality}/12* ({label})",
         "",
-        f"Liquidity Source: {liquidity_source}",
-        f"Liquidity Target: {liquidity_target}",
-        f"OTE Entry Zone: {ote_zone_str}",
-        f"Expected Move: {em_str}",
+        f"流动性来源： {liquidity_source}",
+        f"流动性目标： {liquidity_target}",
+        f"OTE 进场区域： {ote_zone_str}",
+        f"预期波动： {em_str}",
         "",
-        f"EMA H4: {signal.get('ema_h4', 'N/A')}",
-        f"EMA H1: {signal.get('ema_h1', 'N/A')}",
-        f"Dow Theory H4: {signal.get('dow_theory_h4', 'N/A')}",
-        f"Momentum: {signal.get('momentum', 'N/A')}",
-        f"Zona H4: {'✓' if signal.get('in_h4_zone') else '✗'}",
-        f"S/R Reaction: {'✓' if signal.get('sr_reaction') else '✗'}",
-        f"OTE: {'✓' if signal.get('ote_present') else '✗'}",
+        f"EMA H4： {signal.get('ema_h4', 'N/A')}",
+        f"EMA H1： {signal.get('ema_h1', 'N/A')}",
+        f"道氏理论 H4： {signal.get('dow_theory_h4', 'N/A')}",
+        f"动量： {signal.get('momentum', 'N/A')}",
+        f"H4 区域： {'✓' if signal.get('in_h4_zone') else '✗'}",
+        f"S/R 反应： {'✓' if signal.get('sr_reaction') else '✗'}",
+        f"OTE： {'✓' if signal.get('ote_present') else '✗'}",
         f"时段： {signal.get('session', 'N/A')}",
     ]
     return "\n".join(lines)
@@ -91,22 +91,22 @@ def format_v41_signal_alert_plain(signal: dict) -> tuple:
     triggers = signal.get("trigger_types", [])
     triggers_str = " + ".join(triggers) if triggers else "N/A"
 
-    title = f"V4.1 {asset_display} {direction} | Quality {quality}/12 ({label})"
+    title = f"V4.1 {asset_display} {direction} | 质量 {quality}/12 ({label})"
 
     ote_low = signal.get("ote_entry_low")
     ote_high = signal.get("ote_entry_high")
     ote_zone_str = f"{_fmt(ote_low)} - {_fmt(ote_high)}" if ote_low is not None and ote_high is not None else "N/A"
 
     body = (
-        f"Entry: {_fmt(signal['entry'])}\n"
-        f"Stop Loss: {_fmt(signal['stop_loss'])}\n"
-        f"TP1 (1R): {_fmt(signal.get('tp1'))}\n"
-        f"TP2 (2R): {_fmt(signal.get('tp2'))}\n"
-        f"R/R: {signal.get('rr', 0):.2f}\n"
-        f"Trigger: {triggers_str}\n"
-        f"Liquidity Source: {signal.get('liquidity_source') or 'N/A'}\n"
-        f"Liquidity Target: {signal.get('liquidity_target') or 'N/A'}\n"
-        f"OTE Entry Zone: {ote_zone_str}\n"
+        f"进场价： {_fmt(signal['entry'])}\n"
+        f"止损价： {_fmt(signal['stop_loss'])}\n"
+        f"止盈1 (1R): {_fmt(signal.get('tp1'))}\n"
+        f"止盈2 (2R): {_fmt(signal.get('tp2'))}\n"
+        f"盈亏比： {signal.get('rr', 0):.2f}\n"
+        f"触发条件： {triggers_str}\n"
+        f"流动性来源： {signal.get('liquidity_source') or 'N/A'}\n"
+        f"流动性目标： {signal.get('liquidity_target') or 'N/A'}\n"
+        f"OTE 进场区域： {ote_zone_str}\n"
         f"时段： {signal.get('session', 'N/A')}"
     )
     return title, body
@@ -134,15 +134,15 @@ def format_v41_watchlist_alert(asset: str, proximity: dict) -> str:
     emoji = "🟢" if direction == "BUY" else "🔴"
 
     lines = [
-        f"👀 *WATCHLIST — V4.1 Intraday Wave*",
+        f"👀 *观察列表 — V4.1 日内波段*",
         "",
-        f"Asset: *{asset_display}*",
+        f"资产： *{asset_display}*",
         "",
-        f"Liquidity Zone: *{proximity['label']}*",
-        f"Level: `{_fmt(proximity['price'])}`",
-        f"Distance: *{proximity['distance_pct'] * 100:.2f}%*",
+        f"流动性区域： *{proximity['label']}*",
+        f"价位： `{_fmt(proximity['price'])}`",
+        f"距离： *{proximity['distance_pct'] * 100:.2f}%*",
         "",
-        f"Potential Direction: {emoji} *{direction}*",
+        f"潜在方向： {emoji} *{direction}*",
         "",
         "_预备预警：尚未出现 BOS/CHOCH 确认。_",
     ]
@@ -161,11 +161,11 @@ def format_v41_watchlist_alert_plain(asset: str, proximity: dict) -> tuple:
     asset_display = asset.replace("_", " ")
     direction = proximity["potential_direction"]
 
-    title = f"WATCHLIST V4.1 {asset_display} | {proximity['label']} -> {direction}"
+    title = f"观察列表 V4.1 {asset_display} | {proximity['label']} → {direction}"
     body = (
-        f"Level: {_fmt(proximity['price'])}\n"
-        f"Distance: {proximity['distance_pct'] * 100:.2f}%\n"
-        f"Potential Direction: {direction}\n"
+        f"价位： {_fmt(proximity['price'])}\n"
+        f"距离： {proximity['distance_pct'] * 100:.2f}%\n"
+        f"潜在方向： {direction}\n"
         f"预备预警：尚未出现 BOS/CHOCH 确认。"
     )
     return title, body
