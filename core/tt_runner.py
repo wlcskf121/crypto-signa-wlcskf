@@ -181,11 +181,11 @@ def _notify_entry(asset, direction, signal, entry, sl, tp, config):
             return f"{v:,.2f}" if abs(v) > 1000 else f"{v:.4f}"
 
         text = (
-            f"{emoji} *TT — ENTRY CONFERMATA*\n"
+            f"{emoji} *TT —— 进场确认*\n"
             f"*{asset.replace('_',' ')}* — {direction}\n\n"
-            f"Entry: `{fp(entry)}`\n"
-            f"SL: `{fp(sl)}`\n"
-            f"TP: `{fp(tp)}`\n"
+            f"进场价： `{fp(entry)}`\n"
+            f"止损： `{fp(sl)}`\n"
+            f"止盈： `{fp(tp)}`\n"
         )
         bot_token = config.get("TELEGRAM_BOT_TOKEN", "")
         chat_id = config.get("TELEGRAM_CHAT_ID", "")
@@ -193,7 +193,7 @@ def _notify_entry(asset, direction, signal, entry, sl, tp, config):
         if bot_token and chat_id:
             telegram_bot.send_message(bot_token, chat_id, text)
         if ntfy_topic:
-            title = f"TT ENTRY {asset.replace('_',' ')} {direction}"
+            title = f"TT 进场 {asset.replace('_',' ')} {direction}"
             ntfy_bot.send_message(ntfy_topic, title, text.replace("*", "").replace("`", ""))
     except Exception as e:
         logger.warning("TT _notify_entry: %s", e)
@@ -345,9 +345,9 @@ def _run_for_asset(conn, asset: str, config: dict, now: datetime):
                 tt_db.confirm_entry(
                     conn, sid, actual_entry=current_price, actual_sl=sig["planned_sl"],
                     actual_tp=sig["planned_tp"], touch_ts=now.isoformat(),
-                    sweep_level=None,
+                    sweep_le速度=None,
                     reaction_type=None,
-                    structure_level=structure.get("broken_level"),
+                    structure_le速度=structure.get("broken_level"),
                 )
                 logger.info("TT [%s %s]: ENTRY CONFERMATA @ %.4f", asset, direction, current_price)
                 _notify_entry(asset, direction, sig, current_price, sig["planned_sl"], sig["planned_tp"], config)
@@ -412,7 +412,7 @@ def _run_for_asset(conn, asset: str, config: dict, now: datetime):
             return
 
         # Tolleranza di sovrapposizione: 1x ATR M15 (stessa scala della
-        # location, che ora e' su M15). Ricavo l'ATR dall'ampiezza
+        # location, che ora e' su M15). Ricavo l'ATR dall'宽度
         # dell'Expansion (prezzo) diviso il suo multiplo in ATR --
         # stesso dato gia' calcolato da select_location, evito di
         # ricalcolarlo da zero. Scala automaticamente per asset.
@@ -478,7 +478,7 @@ def _run_for_asset(conn, asset: str, config: dict, now: datetime):
         tt_db.confirm_entry(
             conn, sid, actual_entry=current_price, actual_sl=signal["planned_sl"],
             actual_tp=signal["planned_tp"], touch_ts=now.isoformat(),
-            sweep_level=None, reaction_type=None, structure_level=None,
+            sweep_le速度=None, reaction_type=None, structure_le速度=None,
         )
         logger.info("TT [%s %s]: ENTRY immediato (id=%s) entry=%.4f sl=%.4f tp=%.4f rr_reale=%.2f (rr_location=%.2f)",
                    asset, signal["direction"], sid[:8], current_price,
