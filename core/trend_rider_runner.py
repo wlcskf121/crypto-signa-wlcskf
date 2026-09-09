@@ -319,17 +319,17 @@ def _notify_stop_move(sp: dict, config: dict):
             return f"{v:,.2f}" if float(v) > 1000 else f"{v:.4f}"
 
         if sp["event"] == "TP1_REACHED":
-            titolo = "SPOSTA STOP A BREAKEVEN"
-            dettaglio = "TP1 raggiunto — metti lo stop a entry"
+            titolo = "将止损移至保本"
+            dettaglio = "已触及止盈1 —— 将止损移至进场价"
         else:  # STAGE2_REACHED
-            titolo = "SPOSTA STOP A TP1"
-            dettaglio = "Il prezzo si sta avvicinando a TP2 — sposta lo stop al livello di TP1"
+            titolo = "将止损移至止盈1"
+            dettaglio = "价格接近止盈2 —— 将止损移至止盈1位置"
 
         text = (
-            f"{emoji} *TREND RIDER — {titolo}*\n\n"
+            f"{emoji} *趋势骑士 —— {titolo}*\n\n"
             f"*{asset.replace('_',' ')}* — {direction}\n"
             f"{dettaglio}\n\n"
-            f"Nuovo stop: `{fp(sp['new_stop'])}`"
+            f"新止损： `{fp(sp['new_stop'])}`"
         )
 
         bot_token  = config.get("TELEGRAM_BOT_TOKEN", "")
@@ -366,21 +366,21 @@ def _notify(signal: dict, config: dict):
             return f"{v:,.2f}" if float(v) > 1000 else f"{v:.4f}"
 
         text = (
-            f"{emoji} *TREND RIDER BALANCED v1.0*\n\n"
+            f"{emoji} *趋势骑士 均衡版 v1.0*\n\n"
             f"*{asset.replace('_',' ')}* — {direction}\n\n"
-            f"Score: *{signal['quality_score']}* ({quality})\n"
-            f"Trend H1: {signal['trend_h1']} | H4: {signal.get('trend_h4','N/A')}\n"
-            f"ADX: {signal['adx']:.1f} | Pullback: ✓\n\n"
-            f"Entry:  `{fp(signal['entry'])}`\n"
-            f"SL:     `{fp(signal['stop_loss'])}`\n"
-            f"TP1:    `{fp(signal['tp1'])}` (1R)\n"
-            f"TP2:    `{fp(signal['tp2'])}` ({signal.get('rr2',0):.2f}R)\n\n"
-            f"Target: {signal.get('liquidity_target','N/A')}\n"
-            f"Session: {signal.get('session','N/A')}"
+            f"评分： *{signal['quality_score']}* ({quality})\n"
+            f"H1 趋势： {signal['trend_h1']} | H4 趋势： {signal.get('trend_h4','N/A')}\n"
+            f"ADX: {signal['adx']:.1f} | 回调： ✓\n\n"
+            f"进场价：  `{fp(signal['entry'])}`\n"
+            f"止损：     `{fp(signal['stop_loss'])}`\n"
+            f"止盈1：    `{fp(signal['tp1'])}` (1R)\n"
+            f"止盈2：    `{fp(signal['tp2'])}` ({signal.get('rr2',0):.2f}R)\n\n"
+            f"目标： {signal.get('liquidity_target','N/A')}\n"
+            f"时段： {signal.get('session','N/A')}"
         )
 
         if signal.get("new_24h_extreme"):
-            text += "\n🚀 Nuovo estremo 24h"
+            text += "\n🚀 创 24 小时新高"
 
         bot_token  = config.get("TELEGRAM_BOT_TOKEN", "")
         chat_id    = config.get("TELEGRAM_CHAT_ID", "")
