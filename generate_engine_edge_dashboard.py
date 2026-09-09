@@ -1,6 +1,6 @@
 """
 generate_engine_edge_dashboard.py
-Engine Edge Lab — quali engine MIE aiutano davvero ogni strategia
+引擎 Edge 实验室 — quali engine MIE aiutano davvero ogni strategia
 
 Legge dal Decision Ledger (data/decision_ledger.db — file SEPARATO da
 signals.db, vedi core/decision_ledger/ledger_writer.py) e per ogni
@@ -23,7 +23,7 @@ SOGLIA DI AFFIDABILITA': con un singolo fattore (13 engine, non 18)
 la soglia minima per un edge non-rumoroso e' piu' bassa che per l'analisi
 combinatoria multi-fattore (~150-180 trade), ma sotto ~20 trade per
 gruppo il numero resta un'indicazione, non una conclusione. La dashboard
-etichetta esplicitamente ogni edge sotto soglia come "dato provvisorio".
+etichetta esplicitamente ogni edge 低于阈值 come "dato provvisorio".
 
 Genera docs/engine_edge_dashboard.html
 """
@@ -212,29 +212,29 @@ CSS = """
   --text:#e2e8f0;--dim:#5a6478;--buy:#4fffb0;--sell:#ff6b6b;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',sans-serif;font-size:14px;line-height:1.6}
+body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans','PingFang SC','Microsoft YaHei','Noto Sans SC',sans-serif;font-size:14px;line-height:1.6}
 header{border-bottom:1px solid var(--border);padding:18px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
-header h1{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
-header .meta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)}
-header a{color:var(--accent);text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:11px}
+header h1{font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+header .meta{font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:11px;color:var(--dim)}
+header a{color:var(--accent);text-decoration:none;font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:11px}
 .container{max-width:1320px;margin:0 auto;padding:24px 32px}
 .intro{font-size:13px;color:var(--dim);max-width:760px;margin-bottom:24px;line-height:1.7}
 .intro strong{color:var(--text)}
-.fw-header{padding:14px 20px;font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.fw-header{padding:14px 20px;font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
 .fw-tag{font-size:10px;padding:2px 8px;border-radius:4px;font-weight:600;background:rgba(90,100,120,.2);color:var(--dim)}
 .summary-grid{display:grid;gap:1px;background:var(--border)}
 .summary-grid.cols3{grid-template-columns:repeat(3,1fr)}
 .summary-grid>div{background:var(--surface);padding:14px 8px;text-align:center}
-.big{font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:600}
+.big{font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:18px;font-weight:600}
 .big.pos{color:var(--buy)} .big.neg{color:var(--sell)} .big.warn{color:var(--accent3)}
 .lbl{font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);display:block;margin-top:3px}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:16px}
-.ch{padding:10px 16px;border-bottom:1px solid var(--border);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.ch{padding:10px 16px;border-bottom:1px solid var(--border);font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
 table{width:100%;border-collapse:collapse}
-th{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);padding:9px 14px;text-align:left;border-bottom:1px solid var(--border)}
+th{font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);padding:9px 14px;text-align:left;border-bottom:1px solid var(--border)}
 td{padding:8px 14px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:middle}
 tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02)}
-.mono{font-family:'IBM Plex Mono',monospace;font-size:12px}
+.mono{font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:12px}
 .pos{color:var(--buy);font-weight:600} .neg{color:var(--sell)} .warn{color:var(--accent3)}
 .section-divider{margin:36px 0 24px;border-top:2px dashed var(--border);padding-top:8px}
 .empty{text-align:center;padding:24px;color:var(--dim);font-size:13px}
@@ -247,7 +247,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
 .edge-bar-fill{position:absolute;top:0;bottom:0;border-radius:2px}
 .edge-bar-fill.pos-fill{background:var(--buy)}
 .edge-bar-fill.neg-fill{background:var(--sell)}
-.edge-val{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;min-width:56px;text-align:right}
+.edge-val{font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:13px;font-weight:600;min-width:56px;text-align:right}
 @media(max-width:900px){.container{padding:12px}.edge-bar-wrap{min-width:160px}}
 
 /* ---- MOBILE: la tabella engine scorre in orizzontale, con eleganza ---- */
@@ -294,14 +294,14 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
 # ============================================================
 
 def _empty_row(cols):
-    return f'<tr><td colspan="{cols}" class="empty">Nessun dato</td></tr>'
+    return f'<tr><td colspan="{cols}" class="empty">无数据</td></tr>'
 
 
 def edge_bar_row(label, e):
     if e["edge"] is None:
         return f"""<tr class="edge-row">
   <td><span class="edge-name">{label}</span></td>
-  <td colspan="2" class="empty" style="text-align:left;padding-left:0">dati insufficienti (fav={e['n_fav']} / altro={e['n_oth']})</td>
+  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利={e['n_fav']} / 其他={e['n_oth']}）</td>
 </tr>"""
 
     edge = e["edge"]
@@ -310,7 +310,7 @@ def edge_bar_row(label, e):
     fill_cls = "pos-fill" if edge >= 0 else "neg-fill"
     style = f"width:{pct}%;{'left:calc(50% - ' + str(pct) + '%)' if edge < 0 else 'left:50%'}"
     val_cls = "pos" if edge > 0 else ("neg" if edge < 0 else "")
-    prov = '<span class="prov">provvisorio</span>' if e["provisional"] else ""
+    prov = '<span class="prov">暂定</span>' if e["provisional"] else ""
 
     # I win rate/R medi possono essere None (gruppo senza r_realized registrato):
     # formattazione difensiva per non far crashare la f-string.
@@ -329,8 +329,8 @@ def edge_bar_row(label, e):
     </div>
   </td>
   <td class="mono" style="font-size:11px;color:var(--dim)">
-    fav {e['n_fav']} ({_pct(e['win_fav'])} win, {_r(e['r_fav'])} avg) &nbsp;·&nbsp;
-    altro {e['n_oth']} ({_pct(e['win_oth'])} win, {_r(e['r_oth'])} avg)
+    有利 {e['n_fav']}（{_pct(e['win_fav'])} 胜率，{_r(e['r_fav'])} 均值） &nbsp;·&nbsp;
+    其他 {e['n_oth']}（{_pct(e['win_oth'])} 胜率，{_r(e['r_oth'])} 均值）
   </td>
 </tr>"""
 
@@ -350,8 +350,8 @@ def regime_table(rb):
 </tr>"""
     if not body:
         body = _empty_row(4)
-    return f"""<div class="card"><div class="ch">Per Regime di Mercato</div>
-  <div class="table-scroll"><table><thead><tr><th>Regime</th><th>N</th><th>Win%</th><th>Expectancy</th></tr></thead>
+    return f"""<div class="card"><div class="ch">按市场状态</div>
+  <div class="table-scroll"><table><thead><tr><th>市场状态</th><th>N</th><th>Win%</th><th>期望值</th></tr></thead>
   <tbody>{body}</tbody></table></div></div>"""
 
 
@@ -362,16 +362,16 @@ def section_strategy(strategy, rows):
     ec = "pos" if s["exp_r"] > 0 else "neg"
 
     summary = f"""<div class="summary-grid cols3" style="border:1px solid var(--border);border-top:2px solid {color};border-radius:6px;overflow:hidden;margin-bottom:16px">
-  <div><span class="big">{s['n']}</span><span class="lbl">Decisioni chiuse</span></div>
-  <div><span class="big {wc}">{s['win']}%</span><span class="lbl">Win Rate</span></div>
-  <div><span class="big {ec}">{s['exp_r']:+.2f}R</span><span class="lbl">Expectancy</span></div>
+  <div><span class="big">{s['n']}</span><span class="lbl">已结束决策</span></div>
+  <div><span class="big {wc}">{s['win']}%</span><span class="lbl">胜率</span></div>
+  <div><span class="big {ec}">{s['exp_r']:+.2f}R</span><span class="lbl">期望值</span></div>
 </div>"""
 
     if not rows:
         body = f"""
 <div class="card" style="border-top:2px solid {color}">
-  <div class="fw-header" style="color:{color}">{strategy}<span class="fw-tag">IN ATTESA DI DATI</span></div>
-  <div class="empty">Nessuna decisione chiusa ancora nel Ledger per questa strategia.</div>
+  <div class="fw-header" style="color:{color}">{strategy}<span class="fw-tag">等待数据</span></div>
+  <div class="empty">该策略在 Ledger 中暂无已结束的决策。</div>
 </div>"""
         return body
 
@@ -383,8 +383,8 @@ def section_strategy(strategy, rows):
     n_prov = sum(1 for _, e in edges if e.get("provisional") and e["edge"] is not None)
 
     edge_card = f"""<div class="card">
-  <div class="ch">Engine Edge — Win Rate quando favorevole vs. neutro/contrario
-    {f'<span class="prov" style="margin-left:8px">{n_prov} engine sotto soglia campione ({MIN_SAMPLE}/gruppo)</span>' if n_prov else ''}
+  <div class="ch">引擎 Edge — 有利 vs 中性/不利时的胜率
+    {f'<span class="prov" style="margin-left:8px">{n_prov} 个引擎样本不足（{MIN_SAMPLE}／组）</span>' if n_prov else ''}
   </div>
   <div class="table-scroll"><table class="engine-table"><tbody>{edge_rows}</tbody></table></div>
 </div>"""
@@ -426,30 +426,26 @@ def generate():
         print(f"Engine Edge dashboard: errore non gestito — {e}")
 
     if not strategies:
-        sections = '<div class="card"><div class="empty">Nessuna strategia con decisioni chiuse nel Decision Ledger ancora.</div></div>'
+        sections = '<div class="card"><div class="empty">Decision Ledger 中暂无任何策略有已结束的决策。</div></div>'
 
     html = f"""<!DOCTYPE html>
-<html lang="it">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Engine Edge Lab</title>
+<title>引擎 Edge 实验室</title>
 <style>{CSS}</style>
 </head>
 <body>
 <header>
-  <h1>Engine Edge Lab</h1>
-  <div class="meta">{generated} &nbsp;|&nbsp; <a href="analytics_dashboard.html">&larr; Analytics Lab</a> &nbsp;|&nbsp; <a href="radar_lab_dashboard.html">Radar Lab →</a></div>
+  <h1>引擎 Edge 实验室</h1>
+  <div class="meta">{generated} &nbsp;|&nbsp; <a href="analytics_dashboard.html">&larr; 分析实验室</a> &nbsp;|&nbsp; <a href="radar_lab_dashboard.html">雷达实验室 →</a></div>
 </header>
 <div class="container">
   <p class="intro">
-    Per ogni strategia, il <strong>voto</strong> di ognuno dei 13 engine MIE rispetto alla direzione
-    del trade (favorevole / neutro / contrario) viene confrontato con l'esito reale.
-    <strong>Edge % = Win Rate quando l'engine era favorevole − Win Rate quando non lo era.</strong>
-    Positivo (verde) = l'engine aiuta; negativo (rosso) = l'engine, quando favorevole, ha coinciso
-    con esiti peggiori — vale la pena capire perché, non necessariamente scartarlo.
-    Sotto {MIN_SAMPLE} trade per gruppo il numero è etichettato "provvisorio": rumore statistico,
-    non un segnale su cui agire.
+    对每条策略， <strong>状态</strong> 13 个 MIE 引擎各自相对于交易方向（有利 / 中性 / 不利）的判断，都与真实结果做了对照。
+    <strong>Edge % = 引擎处于有利状态时的胜率 − 非有利状态时的胜率。</strong>
+    正值（绿色）= 该引擎有帮助；负值（红色）= 该引擎在有利时反而对应更差的结果——值得去搞清楚原因，不一定要丢弃它。每组样本少于 {MIN_SAMPLE} 笔时，数值会被标注为 「暂定」：这只是统计噪声，不是可以据此行动的信号。
   </p>
   {sections}
 </div>
