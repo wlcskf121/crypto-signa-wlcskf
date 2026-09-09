@@ -1,6 +1,6 @@
 """
 generate_analytics_dashboard.py
-Crypto Signal Engine — Analytics Lab (unificato)
+加密信号引擎 — 分析实验室 (unificato)
 
 Struttura:
     SEZIONE 0 — TT (nuova strategia: Direction/Location/Liquidity)
@@ -371,13 +371,13 @@ CSS = """
   --text:#e2e8f0;--dim:#5a6478;--buy:#4fffb0;--sell:#ff6b6b;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',sans-serif;font-size:14px;line-height:1.6}
+body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans','PingFang SC','Microsoft YaHei','Noto Sans SC',sans-serif;font-size:14px;line-height:1.6}
 header{border-bottom:1px solid var(--border);padding:18px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
-header h1{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
-header .meta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)}
-header a{color:var(--accent);text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:11px}
+header h1{font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+header .meta{font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:11px;color:var(--dim)}
+header a{color:var(--accent);text-decoration:none;font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:11px}
 .container{max-width:1320px;margin:0 auto;padding:24px 32px}
-.fw-header{padding:14px 20px;font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.fw-header{padding:14px 20px;font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
 .fw-tag{font-size:10px;padding:2px 8px;border-radius:4px;font-weight:600}
 .tag-active{background:rgba(79,255,176,.15);color:var(--buy)}
 .tag-active-purple{background:rgba(167,139,250,.15);color:var(--accent4)}
@@ -390,21 +390,21 @@ header a{color:var(--accent);text-decoration:none;font-family:'IBM Plex Mono',mo
 .summary-grid.cols6{grid-template-columns:repeat(6,1fr)}
 .summary-grid.cols5{grid-template-columns:repeat(5,1fr)}
 .summary-grid>div{background:var(--surface);padding:14px 8px;text-align:center}
-.big{font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:600}
+.big{font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:18px;font-weight:600}
 .big.pos{color:var(--buy)} .big.neg{color:var(--sell)} .big.warn{color:var(--accent3)}
 .lbl{font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);display:block;margin-top:3px}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:16px}
-.ch{padding:10px 16px;border-bottom:1px solid var(--border);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.ch{padding:10px 16px;border-bottom:1px solid var(--border);font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
 table{width:100%;border-collapse:collapse}
-th{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);padding:9px 14px;text-align:left;border-bottom:1px solid var(--border)}
+th{font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);padding:9px 14px;text-align:left;border-bottom:1px solid var(--border)}
 td{padding:8px 14px;border-bottom:1px solid var(--border);font-size:13px}
 tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02)}
 tr.hl td{background:rgba(79,255,176,.06)}
-.mono{font-family:'IBM Plex Mono',monospace;font-size:12px}
+.mono{font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:12px}
 .pos{color:var(--buy);font-weight:600} .neg{color:var(--sell)} .warn{color:var(--accent3)}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .section-divider{margin:36px 0 24px;border-top:2px dashed var(--border);padding-top:8px}
-.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:'IBM Plex Mono',monospace;font-weight:600}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-weight:600}
 .b-tp{background:rgba(79,255,176,.15);color:var(--buy)}
 .b-sl{background:rgba(255,107,107,.15);color:var(--sell)}
 .b-be{background:rgba(56,189,248,.15);color:var(--accent5)}
@@ -426,7 +426,7 @@ tr.hl td{background:rgba(79,255,176,.06)}
 # ============================================================
 
 def _empty_row(cols):
-    return f'<tr><td colspan="{cols}" class="empty">Nessun dato</td></tr>'
+    return f'<tr><td colspan="{cols}" class="empty">无数据</td></tr>'
 
 def outcome_badge(o):
     cls = {"TP":"b-tp","SL":"b-sl","EXPIRED":"b-exp","OPEN":"b-open",
@@ -484,7 +484,7 @@ def perf_table(title, d, keys, key_label, cols, stat_fn_empty):
     return f"""<div class="card">
   <div class="ch">{title}</div>
   <table><thead><tr>
-    <th>{key_label}</th><th>N</th><th>Win%</th><th>Expectancy</th>
+    <th>{key_label}</th><th>N</th><th>Win%</th><th>期望值</th>
     <th>Avg MAE</th><th>Avg MFE</th>
   </tr></thead><tbody>{body}</tbody></table>
 </div>"""
@@ -500,17 +500,17 @@ def section_tt(rows, recent, invalidated_count):
     ec = "pos" if s["exp_r"]>0 else "neg"
 
     summary = f"""<div class="summary-grid cols8" style="border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:16px">
-  <div><span class="big">{s['n']}</span><span class="lbl">Chiusi (TP/SL/EXP)</span></div>
+  <div><span class="big">{s['n']}</span><span class="lbl">已平仓（TP/SL/EXP）</span></div>
   <div><span class="big warn">{invalidated_count}</span><span class="lbl">Invalidated</span></div>
-  <div><span class="big {wc}">{s['win']}%</span><span class="lbl">Win Rate</span></div>
-  <div><span class="big neg">{s['sl']}%</span><span class="lbl">SL Rate</span></div>
-  <div><span class="big {ec}">{s['exp_r']:+.2f}R</span><span class="lbl">Expectancy</span></div>
+  <div><span class="big {wc}">{s['win']}%</span><span class="lbl">胜率</span></div>
+  <div><span class="big neg">{s['sl']}%</span><span class="lbl">止损率</span></div>
+  <div><span class="big {ec}">{s['exp_r']:+.2f}R</span><span class="lbl">期望值</span></div>
   <div><span class="big">{s['avg_rr']:.2f}</span><span class="lbl">Avg R/R</span></div>
   <div><span class="big neg">{s['avg_mae']:.1f}</span><span class="lbl">Avg MAE</span></div>
   <div><span class="big pos">{s['avg_mfe']:.1f}</span><span class="lbl">Avg MFE</span></div>
 </div>"""
 
-    no_data = "" if rows else '<div class="card"><div class="empty">In attesa del primo segnale TT chiuso.</div></div>'
+    no_data = "" if rows else '<div class="card"><div class="empty">等待第一个已平仓的 TT 信号。</div></div>'
 
     asset_keys = asset_keys_from(rows)
     dir_keys   = ["BUY","SELL"]
@@ -525,7 +525,7 @@ def section_tt(rows, recent, invalidated_count):
     bd_ql    = breakdown(rows, lambda r: r["quality_label"], ql_keys,    stats_el)
 
     if not recent:
-        rec_html = '<div class="card"><div class="empty">Nessun segnale ancora.</div></div>'
+        rec_html = '<div class="card"><div class="empty">暂无信号。</div></div>'
     else:
         body = ""
         for r in recent:
@@ -547,11 +547,11 @@ def section_tt(rows, recent, invalidated_count):
   <td style="font-size:12px;color:var(--dim)">{pd_zone or '—'}</td>
   <td style="font-size:12px;color:var(--dim)">{ql or '—'}</td>
 </tr>"""
-        rec_html = f"""<div class="card"><div class="ch">Segnali Recenti TT</div>
+        rec_html = f"""<div class="card"><div class="ch">TT 近期信号</div>
   <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
   <table><thead><tr>
-    <th>Data</th><th>Asset</th><th>Dir</th><th>Stato</th><th>Entry</th><th>SL</th><th>TP</th>
-    <th>R/R</th><th>POI</th><th>PD</th><th>Quality</th>
+    <th>日期</th><th>资产</th><th>方向</th><th>状态</th><th>入场</th><th>SL</th><th>TP</th>
+    <th>R/R</th><th>POI</th><th>PD</th><th>质量</th>
   </tr></thead><tbody>{body}</tbody></table>
   </div></div>"""
 
@@ -559,19 +559,19 @@ def section_tt(rows, recent, invalidated_count):
 <div class="card" style="border-top:2px solid var(--accent)">
   <div class="fw-header" style="color:var(--accent)">
     ⚡ TT — Direction · Location · Liquidity
-    <span class="fw-tag tag-active">ATTIVO</span>
+    <span class="fw-tag tag-active">运行中</span>
     <span style="color:var(--dim);font-size:11px;margin-left:auto">4H→1H→15M→5M · BTC · XAU</span>
   </div>
   {summary}{no_data}
   <div class="grid-2">
-    {perf_table("Per Asset", bd_asset, asset_keys, "Asset", 6, stats_el)}
-    {perf_table("Per Direzione", bd_dir, dir_keys, "Dir", 6, stats_el)}
+    {perf_table("按资产", bd_asset, asset_keys, "Asset", 6, stats_el)}
+    {perf_table("按方向", bd_dir, dir_keys, "Dir", 6, stats_el)}
   </div>
   <div class="grid-2">
-    {perf_table("Per Tipo POI", bd_poi, poi_keys, "POI", 6, stats_el)}
-    {perf_table("Per Premium/Discount", bd_pd, pd_keys, "Zona", 6, stats_el)}
+    {perf_table("按 POI 类型", bd_poi, poi_keys, "POI", 6, stats_el)}
+    {perf_table("按溢价／折价", bd_pd, pd_keys, "区间", 6, stats_el)}
   </div>
-  {perf_table("Per Quality", bd_ql, ql_keys, "Quality", 6, stats_el)}
+  {perf_table("按质量", bd_ql, ql_keys, "Quality", 6, stats_el)}
   {rec_html}
 </div>"""
 
@@ -586,17 +586,17 @@ def section_ote(rows, recent, cand_stats):
     ec = "pos" if s["exp_r"]>0 else "neg"
 
     summary = f"""<div class="summary-grid cols8" style="border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:16px">
-  <div><span class="big">{s['n']}</span><span class="lbl">Chiusi (TP/SL/EXP)</span></div>
-  <div><span class="big warn">{cand_stats['total']}</span><span class="lbl">Candidate totali</span></div>
-  <div><span class="big {wc}">{s['win']}%</span><span class="lbl">Win Rate</span></div>
-  <div><span class="big neg">{s['sl']}%</span><span class="lbl">SL Rate</span></div>
-  <div><span class="big {ec}">{s['exp_r']:+.2f}R</span><span class="lbl">Expectancy</span></div>
+  <div><span class="big">{s['n']}</span><span class="lbl">已平仓（TP/SL/EXP）</span></div>
+  <div><span class="big warn">{cand_stats['total']}</span><span class="lbl">候选总数</span></div>
+  <div><span class="big {wc}">{s['win']}%</span><span class="lbl">胜率</span></div>
+  <div><span class="big neg">{s['sl']}%</span><span class="lbl">止损率</span></div>
+  <div><span class="big {ec}">{s['exp_r']:+.2f}R</span><span class="lbl">期望值</span></div>
   <div><span class="big">{s['avg_rr']:.2f}</span><span class="lbl">Avg R/R</span></div>
   <div><span class="big neg">{s['avg_mae']:.1f}</span><span class="lbl">Avg MAE</span></div>
   <div><span class="big pos">{s['avg_mfe']:.1f}</span><span class="lbl">Avg MFE</span></div>
 </div>"""
 
-    no_data = "" if rows else '<div class="card"><div class="empty">In attesa del primo segnale OTE chiuso. Candidate attivi: ' + str(cand_stats["watching"]) + '</div></div>'
+    no_data = "" if rows else '<div class="card"><div class="empty">等待第一个已平仓的 OTE 信号。 Candidate attivi: ' + str(cand_stats["watching"]) + '</div></div>'
 
     asset_keys = asset_keys_from(rows)
     dir_keys   = ["BUY","SELL"]
@@ -609,7 +609,7 @@ def section_ote(rows, recent, cand_stats):
     bd_ql    = breakdown(rows, lambda r: r["quality_label"], ql_keys,    stats_el)
 
     if not recent:
-        rec_html = '<div class="card"><div class="empty">Nessun segnale ancora.</div></div>'
+        rec_html = '<div class="card"><div class="empty">暂无信号。</div></div>'
     else:
         body = ""
         for r in recent:
@@ -627,29 +627,29 @@ def section_ote(rows, recent, cand_stats):
   <td style="font-size:12px;color:var(--dim)">{zone_str or '—'}</td>
   <td style="font-size:12px;color:var(--dim)">{trigger or '—'}</td>
 </tr>"""
-        rec_html = f"""<div class="card"><div class="ch">Segnali Recenti OTE</div>
+        rec_html = f"""<div class="card"><div class="ch">OTE 近期信号</div>
   <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
   <table><thead><tr>
-    <th>Data</th><th>Asset</th><th>Dir</th><th>Stato</th><th>Entry</th><th>SL</th><th>TP</th>
-    <th>R/R</th><th>Zona</th><th>Trigger</th>
+    <th>日期</th><th>资产</th><th>方向</th><th>状态</th><th>入场</th><th>SL</th><th>TP</th>
+    <th>R/R</th><th>区间</th><th>触发</th>
   </tr></thead><tbody>{body}</tbody></table>
   </div></div>"""
 
     return f"""
 <div class="card" style="border-top:2px solid var(--accent)">
   <div class="fw-header" style="color:var(--accent)">
-    ⚡ OTE — Zona prima, direzione dopo
-    <span class="fw-tag tag-active">ATTIVO</span>
+    ⚡ OTE — 先找区间，再定方向
+    <span class="fw-tag tag-active">运行中</span>
     <span style="color:var(--dim);font-size:11px;margin-left:auto">Sweep+Reaction · BTC · XAU</span>
   </div>
   {summary}{no_data}
   <div class="grid-2">
-    {perf_table("Per Asset", bd_asset, asset_keys, "Asset", 6, stats_el)}
-    {perf_table("Per Direzione", bd_dir, dir_keys, "Dir", 6, stats_el)}
+    {perf_table("按资产", bd_asset, asset_keys, "Asset", 6, stats_el)}
+    {perf_table("按方向", bd_dir, dir_keys, "Dir", 6, stats_el)}
   </div>
   <div class="grid-2">
-    {perf_table("Per Zona Strength", bd_str, str_keys, "Strength", 6, stats_el)}
-    {perf_table("Per Quality", bd_ql, ql_keys, "Quality", 6, stats_el)}
+    {perf_table("按区间强度", bd_str, str_keys, "Strength", 6, stats_el)}
+    {perf_table("按质量", bd_ql, ql_keys, "Quality", 6, stats_el)}
   </div>
   {rec_html}
 </div>"""
@@ -665,16 +665,16 @@ def section_trb(rows, recent):
     ec = "pos" if s["exp_r"]>0 else "neg"
 
     summary = f"""<div class="summary-grid cols7" style="border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:16px">
-  <div><span class="big">{s['n']}</span><span class="lbl">Chiusi</span></div>
-  <div><span class="big {wc}">{s['win']}%</span><span class="lbl">Win Rate</span></div>
+  <div><span class="big">{s['n']}</span><span class="lbl">已平仓</span></div>
+  <div><span class="big {wc}">{s['win']}%</span><span class="lbl">胜率</span></div>
   <div><span class="big">{s['tp2']}%</span><span class="lbl">TP2 Hit</span></div>
-  <div><span class="big neg">{s['sl']}%</span><span class="lbl">SL Rate</span></div>
+  <div><span class="big neg">{s['sl']}%</span><span class="lbl">止损率</span></div>
   <div><span class="big" style="color:var(--accent5)">{s['be']}%</span><span class="lbl">BE Rate</span></div>
-  <div><span class="big {ec}">{s['exp_r']:+.2f}R</span><span class="lbl">Expectancy</span></div>
+  <div><span class="big {ec}">{s['exp_r']:+.2f}R</span><span class="lbl">期望值</span></div>
   <div><span class="big">{s['avg_adx']:.1f}</span><span class="lbl">Avg ADX</span></div>
 </div>"""
 
-    no_data = "" if rows else '<div class="card"><div class="empty">In attesa del primo segnale TRB.</div></div>'
+    no_data = "" if rows else '<div class="card"><div class="empty">等待第一个 TRB 信号。</div></div>'
 
     asset_keys = asset_keys_from(rows)
     dir_keys   = ["BUY","SELL"]
@@ -695,7 +695,7 @@ def section_trb(rows, recent):
     bd_adx   = breakdown(rows, adx_bucket, ["ADX>30","ADX 25-30","ADX 20-25"], stats_trb)
 
     if not recent:
-        rec_html = '<div class="card"><div class="empty">Nessun segnale TRB ancora.</div></div>'
+        rec_html = '<div class="card"><div class="empty">暂无 TRB 信号。</div></div>'
     else:
         body = ""
         for r in recent:
@@ -718,11 +718,11 @@ def section_trb(rows, recent):
   <td style="font-size:12px;color:var(--dim)">{target or '—'}</td>
   <td><span class="badge {oc}">{outcome_display}</span></td>
 </tr>"""
-        rec_html = f"""<div class="card"><div class="ch">Segnali Recenti TRB</div>
+        rec_html = f"""<div class="card"><div class="ch">TRB 近期信号</div>
   <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
   <table><thead><tr>
-    <th>Data</th><th>Asset</th><th>Dir</th><th>Entry</th><th>SL</th><th>TP1</th>
-    <th>TP1 in</th><th>ADX</th><th>H1</th><th>Target</th><th>Esito</th>
+    <th>日期</th><th>资产</th><th>方向</th><th>入场</th><th>SL</th><th>TP1</th>
+    <th>TP1 in</th><th>ADX</th><th>H1</th><th>Target</th><th>结果</th>
   </tr></thead><tbody>{body}</tbody></table>
   </div></div>"""
 
@@ -730,21 +730,21 @@ def section_trb(rows, recent):
 <div class="card" style="border-top:2px solid var(--accent4)">
   <div class="fw-header" style="color:var(--accent4)">
     🎯 NMC Trend Rider Balanced v1.0
-    <span class="fw-tag tag-active-purple">ATTIVO</span>
+    <span class="fw-tag tag-active-purple">运行中</span>
     <span style="color:var(--dim);font-size:11px;margin-left:auto">BTC · PAXG</span>
   </div>
   {summary}{no_data}
   <div class="grid-2">
-    {perf_table("Per Asset", bd_asset, asset_keys, "Asset", 6, stats_trb)}
-    {perf_table("Per Direzione", bd_dir, dir_keys, "Dir", 6, stats_trb)}
+    {perf_table("按资产", bd_asset, asset_keys, "Asset", 6, stats_trb)}
+    {perf_table("按方向", bd_dir, dir_keys, "Dir", 6, stats_trb)}
   </div>
   <div class="grid-2">
-    {perf_table("Per Quality", bd_ql, ql_keys, "Quality", 6, stats_trb)}
-    {perf_table("Per Sessione", bd_sess, sess_keys, "Sessione", 6, stats_trb)}
+    {perf_table("按质量", bd_ql, ql_keys, "Quality", 6, stats_trb)}
+    {perf_table("按时段", bd_sess, sess_keys, "时段", 6, stats_trb)}
   </div>
   <div class="grid-2">
-    {perf_table("Per Trend H1", bd_h1, h1_keys, "Trend H1", 6, stats_trb)}
-    {perf_table("Per ADX Bucket", bd_adx, ["ADX>30","ADX 25-30","ADX 20-25"], "ADX", 6, stats_trb)}
+    {perf_table("按 H1 趋势", bd_h1, h1_keys, "Trend H1", 6, stats_trb)}
+    {perf_table("按 ADX 分档", bd_adx, ["ADX>30","ADX 25-30","ADX 20-25"], "ADX", 6, stats_trb)}
   </div>
   {rec_html}
 </div>"""
@@ -760,18 +760,18 @@ def section_lh(rows, recent):
     ec = "pos" if s["exp_r"]>0 else "neg"
 
     summary = f"""<div class="summary-grid cols9" style="border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:16px">
-  <div><span class="big">{s['n']}</span><span class="lbl">Chiusi</span></div>
-  <div><span class="big {wc}">{s['win']}%</span><span class="lbl">Win Rate</span></div>
+  <div><span class="big">{s['n']}</span><span class="lbl">已平仓</span></div>
+  <div><span class="big {wc}">{s['win']}%</span><span class="lbl">胜率</span></div>
   <div><span class="big" style="color:var(--accent4)">{s['stage2']}%</span><span class="lbl">Stadio2 Rate</span></div>
   <div><span class="big" style="color:var(--accent5)">{s['be']}%</span><span class="lbl">BE Rate</span></div>
-  <div><span class="big neg">{s['sl']}%</span><span class="lbl">SL Rate</span></div>
-  <div><span class="big {ec}">{s['exp_r']:+.2f}R</span><span class="lbl">Expectancy</span></div>
+  <div><span class="big neg">{s['sl']}%</span><span class="lbl">止损率</span></div>
+  <div><span class="big {ec}">{s['exp_r']:+.2f}R</span><span class="lbl">期望值</span></div>
   <div><span class="big">{s['avg_rr']:.2f}</span><span class="lbl">Avg R/R</span></div>
   <div><span class="big neg">{s['avg_mae']:.1f}</span><span class="lbl">Avg MAE</span></div>
   <div><span class="big pos">{s['avg_mfe']:.1f}</span><span class="lbl">Avg MFE</span></div>
 </div>"""
 
-    no_data = "" if rows else '<div class="card"><div class="empty">In attesa del primo segnale Liquidity Hunter.</div></div>'
+    no_data = "" if rows else '<div class="card"><div class="empty">等待第一个 Liquidity Hunter 信号。</div></div>'
 
     asset_keys = asset_keys_from(rows)
     dir_keys     = ["BUY","SELL"]
@@ -784,7 +784,7 @@ def section_lh(rows, recent):
     bd_priority = breakdown(rows, lambda r: r["level_priority"], priority_keys, stats_lh)
 
     if not recent:
-        rec_html = '<div class="card"><div class="empty">Nessun segnale Liquidity Hunter ancora.</div></div>'
+        rec_html = '<div class="card"><div class="empty">暂无 Liquidity Hunter 信号。</div></div>'
     else:
         body = ""
         for r in recent:
@@ -804,11 +804,11 @@ def section_lh(rows, recent):
   <td style="font-size:12px;color:var(--dim)">{sweep or '—'}</td>
   <td style="font-size:12px;color:var(--dim)">{trigger or '—'}</td>
 </tr>"""
-        rec_html = f"""<div class="card"><div class="ch">Segnali Recenti Liquidity Hunter</div>
+        rec_html = f"""<div class="card"><div class="ch">Liquidity Hunter 近期信号</div>
   <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
   <table><thead><tr>
-    <th>Data</th><th>Asset</th><th>Dir</th><th>Esito</th><th>Entry</th><th>SL</th><th>TP</th>
-    <th>R/R</th><th>Livello</th><th>Sweep</th><th>Trigger</th>
+    <th>日期</th><th>资产</th><th>方向</th><th>结果</th><th>入场</th><th>SL</th><th>TP</th>
+    <th>R/R</th><th>价位</th><th>Sweep</th><th>触发</th>
   </tr></thead><tbody>{body}</tbody></table>
   </div></div>"""
 
@@ -816,17 +816,17 @@ def section_lh(rows, recent):
 <div class="card" style="border-top:2px solid var(--accent5)">
   <div class="fw-header" style="color:var(--accent5)">
     🎯 Liquidity Hunter v3.2
-    <span class="fw-tag tag-active-blue">ATTIVO</span>
+    <span class="fw-tag tag-active-blue">运行中</span>
     <span style="color:var(--dim);font-size:11px;margin-left:auto">BTC · PAXG · Proximity 0.30% · Sweep 4 candele</span>
   </div>
   {summary}{no_data}
   <div class="grid-2">
-    {perf_table("Per Asset", bd_asset, asset_keys, "Asset", 6, stats_lh)}
-    {perf_table("Per Direzione", bd_dir, dir_keys, "Dir", 6, stats_lh)}
+    {perf_table("按资产", bd_asset, asset_keys, "Asset", 6, stats_lh)}
+    {perf_table("按方向", bd_dir, dir_keys, "Dir", 6, stats_lh)}
   </div>
   <div class="grid-2">
-    {perf_table("Per Trigger", bd_trigger, trigger_keys, "Trigger", 6, stats_lh)}
-    {perf_table("Per Priorità Livello", bd_priority, priority_keys, "Priorità", 6, stats_lh)}
+    {perf_table("按触发条件", bd_trigger, trigger_keys, "Trigger", 6, stats_lh)}
+    {perf_table("按价位优先级", bd_priority, priority_keys, "Priorità", 6, stats_lh)}
   </div>
   {rec_html}
 </div>"""
@@ -843,10 +843,10 @@ def section_v41p1(rows):
     ec = "pos" if s["exp_r"]>0 else "neg"
 
     summary = f"""<div class="summary-grid cols5" style="border:1px solid var(--border);border-top:2px solid {color};border-radius:6px;overflow:hidden;margin-bottom:16px">
-  <div><span class="big">{s['n']}</span><span class="lbl">Chiusi</span></div>
-  <div><span class="big {wc}">{s['win']}%</span><span class="lbl">Win Rate</span></div>
+  <div><span class="big">{s['n']}</span><span class="lbl">已平仓</span></div>
+  <div><span class="big {wc}">{s['win']}%</span><span class="lbl">胜率</span></div>
   <div><span class="big">{s['tp1']}%</span><span class="lbl">TP1 Hit</span></div>
-  <div><span class="big {ec}">{s['exp_r']:+.2f}R</span><span class="lbl">Expectancy</span></div>
+  <div><span class="big {ec}">{s['exp_r']:+.2f}R</span><span class="lbl">期望值</span></div>
   <div><span class="big neg">{s['avg_mae']}</span><span class="lbl">MAE medio</span></div>
 </div>"""
 
@@ -873,21 +873,21 @@ def section_v41p1(rows):
         if not body: body = _empty_row(6)
         return f"""<div class="card"><div class="ch">{title}</div>
   <table><thead><tr>
-    <th>{key_label}</th><th>N</th><th>Win%</th><th>TP1%</th><th>TP2%</th><th>Expectancy</th>
+    <th>{key_label}</th><th>N</th><th>Win%</th><th>TP1%</th><th>TP2%</th><th>期望值</th>
   </tr></thead><tbody>{body}</tbody></table></div>"""
 
     return f"""
 <div class="card" style="border-top:2px solid {color}">
   <div class="fw-header" style="color:{color}">
     V4.1 Phase 1 — Money Flow
-    <span class="fw-tag tag-benchmark">BENCHMARK STORICO</span>
+    <span class="fw-tag tag-benchmark">历史基准</span>
   </div>
   {summary}
   <div class="grid-2">
-    {v41_table("Per Trigger", bd_trigger, ["BOS","CHOCH","BOS+CHOCH"], "Trigger")}
-    {v41_table("Per Asset",   bd_asset,   v41_asset_keys,              "Asset")}
+    {v41_table("按触发条件", bd_trigger, ["BOS","CHOCH","BOS+CHOCH"], "Trigger")}
+    {v41_table("按资产",   bd_asset,   v41_asset_keys,              "Asset")}
   </div>
-  {v41_table("Per Sessione", bd_sess, ["ASIA","LONDON","NEW_YORK"], "Sessione")}
+  {v41_table("按时段", bd_sess, ["ASIA","LONDON","NEW_YORK"], "时段")}
 </div>"""
 
 
@@ -914,33 +914,33 @@ def generate():
     generated = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 
     html = f"""<!DOCTYPE html>
-<html lang="it">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Crypto Signal Engine — Analytics Lab</title>
+<title>加密信号引擎 — 分析实验室</title>
 <style>{CSS}</style>
 </head>
 <body>
 <header>
-  <h1>Crypto Signal Engine — Analytics Lab</h1>
-  <div class="meta">{generated} &nbsp;|&nbsp; <a href="unified_dashboard.html">&larr; Dashboard</a> &nbsp;|&nbsp; <a href="engine_edge_dashboard.html">Engine Edge Lab →</a></div>
+  <h1>加密信号引擎 — 分析实验室</h1>
+  <div class="meta">{generated} &nbsp;|&nbsp; <a href="unified_dashboard.html">&larr; Dashboard</a> &nbsp;|&nbsp; <a href="engine_edge_dashboard.html">引擎 Edge 实验室 →</a></div>
 </header>
 <div class="container">
 
   {section_tt(tt_rows, tt_recent, tt_invalidated)}
 
-  <div class="section-divider"><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase">Strategie Attive</span></div>
+  <div class="section-divider"><span style="font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:10px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase">活跃策略</span></div>
 
   {section_ote(ote_rows, ote_recent, ote_cand_stats)}
 
   {section_trb(trb_rows, trb_recent)}
 
-  <div class="section-divider"><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase">Nuove Strategie</span></div>
+  <div class="section-divider"><span style="font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:10px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase">新策略</span></div>
 
   {section_lh(lh_rows, lh_recent)}
 
-  <div class="section-divider"><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase">Benchmark Storico</span></div>
+  <div class="section-divider"><span style="font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:10px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase">历史基准</span></div>
 
   {section_v41p1(v41p1_rows)}
 
