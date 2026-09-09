@@ -54,7 +54,8 @@ SOURCE_WEIGHT = {
 }
 
 # Soglia per raggruppare fonti "vicine" nella stessa zona
-CLUSTER_TOLERANCE_POINTS = {"XAU_USD": 5.0, "BTC_USDT": 50.0}
+CLUSTER_TOLERANCE_POINTS = {"XAU_USD": 5.0, "BTC_USDT": 50.0,
+                            "ETH_USDT": 1.5, "SOL_USDT": 0.07}
 
 # Score minimo di confluenza per creare un candidate
 MIN_CONFLUENCE_SCORE = 4
