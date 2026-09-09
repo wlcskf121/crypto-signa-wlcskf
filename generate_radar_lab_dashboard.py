@@ -1,6 +1,6 @@
 """
 generate_radar_lab_dashboard.py
-Radar Lab (BETA) — validazione del Market Radar
+雷达实验室 (BETA) — validazione del Market Radar
 
 V1.1: aggiunta sezione "WR Reale" basata su first_hit (chi tra TP e SL
 viene toccato per primo). TP alzato a 2 ATR (RR 1:2).
@@ -129,10 +129,10 @@ def velocity_buckets(zones):
         f = z.get("features") or {}
         return f.get("impulse_velocity")
     buckets = [
-        ("sotto soglia (< 0.6) \u26a0", lambda v: v is not None and v < 0.6),
-        ("normale (0.6\u20130.8)",      lambda v: v is not None and 0.6 <= v < 0.8),
-        ("veloce (0.8\u20131.0)",       lambda v: v is not None and 0.8 <= v < 1.0),
-        ("molto veloce (\u2265 1.0)",   lambda v: v is not None and v >= 1.0),
+        ("低于阈值 (< 0.6) \u26a0", lambda v: v is not None and v < 0.6),
+        ("正常（0.6–0.8）",      lambda v: v is not None and 0.6 <= v < 0.8),
+        ("快（0.8–1.0）",       lambda v: v is not None and 0.8 <= v < 1.0),
+        ("极快（≥ 1.0）",   lambda v: v is not None and v >= 1.0),
     ]
     out = []
     for label, cond in buckets:
@@ -180,12 +180,12 @@ CSS = """
 :root{--bg:#0d0f14;--surface:#141720;--border:#1e2330;--accent:#4fffb0;--accent2:#ff6b6b;
 --accent3:#ffd166;--accent5:#38bdf8;--text:#e2e8f0;--dim:#5a6478;--buy:#4fffb0;--sell:#ff6b6b;}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',sans-serif;font-size:14px;line-height:1.6}
+body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans','PingFang SC','Microsoft YaHei','Noto Sans SC',sans-serif;font-size:14px;line-height:1.6}
 header{border-bottom:1px solid var(--border);padding:18px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
-header h1{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent5)}
+header h1{font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent5)}
 .beta{font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(255,209,102,.15);color:var(--accent3);margin-left:8px;letter-spacing:.08em}
-header .meta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)}
-header a{color:var(--accent5);text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:11px}
+header .meta{font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:11px;color:var(--dim)}
+header a{color:var(--accent5);text-decoration:none;font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:11px}
 .container{max-width:1100px;margin:0 auto;padding:24px 32px}
 .intro{font-size:13px;color:var(--dim);max-width:720px;margin-bottom:24px;line-height:1.7}
 .intro strong{color:var(--text)}
@@ -193,17 +193,17 @@ header a{color:var(--accent5);text-decoration:none;font-family:'IBM Plex Mono',m
 .summary-grid.c4{grid-template-columns:repeat(4,1fr)}
 .summary-grid.c5{grid-template-columns:repeat(5,1fr)}
 .summary-grid>div{background:var(--surface);padding:16px 8px;text-align:center}
-.big{font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:600}
+.big{font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:20px;font-weight:600}
 .big.pos{color:var(--buy)}.big.neg{color:var(--sell)}.big.warn{color:var(--accent3)}
 .lbl{font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);display:block;margin-top:4px}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:16px}
-.ch{padding:12px 16px;border-bottom:1px solid var(--border);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.ch{padding:12px 16px;border-bottom:1px solid var(--border);font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
 .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
 table{width:100%;border-collapse:collapse}
-th{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap}
+th{font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap}
 td{padding:10px 14px;border-bottom:1px solid var(--border);font-size:13px;white-space:nowrap}
 tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)}
-.mono{font-family:'IBM Plex Mono',monospace;font-size:12px}
+.mono{font-family:'IBM Plex Mono','PingFang SC','Microsoft YaHei','Noto Sans SC',monospace;font-size:12px}
 .pos{color:var(--buy);font-weight:600}.neg{color:var(--sell)}.warn{color:var(--accent3)}
 .prov{font-size:10px;color:var(--dim);font-style:italic}
 .empty{text-align:center;padding:32px 16px;color:var(--dim);font-size:13px;line-height:1.7}
@@ -234,10 +234,10 @@ def metric(val, unit="", cls=""):
 def summary_block(s):
     mfe_cls = "pos" if (s["mfe_avg_atr"] or 0) > 0 else "neg"
     return f"""<div class="summary-grid c4">
-  <div>{metric(s['total'])}<span class="lbl">Zone emesse</span></div>
-  <div>{metric(s['closed'])}<span class="lbl">Chiuse</span></div>
-  <div>{metric(s['mfe_avg_atr'],'', mfe_cls)}<span class="lbl">MFE medio (ATR)</span></div>
-  <div>{metric(s['mae_avg_atr'],'', 'neg')}<span class="lbl">MAE medio (ATR)</span></div>
+  <div>{metric(s['total'])}<span class="lbl">已发出区间</span></div>
+  <div>{metric(s['closed'])}<span class="lbl">已结束</span></div>
+  <div>{metric(s['mfe_avg_atr'],'', mfe_cls)}<span class="lbl">平均 MFE（ATR）</span></div>
+  <div>{metric(s['mae_avg_atr'],'', 'neg')}<span class="lbl">平均 MAE（ATR）</span></div>
 </div>"""
 
 
@@ -254,9 +254,9 @@ def asset_table(rows):
   <td class="mono">{s['total']}</td><td class="mono">{s['closed']}</td>
   <td class="mono">{mfe_s}</td><td class="mono">{mae_s}</td>
   <td class="mono">{s['bars_to_mfe_avg'] if s['bars_to_mfe_avg'] is not None else '\u2014'}</td></tr>"""
-    return f"""<div class="card"><div class="ch">Per Asset</div>
+    return f"""<div class="card"><div class="ch">按资产</div>
   <div class="table-scroll"><table><thead><tr>
-    <th>Asset</th><th>Emesse</th><th>Chiuse</th><th>MFE atr</th><th>MAE atr</th><th>Candele al MFE</th>
+    <th>资产</th><th>已发出</th><th>已结束</th><th>MFE (ATR)</th><th>MAE (ATR)</th><th>到 MFE 的 K 线数</th>
   </tr></thead><tbody>{body}</tbody></table></div></div>"""
 
 
@@ -264,18 +264,17 @@ def velocity_table(buckets):
     body = ""
     for label, n, mfe, mae in buckets:
         if n == 0:
-            body += f'<tr><td>{label}</td><td class="mono">0</td><td class="empty" colspan="2" style="text-align:left">nessun dato</td></tr>'
+            body += f'<tr><td>{label}</td><td class="mono">0</td><td class="empty" colspan="2" style="text-align:left">无数据</td></tr>'
             continue
         prov = ' <span class="prov">(provv.)</span>' if n < MIN_SAMPLE else ""
         mfe_s = f'<span class="pos">+{mfe}</span>' if mfe is not None else "\u2014"
         mae_s = f'<span class="neg">{mae}</span>' if mae is not None else "\u2014"
         body += f'<tr><td>{label}{prov}</td><td class="mono">{n}</td><td class="mono">{mfe_s}</td><td class="mono">{mae_s}</td></tr>'
-    return f"""<div class="card"><div class="ch">Ipotesi velocit\u00e0 \u2014 rimbalzo per fascia di impulso</div>
+    return f"""<div class="card"><div class="ch">速度假设 — 按脉冲分档的反弹表现</div>
   <div class="table-scroll"><table><thead><tr>
-    <th>Velocit\u00e0 impulso</th><th>N</th><th>MFE atr</th><th>MAE atr</th>
+    <th>脉冲速度</th><th>N</th><th>MFE (ATR)</th><th>MAE (ATR)</th>
   </tr></thead><tbody>{body}</tbody></table></div>
-  <div class="note">Se il radar ha edge sulla velocit\u00e0, le fasce pi\u00f9 veloci mostrano un MFE medio pi\u00f9 alto.
-  Numeri sotto {MIN_SAMPLE} campioni sono provvisori: rumore, non conclusioni.</div></div>"""
+  <div class="note">若雷达在速度上确有 edge，速度越快的分档应显示更高的平均 MFE。样本少于 {MIN_SAMPLE} 个的数字为暂定：是噪声，不是结论。</div></div>"""
 
 
 def first_hit_card(zones):
@@ -287,10 +286,9 @@ def first_hit_card(zones):
     # Globale
     g = _first_hit_stats(zones)
     if g is None or g["n"] == 0:
-        return f"""<div class="card"><div class="ch">WR Reale \u2014 SL 1 ATR vs TP 2 ATR (chi arriva primo)</div>
-  <div class="empty">Dati first_hit non ancora disponibili.<br>
-  Le zone esistenti usavano TP 1 ATR. I dati si popoleranno con le nuove zone a TP 2 ATR,
-  oppure dopo il backfill delle zone storiche (confronto time_to_tp vs time_to_stop).</div></div>"""
+        return f"""<div class="card"><div class="ch">真实胜率 — SL 1 ATR vs TP 2 ATR（谁先到达）</div>
+  <div class="empty">first_hit 数据暂不可用。<br>
+  已有区间使用的是 1 ATR 的 TP。数据会在新的 2 ATR TP 区间出现后填充，或在对历史区间回填之后（比较 time_to_tp 与 time_to_stop）。</div></div>"""
 
     prov = ' <span class="prov">(provv.)</span>' if g["n"] < MIN_SAMPLE else ""
     wr_cls = "pos" if g["wr"] >= 40 else ("neg" if g["wr"] < 25 else "warn")
@@ -314,18 +312,16 @@ def first_hit_card(zones):
   <td class="mono {a_exp_cls}">{a_stats['exp']:+.3f}R</td>
 </tr>"""
 
-    return f"""<div class="card"><div class="ch">WR Reale \u2014 SL 1 ATR vs TP 2 ATR (chi arriva primo)</div>
+    return f"""<div class="card"><div class="ch">真实胜率 — SL 1 ATR vs TP 2 ATR（谁先到达）</div>
   <div class="summary-grid c5" style="border:none;margin:0">
-    <div>{metric(g['n'])}<span class="lbl">Zone con esito{prov}</span></div>
-    <div>{metric(g['tp_first'],'','pos')}<span class="lbl">TP primo</span></div>
-    <div>{metric(g['sl_first'],'','neg')}<span class="lbl">SL primo</span></div>
+    <div>{metric(g['n'])}<span class="lbl">有结果的区间{prov}</span></div>
+    <div>{metric(g['tp_first'],'','pos')}<span class="lbl">先到 TP</span></div>
+    <div>{metric(g['sl_first'],'','neg')}<span class="lbl">先到 SL</span></div>
     <div>{metric(g['wr'],'%',wr_cls)}<span class="lbl">Win Rate reale</span></div>
     <div>{metric(g['exp'],'R',exp_cls)}<span class="lbl">Expectancy (1:2)</span></div>
   </div>
-  {f'<div class="table-scroll"><table><thead><tr><th>Asset</th><th>N</th><th>TP primo</th><th>SL primo</th><th>WR</th><th>Exp (1:2)</th></tr></thead><tbody>{asset_body}</tbody></table></div>' if asset_body else ''}
-  <div class="note">Il numero che conta: se il TP (2 ATR) viene toccato prima dello SL (1 ATR)
-  il trade sarebbe vincente a +2R; se lo SL arriva prima, perdente a -1R.
-  Breakeven a 33.3% WR. Zone senza tocco di nessuno dei due non sono conteggiate.</div></div>"""
+  {f'<div class="table-scroll"><table><thead><tr><th>资产</th><th>N</th><th>先到 TP</th><th>先到 SL</th><th>WR</th><th>Exp (1:2)</th></tr></thead><tbody>{asset_body}</tbody></table></div>' if asset_body else ''}
+  <div class="note">关键数字：若先触及 TP（2 ATR）再触及 SL（1 ATR），该笔交易以 +2R 获利；若先触及 SL，则以 -1R 亏损。胜率 33.3% 时为盈亏平衡。两者都未触及的区间不计入统计。</div></div>"""
 
 
 def gestione_card(zones):
@@ -342,16 +338,14 @@ def gestione_card(zones):
             beyond_atr.append(mb / atr)
     tp_pct = round(len(tp_hit) / len(closed) * 100, 1) if closed else 0
     beyond_avg = _avg(beyond_atr)
-    return f"""<div class="card"><div class="ch">Gestione \u2014 TP target / BE / lascia-correre</div>
+    return f"""<div class="card"><div class="ch">平仓管理 — TP 目标 / 保本 / 让利润奔跑</div>
   <div class="summary-grid c4" style="border:none;margin:0">
-    <div>{metric(tp_pct,'%','pos')}<span class="lbl">zone che colpiscono il TP (2 ATR)</span></div>
-    <div>{metric(len(tp_hit))}<span class="lbl">TP colpiti su {len(closed)}</span></div>
-    <div>{metric(round(len(be)/len(closed)*100,1) if closed else 0,'%')}<span class="lbl">che raggiungono il BE</span></div>
-    <div>{metric(beyond_avg,'', 'pos' if (beyond_avg or 0)>0 else '')}<span class="lbl">respiro OLTRE il TP (ATR)</span></div>
+    <div>{metric(tp_pct,'%','pos')}<span class="lbl">触及 TP（2 ATR）的区间</span></div>
+    <div>{metric(len(tp_hit))}<span class="lbl">触及 TP / 共 {len(closed)}</span></div>
+    <div>{metric(round(len(be)/len(closed)*100,1) if closed else 0,'%')}<span class="lbl">达到保本</span></div>
+    <div>{metric(beyond_avg,'', 'pos' if (beyond_avg or 0)>0 else '')}<span class="lbl">超出 TP 的幅度（ATR）</span></div>
   </div>
-  <div class="note">Il numero chiave e' l'ultimo: quanto il respiro continua <strong>oltre</strong> il TP target (2 ATR).
-  Se e' alto, il trailing batteva il target secco. Se e' ~0, chiudere a 2 ATR bastava.
-  Tutti i livelli sono registrati: nulla viene chiuso, si misura solo cosa fa il prezzo.</div></div>"""
+  <div class="note">关键数字是最后一个：触及之后行情还能延续多远 <strong>oltre</strong> （2 ATR 的 TP 目标）。该值高说明移动止盈优于固定目标；接近 0 则说明在 2 ATR 直接平仓已足够。所有价位都只做记录：不真正平仓，只测量价格的实际行为。</div></div>"""
 
 
 def stop_card(zones):
@@ -367,16 +361,14 @@ def stop_card(zones):
             rebounded += 1
     pct = round(len(hits) / len(closed) * 100, 1) if closed else 0
     reb_pct = round(rebounded / len(hits) * 100, 1) if hits else 0
-    return f"""<div class="card"><div class="ch">Stop Loss \u2014 equilibrio respiro/stop</div>
+    return f"""<div class="card"><div class="ch">止损 — 「呼吸」与止损的平衡</div>
   <div class="summary-grid c4" style="border:none;margin:0">
-    <div>{metric(pct,'%','warn')}<span class="lbl">zone che toccano lo stop</span></div>
-    <div>{metric(len(hits))}<span class="lbl">tocchi su {len(closed)}</span></div>
-    <div>{metric(reb_pct,'%','pos')}<span class="lbl">di cui rimbalza dopo (\u22651 ATR)</span></div>
-    <div>{metric(rebounded)}<span class="lbl">respiro recuperato</span></div>
+    <div>{metric(pct,'%','warn')}<span class="lbl">触及止损的区间</span></div>
+    <div>{metric(len(hits))}<span class="lbl">触及 / 共 {len(closed)}</span></div>
+    <div>{metric(reb_pct,'%','pos')}<span class="lbl">其中触及后反弹（≥1 ATR）</span></div>
+    <div>{metric(rebounded)}<span class="lbl">已收复的幅度</span></div>
   </div>
-  <div class="note">Se molte zone toccano lo stop <strong>ma poi rimbalzano</strong>, lo stop e'
-  troppo stretto e taglierebbe il guadagno. Se quasi nessuna rimbalza dopo il tocco, lo stop e'
-  equilibrato. Lo stop e' solo registrato: non interrompe la misura del respiro.</div></div>"""
+  <div class="note">若很多区间都触及止损 <strong>但随后反弹</strong>，说明止损过窄，会砍掉利润。若触及后几乎都没有反弹，说明止损设置得当。止损只做记录：不会中断「呼吸」的测量。</div></div>"""
 
 
 def funnel_card(funnel, zones):
@@ -384,15 +376,14 @@ def funnel_card(funnel, zones):
     to_observe  = sum(v for (fr, to), v in funnel.items() if to == "OSSERVAZIONE")
     emitted     = len(zones)
     rows = [
-        ("Ingressi in Osservazione", to_observe),
-        ("\u2192 diventate Entry Zone", emitted),
-        ("\u2192 invalidate (tornate a Riposo)", invalidated),
+        ("进入观察", to_observe),
+        ("→ 转为 Entry Zone", emitted),
+        ("→ 已作废（回到静默）", invalidated),
     ]
     body = "".join(f'<tr><td>{l}</td><td class="mono">{n}</td></tr>' for l, n in rows)
-    return f"""<div class="card"><div class="ch">Funnel della macchina a stati</div>
+    return f"""<div class="card"><div class="ch">状态机漏斗</div>
   <div class="table-scroll"><table><tbody>{body}</tbody></table></div>
-  <div class="note">Quante osservazioni si trasformano davvero in Entry Zone, e quante
-  vengono invalidate. Un funnel sano non emette su ogni osservazione.</div></div>"""
+  <div class="note">有多少观察真正转化为 Entry Zone，又有多少被作废。健康的漏斗不会对每个观察都发信号。</div></div>"""
 
 
 # ============================================================
@@ -410,13 +401,13 @@ def generate():
         conn.close()
     except Exception as e:
         zones, funnel = [], {}
-        print(f"Radar Lab: errore lettura DB \u2014 {e}")
+        print(f"雷达实验室: errore lettura DB \u2014 {e}")
 
     if not zones:
         body = """<div class="card"><div class="empty">
-        Il Market Radar non ha ancora emesso Entry Zone.<br>
-        La pagina si popoleranno quando il radar iniziera' a registrare configurazioni.<br>
-        <span class="prov">Modalita' sola-osservazione \u00b7 in attesa dei primi dati</span>
+        Market Radar 尚未发出任何 Entry Zone。<br>
+        雷达开始记录形态后，本页就会填充数据。<br>
+        <span class="prov">仅观察模式 · 等待首批数据</span>
         </div></div>"""
         counts = "0 zone"
     else:
@@ -431,21 +422,18 @@ def generate():
         counts = f"{s['total']} zone ({s['closed']} chiuse)"
 
     html = f"""<!DOCTYPE html>
-<html lang="it"><head><meta charset="UTF-8">
+<html lang="zh-CN"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Radar Lab (beta)</title><style>{CSS}</style></head>
+<title>雷达实验室（Beta）</title><style>{CSS}</style></head>
 <body>
 <header>
-  <h1>Radar Lab<span class="beta">BETA</span></h1>
-  <div class="meta">{generated} &nbsp;|&nbsp; <a href="engine_edge_dashboard.html">&larr; Engine Edge Lab</a></div>
+  <h1>雷达实验室<span class="beta">BETA</span></h1>
+  <div class="meta">{generated} &nbsp;|&nbsp; <a href="engine_edge_dashboard.html">&larr; 引擎 Edge 实验室</a></div>
 </header>
 <div class="container">
   <p class="intro">
-    Validazione del <strong>Market Radar</strong> in sola osservazione. Il radar non compra
-    e non vende: segnala \u00abzone da osservare\u00bb dopo un impulso esteso che perde forza.
-    Qui misuriamo <strong>cosa fa il prezzo dopo</strong> ogni zona \u2014 quanto rimbalza (MFE) e
-    quanto soffre prima (MAE), in unita' di ATR. <strong>Nessuna soglia di successo e' imposta:</strong>
-    i dati grezzi mostrano se e quanto esiste un edge. Le conclusioni arrivano dopo 300\u2013500 zone.
+    验证 <strong>Market Radar</strong> 仅观察模式。雷达不买入也不卖出：它只在一波过度延伸、开始衰竭的脉冲之后标记「待观察区间」。这里我们测量 <strong>之后价格怎么走</strong> 每个区间——反弹了多少（MFE）、此前又承受了多少回撤（MAE），单位均为 ATR。 <strong>这里没有预设任何成功阈值：</strong>
+    原始数据只展示是否存在 edge、以及有多大。结论要等积累 300–500 个区间之后才能下。
   </p>
   {body}
 </div>
@@ -453,7 +441,7 @@ def generate():
 
     with open(OUT_PATH, "w") as f:
         f.write(html)
-    print(f"Radar Lab dashboard generata: {OUT_PATH} ({counts})")
+    print(f"雷达实验室 dashboard generata: {OUT_PATH} ({counts})")
 
 
 if __name__ == "__main__":
