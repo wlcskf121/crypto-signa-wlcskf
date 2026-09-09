@@ -398,15 +398,15 @@ def _notify_otesc(signal: dict, config: dict):
 
         text = (
             f"{emoji} *EDGE LAB — OTE-SC*\n\n"
-            f"Asset: *{asset.replace('_',' ')}*\n"
-            f"Direzione: *{direction}*\n\n"
-            f"Entry:     `{fp(signal['entry'])}`\n"
-            f"Stop Loss: `{fp(signal['stop_loss'])}`\n"
-            f"TP:        `{fp(signal.get('tp'))}`\n"
-            f"R/R: *{signal.get('rr',0):.2f}*\n\n"
-            f"Quality: *{signal['quality_score']}/10* ({signal['quality_label']})\n"
-            f"Session: {signal.get('session','N/A')} → Ref: {signal.get('ref_session','N/A')}\n"
-            f"Target: {signal.get('liquidity_target','N/A')}\n"
+            f"资产： *{asset.replace('_',' ')}*\n"
+            f"方向： *{direction}*\n\n"
+            f"进场价：     `{fp(signal['entry'])}`\n"
+            f"止损价： `{fp(signal['stop_loss'])}`\n"
+            f"止盈：        `{fp(signal.get('tp'))}`\n"
+            f"盈亏比： *{signal.get('rr',0):.2f}*\n\n"
+            f"质量： *{signal['quality_score']}/10* ({signal['quality_label']})\n"
+            f"时段： {signal.get('session','N/A')} → Ref: {signal.get('ref_session','N/A')}\n"
+            f"目标： {signal.get('liquidity_target','N/A')}\n"
             f"Trend: {signal.get('trend_combined','N/A')}"
         )
         if signal.get("tradeability_flags"):
