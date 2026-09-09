@@ -127,7 +127,7 @@ def _run_for_asset(conn, asset: str, config: dict, now: datetime):
     df_h4  = core_db.get_candles_df(conn, asset, LH_TIMEFRAMES["H4"], limit=limit)
     df_m15 = v3_db.get_v3_candles_df(conn, asset, LH_TIMEFRAMES["M15"], limit=limit)
 
-    # M30/H1 -- SOLO per il Restart Zone Engine (detection impulso su
+    # M30/H1 -- SOLO per il 重启区域 Engine (detection impulso su
     # timeframe piu' alti). Il segnale di trading non li usa, restano
     # separati dal df_h4/df_m15 sopra per non toccare comportamento gia'
     # validato.
@@ -153,9 +153,9 @@ def _run_for_asset(conn, asset: str, config: dict, now: datetime):
             logger.info("LH [%s]: candele M5 insufficienti, uso M15.", asset)
             df_m5 = None
 
-    # M5 per il Restart Zone Engine — SEPARATO da df_m5 sopra, che resta
+    # M5 per il 重启区域 Engine — SEPARATO da df_m5 sopra, che resta
     # XAU-only per non toccare la precisione di entry del segnale di
-    # trading (design invariato). Il Restart Zone Engine serve M5 su
+    # trading (design invariato). Il 重启区域 Engine serve M5 su
     # ENTRAMBI gli asset per raffinare le zone (deploy 19/07: v3_candles_cache
     # ha gia' M5 anche per BTC).
     df_m5_zones = df_m5 if asset == "XAU_USD" else None
@@ -190,7 +190,7 @@ def _run_for_asset(conn, asset: str, config: dict, now: datetime):
 
     mie_context = _read_mie_context(conn, asset)
 
-    # ── Restart Zone Engine (v3.4) — informativo, indipendente dal segnale ──
+    # ── 重启区域 Engine (v3.4) — informativo, indipendente dal segnale ──
     # Gira SEMPRE, anche se poi il segnale di trading viene rifiutato o
     # e' un duplicato: e' un canale separato, non deve dipendere dalla
     # logica di trading qui sotto.
@@ -204,10 +204,10 @@ def _run_for_asset(conn, asset: str, config: dict, now: datetime):
         # fuorviante dal v3.5 (la detection non dipende piu' dagli OB).
         # E soprattutto: NON mostrava se H1/M30 fossero disponibili, che
         # sono le uniche due fonti reali dell'impulso da v3.6. Senza
-        # questo, "0 Restart Zone trovate" era ambiguo -- impossibile
+        # questo, "0 重启区域 trovate" era ambiguo -- impossibile
         # distinguere "nessun impulso oggi" da "dati H1/M30 mancanti".
         logger.info(
-            "LH ZoneScan [%s]: %d Restart Zone trovate "
+            "LH ZoneScan [%s]: %d 个重启区域 "
             "(h1=%s/%d barre, m30=%s/%d barre, m5=%s/%d barre)",
             asset, len(zones),
             "disponibili" if df_h1_zones is not None else "ASSENTI",
@@ -639,7 +639,7 @@ def _run_for_asset(conn, asset: str, config: dict, now: datetime):
 def _notify_zone_near(asset: str, zone: dict, config: dict):
     """
     Secondo livello, piu' urgente del primo avviso "sorvegliala": il
-    prezzo e' a pochi punti dalla Restart Zone (soglia per asset, non ATR
+    prezzo e' a pochi punti dalla 重启区域 (soglia per asset, non ATR
     -- qui conta la precisione assoluta di prezzo). Stessa filosofia del
     Metodo Gold Edge (Fase 5, M5): "il mercato entra nella tua area.
     Non comprare. Non vendere. Guarda." — promemoria di conferma incluso.
@@ -649,7 +649,7 @@ def _notify_zone_near(asset: str, zone: dict, config: dict):
 
         kind = zone["zone_kind"]
         emoji = "\U0001f7e2" if kind == "BULLISH" else "\U0001f534"
-        kind_it = "rialzista" if kind == "BULLISH" else "ribassista"
+        kind_it = "看多" if kind == "BULLISH" else "看空"
         precision_note = "" if zone.get("m5_refined") else " (non raffinata, M5 assente)"
 
         def fp(v):
@@ -661,22 +661,22 @@ def _notify_zone_near(asset: str, zone: dict, config: dict):
         if trade:
             trade_line = (
                 f"\n\U0001f4a1 *Possibile trade* ({trade['rr']:.0f}R)\n"
-                f"Entry: `{fp(trade['entry'])}`  SL: `{fp(trade['stop_loss'])}`  "
-                f"TP: `{fp(trade['take_profit'])}`\n"
+                f"进场价： `{fp(trade['entry'])}`  止损： `{fp(trade['stop_loss'])}`  "
+                f"止盈： `{fp(trade['take_profit'])}`\n"
             )
 
         text = (
-            f"{emoji} \U0001f6a8 *Restart Zone {kind_it} VICINISSIMA*\n"
-            f"{asset.replace('_',' ')} — siamo dentro l'area, a {zone.get('distance_points',0):.1f} punti.\n\n"
-            f"Zona: `{fp(zone.get('zone_low'))}` - `{fp(zone.get('zone_high'))}` "
-            f"({zone.get('zone_width',0):.2f} ampiezza{precision_note})\n"
-            f"Forza: {zone.get('zone_strength','?')} ({zone.get('restart_score',0):.0f}/100)\n"
+            f"{emoji} \U0001f6a8 *重启区域 {kind_it} 极近*\n"
+            f"{asset.replace('_',' ')} — 已进入该区域，距 {zone.get('distance_points',0):.1f} punti.\n\n"
+            f"区域： `{fp(zone.get('zone_low'))}` - `{fp(zone.get('zone_high'))}` "
+            f"({zone.get('zone_width',0):.2f} 宽度{precision_note})\n"
+            f"强度： {zone.get('zone_strength','?')} ({zone.get('restart_score',0):.0f}/100)\n"
             + trade_line +
-            f"\n_Prima di agire, verifica tu:_\n"
-            f"_- Ha preso liquidita'?_\n"
-            f"_- Ha rotto la microstruttura?_\n"
-            f"_- Il movimento e' deciso o debole?_\n\n"
-            f"_Informativo \u2014 non e' un segnale di trading._"
+            f"\n_操作前请自行确认：_\n"
+            f"_- 是否吸收了流动性？_\n"
+            f"_- 是否突破了微观结构？_\n"
+            f"_- 走势是坚决还是疲软？_\n\n"
+            f"_仅供参考 —— 非交易信号。_"
         )
 
         bot_token  = config.get("TELEGRAM_BOT_TOKEN", "")
@@ -686,7 +686,7 @@ def _notify_zone_near(asset: str, zone: dict, config: dict):
         if bot_token and chat_id:
             telegram_bot.send_message(bot_token, chat_id, text)
         if ntfy_topic:
-            title = f"VICINISSIMA: Restart Zone {kind_it} {asset.replace('_',' ')}"
+            title = f"极近: 重启区域 {kind_it} {asset.replace('_',' ')}"
             ntfy_bot.send_message(ntfy_topic, title, text.replace("*","").replace("`","").replace("_",""))
 
     except Exception as e:
@@ -695,7 +695,7 @@ def _notify_zone_near(asset: str, zone: dict, config: dict):
 
 def _notify_zone(asset: str, zone: dict, config: dict):
     """
-    Notifica INFORMATIVA di Restart Zone — non un trade. Nessun
+    Notifica INFORMATIVA di 重启区域 — non un trade. Nessun
     entry/SL/TP operativo: solo "guarda qui", il resto lo decide il trader.
 
     Il messaggio guida con la frase in chiaro (zona interessante, da
@@ -707,15 +707,15 @@ def _notify_zone(asset: str, zone: dict, config: dict):
 
         kind = zone["zone_kind"]  # BULLISH / BEARISH
         emoji = "\U0001f7e2" if kind == "BULLISH" else "\U0001f534"
-        kind_it = "rialzista" if kind == "BULLISH" else "ribassista"
+        kind_it = "看多" if kind == "BULLISH" else "看空"
 
         strength = zone.get("zone_strength")
         if strength == "STRONG":
-            headline = f"Restart Zone {kind_it} molto interessante — sorvegliala."
+            headline = f"重启区域 {kind_it} 非常值得关注 —— 请密切监视。"
         elif strength == "MODERATE":
-            headline = f"Restart Zone {kind_it} da tenere d'occhio."
+            headline = f"重启区域 {kind_it} 值得留意。"
         else:  # WEAK
-            headline = f"Restart Zone {kind_it} (impulso trovato, poche conferme)."
+            headline = f"重启区域 {kind_it}（已现冲动，确认较少）。"
 
         confirmations = zone.get("confirmations") or []
         conf_line = ", ".join(confirmations) if confirmations else "nessuna conferma SMC"
@@ -730,19 +730,19 @@ def _notify_zone(asset: str, zone: dict, config: dict):
         if trade:
             trade_line = (
                 f"\n\U0001f4a1 *Possibile trade* ({trade['rr']:.0f}R)\n"
-                f"Entry: `{fp(trade['entry'])}`  SL: `{fp(trade['stop_loss'])}`  "
-                f"TP: `{fp(trade['take_profit'])}`\n"
+                f"进场价： `{fp(trade['entry'])}`  止损： `{fp(trade['stop_loss'])}`  "
+                f"止盈： `{fp(trade['take_profit'])}`\n"
             )
 
         text = (
             f"{emoji} *{headline}*\n"
-            f"{asset.replace('_',' ')} — ci si sta avvicinando alla zona.\n\n"
-            f"Zona: `{fp(zone.get('zone_low'))}` - `{fp(zone.get('zone_high'))}` "
-            f"({zone.get('zone_width',0):.2f} ampiezza{precision_note})\n"
-            f"Distanza: {zone['distance_atr']} ATR \u2014 punteggio: {zone.get('restart_score',0):.0f}/100\n"
-            f"Confermata da: {conf_line}\n"
+            f"{asset.replace('_',' ')} — 正在接近该区域。\n\n"
+            f"区域： `{fp(zone.get('zone_low'))}` - `{fp(zone.get('zone_high'))}` "
+            f"({zone.get('zone_width',0):.2f} 宽度{precision_note})\n"
+            f"距离： {zone['distance_atr']} ATR \u2014 评分： {zone.get('restart_score',0):.0f}/100\n"
+            f"确认依据： {conf_line}\n"
             + trade_line +
-            f"\n_Informativo \u2014 non e' un segnale di trading._"
+            f"\n_仅供参考 —— 非交易信号。_"
         )
 
         bot_token  = config.get("TELEGRAM_BOT_TOKEN", "")
@@ -766,7 +766,7 @@ def _notify(signal: dict, config: dict):
         direction = signal["direction"]
         asset     = signal["asset"]
         emoji     = "\U0001f7e2" if direction == "BUY" else "\U0001f534"
-        dir_it    = "LONG" if direction == "BUY" else "SHORT"
+        dir_it    = "做多" if direction == "BUY" else "做空"
 
         def fp(v):
             if v is None: return "N/A"
@@ -789,18 +789,18 @@ def _notify(signal: dict, config: dict):
                 tags.append(t)
             if len(tags) >= 3:
                 break
-        tags_str = " + ".join(tags) if tags else "impulso puro"
+        tags_str = " + ".join(tags) if tags else "纯冲动"
 
         text = (
-            f"{emoji} *{dir_it} — Restart Zone*\n"
+            f"{emoji} *{dir_it} — 重启区域*\n"
             f"*{asset.replace('_',' ')}*\n\n"
             f"{stars}\n"
             f"{tags_str}\n\n"
-            f"Entry: `{fp(signal['entry'])}`\n"
-            f"SL: `{fp(signal['stop_loss'])}`\n"
-            f"TP: `{fp(signal['tp'])}`\n"
-            f"RR: {signal['rr']:.1f}\n\n"
-            f"Sessione: {signal.get('session','?')}"
+            f"进场价： `{fp(signal['entry'])}`\n"
+            f"止损： `{fp(signal['stop_loss'])}`\n"
+            f"止盈： `{fp(signal['tp'])}`\n"
+            f"盈亏比： {signal['rr']:.1f}\n\n"
+            f"时段： {signal.get('session','?')}"
         )
 
         bot_token  = config.get("TELEGRAM_BOT_TOKEN", "")
@@ -856,7 +856,7 @@ def _format_digest_message(asset: str, digest: dict) -> str:
     lines = [f"*{asset.replace('_',' ')}*", ""]
 
     if digest["buy_lines"]:
-        lines.append("\U0001f7e2 *BUY WATCH*")
+        lines.append("\U0001f7e2 *做多关注*")
         lines.append("")
         for l in digest["buy_lines"]:
             lines.append(l["range"])
@@ -865,7 +865,7 @@ def _format_digest_message(asset: str, digest: dict) -> str:
             lines.append("")
 
     if digest["sell_lines"]:
-        lines.append("\U0001f534 *SELL WATCH*")
+        lines.append("\U0001f534 *做空关注*")
         lines.append("")
         for l in digest["sell_lines"]:
             lines.append(l["range"])
@@ -874,10 +874,10 @@ def _format_digest_message(asset: str, digest: dict) -> str:
             lines.append("")
 
     if not digest["buy_lines"] and not digest["sell_lines"]:
-        lines.append("_Nessuna Restart Zone di qualita' sufficiente oggi._")
+        lines.append("_今日无质量达标的重启区域。_")
         lines.append("")
 
-    lines.append("\U0001f3af *Focus di domani*")
+    lines.append("\U0001f3af *明日焦点*")
     lines.append(digest["focus"])
 
     return "\n".join(lines)
@@ -950,7 +950,7 @@ def _get_macro_events_for_tomorrow() -> list:
 
 def send_zone_digest(config: dict):
     """
-    Riepilogo serale delle Restart Zone ancora valide -- "Overnight
+    Riepilogo serale delle 重启区域 ancora valide -- "Overnight
     Trading Plan". Chiamato una volta al giorno (trigger orario nello
     scan.yml, stesso pattern del Daily Brief).
     """
@@ -1002,7 +1002,7 @@ def send_zone_digest(config: dict):
         macro_events = _get_macro_events_for_tomorrow()
         if macro_events:
             macro_lines = ["", "\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500",
-                          "", "\U0001f4c5 *High Impact Events (domani)*"]
+                          "", "\U0001f4c5 *高影响事件（明日）*"]
             for ev in macro_events:
                 flag = {"US": "\U0001f1fa\U0001f1f8", "EU": "\U0001f1ea\U0001f1fa",
                        "JP": "\U0001f1ef\U0001f1f5", "CN": "\U0001f1e8\U0001f1f3",
@@ -1028,7 +1028,7 @@ def send_zone_digest(config: dict):
     if ntfy_topic:
         try:
             from notifications import ntfy_bot
-            title = f"Gold Edge AI — Overnight Plan {now.strftime('%d %b %Y')}"
+            title = f"黄金边缘 AI —— 隔夜计划 {now.strftime('%d %b %Y')}"
             plain = full_message.replace("*", "").replace("_", "")
             ntfy_bot.send_message(ntfy_topic, title, plain)
             logger.info("LH Digest ntfy inviato")
