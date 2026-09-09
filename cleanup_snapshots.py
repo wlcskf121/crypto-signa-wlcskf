@@ -80,12 +80,20 @@ for table in [
     except Exception:
         pass
 
-# ── Candles cache: tieni ultime ~4000 righe (invariato) ───────
+# ── Candles cache: tieni ultime N righe ───────────────────────
+# ATTENZIONE: il limite e' GLOBALE (per rowid), non per asset.
+#   candles_cache    = n_asset x 2 timeframe (H4,H1) x 300 candele
+#   v3_candles_cache = n_asset x 4 timeframe (D1,M30,M15,M5) x 300 candele
+# Con 2 asset servivano 2400 righe su v3_candles_cache; con 4 asset ne
+# servono 4800. A 4000 (vecchio valore) la storia veniva troncata in
+# silenzio -- e lh_runner vuole 6600 candele H4.
+# 12000 regge fino a ~10 asset su v3_candles_cache.
+CANDLES_CACHE_ROWS = 12000
 for table in ["candles_cache", "v3_candles_cache"]:
     try:
         deleted = conn.execute(
             f"DELETE FROM {table} WHERE rowid NOT IN "
-            f"(SELECT rowid FROM {table} ORDER BY rowid DESC LIMIT 4000)"
+            f"(SELECT rowid FROM {table} ORDER BY rowid DESC LIMIT {CANDLES_CACHE_ROWS})"
         ).rowcount
         total_deleted += deleted
         if deleted > 0:
