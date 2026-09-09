@@ -145,6 +145,51 @@ ASSET_PARAMS = {
         "recurrence_invalidate_after_failures": 2,
         "recurrence_max_age_days": 14,
     },
+    # ── ETH_USDT / SOL_USDT (aggiunti 2026-09-09) ──────────────
+    # I parametri in ATR / barre sono indipendenti dal prezzo: copiati
+    # da BTC_USDT. I due valori in PUNTI sono ribaltati da BTC con la
+    # stessa proporzione (BTC ~78.850: 20pt = 0,025% e 50pt = 0,063%).
+    # Come per BTC e XAU: NESSUN valore e' calibrato su dati storici.
+    "ETH_USDT": {
+        "sl_buffer_atr": 0.5, "min_rr": 1.0, "expiry_bars": 12,
+        "max_zone_atr": 2.0, "min_zone_atr": 0.25, "tp1_max_atr": 3.0,
+        "watch_max_atr": 1.5,
+        "liq_tight_atr": 3.0,
+        "liq_ample_atr": 10.0,
+        "launch_body_ratio": 0.5,
+        "min_zone_width_points": 0.6,      # 0,025% di ~2.500
+        "zone_merge_tolerance_points": 1.6,
+        "min_impulse_atr": 0.8,
+        "impulse_lookback_bars": 16,
+        "max_zones_per_scan": 5,
+        "min_impulse_atr_h1": 1.0,
+        "impulse_lookback_bars_h1": 12,
+        "min_impulse_atr_m30": 0.9,
+        "impulse_lookback_bars_m30": 16,
+        "recurrence_confirmation_bars": 6,
+        "recurrence_invalidate_after_failures": 2,
+        "recurrence_max_age_days": 14,
+    },
+    "SOL_USDT": {
+        "sl_buffer_atr": 0.5, "min_rr": 1.0, "expiry_bars": 12,
+        "max_zone_atr": 2.0, "min_zone_atr": 0.25, "tp1_max_atr": 3.0,
+        "watch_max_atr": 1.5,
+        "liq_tight_atr": 3.0,
+        "liq_ample_atr": 10.0,
+        "launch_body_ratio": 0.5,
+        "min_zone_width_points": 0.03,     # 0,025% di ~104
+        "zone_merge_tolerance_points": 0.07,
+        "min_impulse_atr": 0.8,
+        "impulse_lookback_bars": 16,
+        "max_zones_per_scan": 5,
+        "min_impulse_atr_h1": 1.0,
+        "impulse_lookback_bars_h1": 12,
+        "min_impulse_atr_m30": 0.9,
+        "impulse_lookback_bars_m30": 16,
+        "recurrence_confirmation_bars": 6,
+        "recurrence_invalidate_after_failures": 2,
+        "recurrence_max_age_days": 14,
+    },
 }
 DEFAULT_PARAMS = ASSET_PARAMS["BTC_USDT"]
 
@@ -155,9 +200,14 @@ RECURRENCE_BONUS_MAX = 45          # tetto: 3+ restart confermati
 RECURRENCE_PENALTY_PER_FAILURE = 10
 RECURRENCE_PENALTY_MAX = 30
 
+# ATTENZIONE: un asset assente da questo dict riceve () e quindi
+# session_active == 0 per SEMPRE (nessun errore, solo segnali persi).
+# Ogni nuovo asset va aggiunto qui.
 ALLOWED_SESSIONS = {
     "XAU_USD":  ("ASIA", "LONDON", "NEW_YORK", "OVERLAP"),
     "BTC_USDT": ("LONDON", "NEW_YORK", "OVERLAP"),
+    "ETH_USDT": ("LONDON", "NEW_YORK", "OVERLAP"),
+    "SOL_USDT": ("LONDON", "NEW_YORK", "OVERLAP"),
 }
 
 
@@ -500,6 +550,8 @@ ZONE_SCAN_MAX_ATR_DEFAULT = 3.0
 ZONE_SCAN_NEAR_POINTS = {
     "BTC_USDT": 75,
     "XAU_USD":  15,
+    "ETH_USDT": 2.5,    # 0,095% di ~2.500 (stessa proporzione di BTC)
+    "SOL_USDT": 0.10,   # 0,095% di ~104
 }
 
 
