@@ -1,11 +1,11 @@
 """
 notifications/v41_telegram.py
-Notifica Telegram dedicata a Institutional Scanner V4.1
+Telegram 推送：专用于 Institutional Scanner V4.1
 Intraday Wave Edition.
 
-Isolata da notifications/telegram_bot.py, v3_telegram.py, v4_telegram.py,
-riusa solo la funzione di base send_message. Asset mostrato senza
-underscore per evitare problemi di parsing Markdown di Telegram.
+独立于 notifications/telegram_bot.py、v3_telegram.py、v4_telegram.py，
+仅复用底层 send_message 函数。 Asset mostrato senza
+下划线，避免 Telegram Markdown 解析问题。
 """
 
 from notifications.telegram_bot import send_message
@@ -47,7 +47,7 @@ def format_v41_signal_alert(signal: dict) -> str:
         f"{emoji} *INSTITUTIONAL SCANNER V4.1 — Intraday Wave*",
         "",
         f"Asset: *{asset_display}*",
-        f"Direzione: *{direction}*",
+        f"方向： *{direction}*",
         "",
         f"Entry: `{_fmt(signal['entry'])}`",
         f"Stop Loss: `{_fmt(signal['stop_loss'])}`",
@@ -70,7 +70,7 @@ def format_v41_signal_alert(signal: dict) -> str:
         f"Zona H4: {'✓' if signal.get('in_h4_zone') else '✗'}",
         f"S/R Reaction: {'✓' if signal.get('sr_reaction') else '✗'}",
         f"OTE: {'✓' if signal.get('ote_present') else '✗'}",
-        f"Sessione: {signal.get('session', 'N/A')}",
+        f"时段： {signal.get('session', 'N/A')}",
     ]
     return "\n".join(lines)
 
@@ -82,7 +82,7 @@ def send_v41_signal_alert(bot_token: str, chat_id: str, signal: dict) -> bool:
 
 def format_v41_signal_alert_plain(signal: dict) -> tuple:
     """
-    Formato plain-text (senza Markdown) per ntfy. Ritorna (title, body).
+    ntfy 纯文本格式（无 Markdown）。返回 (title, body)。
     """
     direction = signal["direction"]
     asset_display = signal["asset"].replace("_", " ")
@@ -107,16 +107,16 @@ def format_v41_signal_alert_plain(signal: dict) -> tuple:
         f"Liquidity Source: {signal.get('liquidity_source') or 'N/A'}\n"
         f"Liquidity Target: {signal.get('liquidity_target') or 'N/A'}\n"
         f"OTE Entry Zone: {ote_zone_str}\n"
-        f"Sessione: {signal.get('session', 'N/A')}"
+        f"时段： {signal.get('session', 'N/A')}"
     )
     return title, body
 
 
 def send_v41_signal_alert_all_channels(bot_token: str, chat_id: str, ntfy_topic: str, signal: dict) -> dict:
     """
-    Invia il Trade Alert su entrambi i canali (Telegram + ntfy),
-    indipendentemente l'uno dall'altro: se uno fallisce, l'altro
-    viene comunque tentato. Ritorna {"telegram": bool, "ntfy": bool}.
+    向两个渠道（Telegram + ntfy）同时发送交易预警，
+    彼此独立：若一个失败，另一个仍会尝试。
+    返回 {"telegram": bool, "ntfy": bool}。
     """
     telegram_sent = send_v41_signal_alert(bot_token, chat_id, signal)
     title, body = format_v41_signal_alert_plain(signal)
@@ -125,7 +125,7 @@ def send_v41_signal_alert_all_channels(bot_token: str, chat_id: str, ntfy_topic:
 
 
 # ============================================================
-# Watchlist Alert (preparatorio, non operativo)
+# 观察列表预警（预备性，非交易信号）
 # ============================================================
 
 def format_v41_watchlist_alert(asset: str, proximity: dict) -> str:
@@ -144,7 +144,7 @@ def format_v41_watchlist_alert(asset: str, proximity: dict) -> str:
         "",
         f"Potential Direction: {emoji} *{direction}*",
         "",
-        "_Alert preparatorio: nessuna conferma BOS/CHOCH ancora presente._",
+        "_预备预警：尚未出现 BOS/CHOCH 确认。_",
     ]
     return "\n".join(lines)
 
@@ -156,7 +156,7 @@ def send_v41_watchlist_alert(bot_token: str, chat_id: str, asset: str, proximity
 
 def format_v41_watchlist_alert_plain(asset: str, proximity: dict) -> tuple:
     """
-    Formato plain-text (senza Markdown) per ntfy. Ritorna (title, body).
+    ntfy 纯文本格式（无 Markdown）。返回 (title, body)。
     """
     asset_display = asset.replace("_", " ")
     direction = proximity["potential_direction"]
@@ -166,7 +166,7 @@ def format_v41_watchlist_alert_plain(asset: str, proximity: dict) -> tuple:
         f"Level: {_fmt(proximity['price'])}\n"
         f"Distance: {proximity['distance_pct'] * 100:.2f}%\n"
         f"Potential Direction: {direction}\n"
-        f"Alert preparatorio: nessuna conferma BOS/CHOCH ancora presente."
+        f"预备预警：尚未出现 BOS/CHOCH 确认。"
     )
     return title, body
 
@@ -174,8 +174,8 @@ def format_v41_watchlist_alert_plain(asset: str, proximity: dict) -> tuple:
 def send_v41_watchlist_alert_all_channels(bot_token: str, chat_id: str, ntfy_topic: str,
                                            asset: str, proximity: dict) -> dict:
     """
-    Invia il Watchlist Alert su entrambi i canali (Telegram + ntfy),
-    indipendentemente l'uno dall'altro. Ritorna {"telegram": bool, "ntfy": bool}.
+    向两个渠道（Telegram + ntfy）同时发送观察列表预警，
+    彼此独立。返回 {"telegram": bool, "ntfy": bool}。
     """
     telegram_sent = send_v41_watchlist_alert(bot_token, chat_id, asset, proximity)
     title, body = format_v41_watchlist_alert_plain(asset, proximity)
