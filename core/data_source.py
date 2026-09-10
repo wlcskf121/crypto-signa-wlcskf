@@ -192,17 +192,11 @@ def get_provider(asset: str, family: str = "main"):
     if asset in TWELVEDATA_ASSETS:
         from core import exchange_twelvedata
         return exchange_twelvedata
-    """
-    if family == "v3":
-        from core import v3_exchange
-        return v3_exchange
-    
-    from core import exchange
-    return exchange
-    """
-    
-    from core import exchange_okx          # 新增：加密资产统一走欧易
+
+    # 加密资产统一走欧易（覆盖 main 族 H4/H1 与 v3 族 D1/M30/M15/5m 全部时段）
+    from core import exchange_okx
     return exchange_okx
+
 
 def should_fetch(asset: str, timeframe: str, last_candle_ts_ms: int | None = None,
                  now: datetime | None = None) -> bool:
