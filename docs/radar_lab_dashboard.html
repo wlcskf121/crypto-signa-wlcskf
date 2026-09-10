@@ -47,7 +47,7 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)
 <body>
 <header>
   <h1>雷达实验室<span class="beta">BETA</span></h1>
-  <div class="meta">2026-09-10 20:41 UTC &nbsp;|&nbsp; <a href="engine_edge_dashboard.html">&larr; 引擎 Edge 实验室</a></div>
+  <div class="meta">2026-09-10 20:46 UTC &nbsp;|&nbsp; <a href="engine_edge_dashboard.html">&larr; 引擎 Edge 实验室</a></div>
 </header>
 <div class="container">
   <p class="intro">
@@ -55,7 +55,7 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)
     原始数据只展示是否存在 edge、以及有多大。结论要等积累 300–500 个区间之后才能下。
   </p>
   <div class="summary-grid c4">
-  <div><span class="big ">4</span><span class="lbl">已发出区间</span></div>
+  <div><span class="big ">5</span><span class="lbl">已发出区间</span></div>
   <div><span class="big ">4</span><span class="lbl">已结束</span></div>
   <div><span class="big pos">1.721</span><span class="lbl">平均 MFE（ATR）</span></div>
   <div><span class="big neg">0.841</span><span class="lbl">平均 MAE（ATR）</span></div>
@@ -68,7 +68,10 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)
   <td class="mono">12.0</td></tr><tr><td><strong>ETH_USDT</strong> <span class="prov">(provv.)</span></td>
   <td class="mono">2</td><td class="mono">2</td>
   <td class="mono"><span class="pos">+2.567</span></td><td class="mono"><span class="neg">0.218</span></td>
-  <td class="mono">24.0</td></tr></tbody></table></div></div><div class="card"><div class="ch">速度假设 — 按脉冲分档的反弹表现</div>
+  <td class="mono">24.0</td></tr><tr><td><strong>XAU_USD</strong> <span class="prov">(provv.)</span></td>
+  <td class="mono">1</td><td class="mono">0</td>
+  <td class="mono">—</td><td class="mono">—</td>
+  <td class="mono">—</td></tr></tbody></table></div></div><div class="card"><div class="ch">速度假设 — 按脉冲分档的反弹表现</div>
   <div class="table-scroll"><table><thead><tr>
     <th>脉冲速度</th><th>N</th><th>MFE (ATR)</th><th>MAE (ATR)</th>
   </tr></thead><tbody><tr><td>低于阈值 (< 0.6) ⚠</td><td class="mono">0</td><td class="empty" colspan="2" style="text-align:left">无数据</td></tr><tr><td>正常（0.6–0.8）</td><td class="mono">0</td><td class="empty" colspan="2" style="text-align:left">无数据</td></tr><tr><td>快（0.8–1.0） <span class="prov">(provv.)</span></td><td class="mono">4</td><td class="mono"><span class="pos">+1.721</span></td><td class="mono"><span class="neg">0.841</span></td></tr><tr><td>极快（≥ 1.0）</td><td class="mono">0</td><td class="empty" colspan="2" style="text-align:left">无数据</td></tr></tbody></table></div>
@@ -110,7 +113,7 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)
     <div><span class="big ">0</span><span class="lbl">已收复的幅度</span></div>
   </div>
   <div class="note">若很多区间都触及止损 <strong>但随后反弹</strong>，说明止损过窄，会砍掉利润。若触及后几乎都没有反弹，说明止损设置得当。止损只做记录：不会中断「呼吸」的测量。</div></div><div class="card"><div class="ch">状态机漏斗</div>
-  <div class="table-scroll"><table><tbody><tr><td>进入观察</td><td class="mono">4</td></tr><tr><td>→ 转为 Entry Zone</td><td class="mono">4</td></tr><tr><td>→ 已作废（回到静默）</td><td class="mono">2</td></tr></tbody></table></div>
+  <div class="table-scroll"><table><tbody><tr><td>进入观察</td><td class="mono">4</td></tr><tr><td>→ 转为 Entry Zone</td><td class="mono">5</td></tr><tr><td>→ 已作废（回到静默）</td><td class="mono">2</td></tr></tbody></table></div>
   <div class="note">有多少观察真正转化为 Entry Zone，又有多少被作废。健康的漏斗不会对每个观察都发信号。</div></div>
 </div>
 </body></html>
