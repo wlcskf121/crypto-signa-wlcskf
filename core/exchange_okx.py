@@ -32,7 +32,9 @@ def _bar(tf: str) -> str:
     return TIMEFRAME_MAP.get(tf, tf)
 
 
-def _request(base_url, instrument_name, timeframe, limit=100, after=None):
+PERP_MAP = {"BTC_USDT": "BTC_USDT_SWAP", "ETH_USDT": "ETH_USDT_SWAP", "SOL_USDT": "SOL_USDT_SWAP"}
+def _request_candlestick(base_url, instrument_name, timeframe, count=None, end_ts=None):
+    instrument_name = PERP_MAP.get(instrument_name, instrument_name)
     url = f"{base_url}/candles"
     params = {
         "instId": _inst_id(instrument_name),
