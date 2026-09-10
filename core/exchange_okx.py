@@ -32,7 +32,7 @@ def _bar(tf: str) -> str:
     return TIMEFRAME_MAP.get(tf, tf)
 
 
-PERP_MAP = {"BTC_USDT": "BTC_USDT_SWAP", "ETH_USDT": "ETH_USDT_SWAP", "SOL_USDT": "SOL_USDT_SWAP"}
+PERP_MAP = {"BTC_USDT": "BTC-USDT-SWAP", "ETH_USDT": "ETH-USDT-SWAP", "SOL_USDT": "SOL-USDT-SWAP"}
 def _request_candlestick(base_url, instrument_name, timeframe, count=None, end_ts=None):
     instrument_name = PERP_MAP.get(instrument_name, instrument_name)
     url = f"{base_url}/candles"
