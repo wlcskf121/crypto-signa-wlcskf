@@ -47,17 +47,30 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)
 <body>
 <header>
   <h1>雷达实验室<span class="beta">BETA</span></h1>
-  <div class="meta">2026-09-10 14:56 UTC &nbsp;|&nbsp; <a href="engine_edge_dashboard.html">&larr; 引擎 Edge 实验室</a></div>
+  <div class="meta">2026-09-10 15:02 UTC &nbsp;|&nbsp; <a href="engine_edge_dashboard.html">&larr; 引擎 Edge 实验室</a></div>
 </header>
 <div class="container">
   <p class="intro">
     验证 <strong>Market Radar</strong> 仅观察模式。雷达不买入也不卖出：它只在一波过度延伸、开始衰竭的脉冲之后标记「待观察区间」。这里我们测量 <strong>之后价格怎么走</strong> 每个区间——反弹了多少（MFE）、此前又承受了多少回撤（MAE），单位均为 ATR。 <strong>这里没有预设任何成功阈值：</strong>
     原始数据只展示是否存在 edge、以及有多大。结论要等积累 300–500 个区间之后才能下。
   </p>
-  <div class="card"><div class="empty">
-        Market Radar 尚未发出任何 Entry Zone。<br>
-        雷达开始记录形态后，本页就会填充数据。<br>
-        <span class="prov">仅观察模式 · 等待首批数据</span>
-        </div></div>
+  <div class="summary-grid c4">
+  <div><span class="big ">1</span><span class="lbl">已发出区间</span></div>
+  <div><span class="big ">0</span><span class="lbl">已结束</span></div>
+  <div><span class="big">—</span><span class="lbl">平均 MFE（ATR）</span></div>
+  <div><span class="big">—</span><span class="lbl">平均 MAE（ATR）</span></div>
+</div><div class="card"><div class="ch">按资产</div>
+  <div class="table-scroll"><table><thead><tr>
+    <th>资产</th><th>已发出</th><th>已结束</th><th>MFE (ATR)</th><th>MAE (ATR)</th><th>到 MFE 的 K 线数</th>
+  </tr></thead><tbody><tr><td><strong>ETH_USDT</strong> <span class="prov">(provv.)</span></td>
+  <td class="mono">1</td><td class="mono">0</td>
+  <td class="mono">—</td><td class="mono">—</td>
+  <td class="mono">—</td></tr></tbody></table></div></div><div class="card"><div class="ch">速度假设 — 按脉冲分档的反弹表现</div>
+  <div class="table-scroll"><table><thead><tr>
+    <th>脉冲速度</th><th>N</th><th>MFE (ATR)</th><th>MAE (ATR)</th>
+  </tr></thead><tbody><tr><td>低于阈值 (< 0.6) ⚠</td><td class="mono">0</td><td class="empty" colspan="2" style="text-align:left">无数据</td></tr><tr><td>正常（0.6–0.8）</td><td class="mono">0</td><td class="empty" colspan="2" style="text-align:left">无数据</td></tr><tr><td>快（0.8–1.0）</td><td class="mono">0</td><td class="empty" colspan="2" style="text-align:left">无数据</td></tr><tr><td>极快（≥ 1.0）</td><td class="mono">0</td><td class="empty" colspan="2" style="text-align:left">无数据</td></tr></tbody></table></div>
+  <div class="note">若雷达在速度上确有 edge，速度越快的分档应显示更高的平均 MFE。样本少于 30 个的数字为暂定：是噪声，不是结论。</div></div><div class="card"><div class="ch">状态机漏斗</div>
+  <div class="table-scroll"><table><tbody><tr><td>进入观察</td><td class="mono">2</td></tr><tr><td>→ 转为 Entry Zone</td><td class="mono">1</td></tr><tr><td>→ 已作废（回到静默）</td><td class="mono">0</td></tr></tbody></table></div>
+  <div class="note">有多少观察真正转化为 Entry Zone，又有多少被作废。健康的漏斗不会对每个观察都发信号。</div></div>
 </div>
 </body></html>
