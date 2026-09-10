@@ -84,7 +84,7 @@ PIVOT_LOOKBACK: 5
 # EXCHANGE_BASE_URL vale per gli asset Crypto.com.
 # Per XAU_USD il provider è Twelve Data (endpoint fisso nel modulo)
 # e la chiave arriva da GitHub Secrets: TWELVEDATA_API_KEY
-EXCHANGE_BASE_URL: "https://api.crypto.com/exchange/v1"
+EXCHANGE_BASE_URL: "https://www.okx.com/api/v5/market"
 MAX_CANDLES_PER_CALL: 300
 REQUEST_DELAY_SECONDS: 0.75
 BOOTSTRAP_TARGET_CANDLES: 300
