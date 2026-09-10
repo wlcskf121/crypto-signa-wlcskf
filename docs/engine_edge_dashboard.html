@@ -91,7 +91,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
 <body>
 <header>
   <h1>引擎 Edge 实验室</h1>
-  <div class="meta">2026-09-09 23:51 UTC &nbsp;|&nbsp; <a href="analytics_dashboard.html">&larr; 分析实验室</a> &nbsp;|&nbsp; <a href="radar_lab_dashboard.html">雷达实验室 →</a></div>
+  <div class="meta">2026-09-10 01:31 UTC &nbsp;|&nbsp; <a href="analytics_dashboard.html">&larr; 分析实验室</a> &nbsp;|&nbsp; <a href="radar_lab_dashboard.html">雷达实验室 →</a></div>
 </header>
 <div class="container">
   <p class="intro">
@@ -104,53 +104,65 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
   <div class="fw-header" style="color:#ffd166;border-bottom:none">V41P1</div>
 </div>
 <div class="summary-grid cols3" style="border:1px solid var(--border);border-top:2px solid #ffd166;border-radius:6px;overflow:hidden;margin-bottom:16px">
-  <div><span class="big">1</span><span class="lbl">已结束决策</span></div>
-  <div><span class="big pos">100.0%</span><span class="lbl">胜率</span></div>
+  <div><span class="big">2</span><span class="lbl">已结束决策</span></div>
+  <div><span class="big pos">50.0%</span><span class="lbl">胜率</span></div>
   <div><span class="big pos">+2.00R</span><span class="lbl">期望值</span></div>
 </div>
 <div class="card">
   <div class="ch">引擎 Edge — 有利 vs 中性/不利时的胜率
-    
+    <span class="prov" style="margin-left:8px">1 个引擎样本不足（20／组）</span>
   </div>
   <div class="table-scroll"><table class="engine-table"><tbody><tr class="edge-row">
-  <td><span class="edge-name">Structure</span></td>
-  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=0 / 其他=1）</td>
+  <td><span class="edge-name">Structure</span><span class="prov">暂定</span></td>
+  <td>
+    <div class="edge-bar-wrap">
+      <div class="edge-bar-track">
+        <div class="edge-bar-mid"></div>
+        <div class="edge-bar-fill neg-fill" style="width:50.0%;left:calc(50% - 50.0%)"></div>
+      </div>
+      <span class="edge-val neg">-100.0%</span>
+    </div>
+  </td>
+  <td class="mono" style="font-size:11px;color:var(--dim)">
+    有利 1（0.0% 胜率，n/d 均值） &nbsp;·&nbsp;
+    其他 1（100.0% 胜率，+2.00R 均值）
+  </td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">Trend Health</span></td>
-  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=0 / 其他=1）</td>
+  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=0 / 其他=2）</td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">Volatility</span></td>
-  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=0 / 其他=1）</td>
+  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=0 / 其他=2）</td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">Displacement</span></td>
-  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=1 / 其他=0）</td>
+  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=2 / 其他=0）</td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">Order Block</span></td>
-  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=1 / 其他=0）</td>
+  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=2 / 其他=0）</td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">FVG</span></td>
-  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=1 / 其他=0）</td>
+  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=2 / 其他=0）</td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">Liquidity</span></td>
-  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=1 / 其他=0）</td>
+  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=2 / 其他=0）</td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">Session Sweep</span></td>
-  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=0 / 其他=1）</td>
+  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=0 / 其他=2）</td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">Reaction Map</span></td>
-  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=1 / 其他=0）</td>
+  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=2 / 其他=0）</td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">Candlestick</span></td>
-  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=0 / 其他=1）</td>
+  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=0 / 其他=2）</td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">Macro</span></td>
-  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=0 / 其他=1）</td>
+  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=0 / 其他=2）</td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">Market State</span></td>
-  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=1 / 其他=0）</td>
+  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=2 / 其他=0）</td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">Money Flow</span></td>
-  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=1 / 其他=0）</td>
+  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=2 / 其他=0）</td>
 </tr></tbody></table></div>
 </div>
 <div class="card"><div class="ch">按市场状态</div>
@@ -160,6 +172,11 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
   <td class="mono">1</td>
   <td class="mono pos">100.0%</td>
   <td class="mono pos">+2.00R</td>
+</tr><tr>
+  <td><strong>TRANSITIONAL</strong></td>
+  <td class="mono">1</td>
+  <td class="mono neg">0%</td>
+  <td class="mono neg">+0.00R</td>
 </tr></tbody></table></div></div>
 <div class="section-divider"></div>
 <div class="card" style="border-top:2px solid #4fffb0;background:transparent;border-left:none;border-right:none">
@@ -228,9 +245,9 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
   <div class="fw-header" style="color:#38bdf8;border-bottom:none">LH</div>
 </div>
 <div class="summary-grid cols3" style="border:1px solid var(--border);border-top:2px solid #38bdf8;border-radius:6px;overflow:hidden;margin-bottom:16px">
-  <div><span class="big">9</span><span class="lbl">已结束决策</span></div>
+  <div><span class="big">11</span><span class="lbl">已结束决策</span></div>
   <div><span class="big neg">0%</span><span class="lbl">胜率</span></div>
-  <div><span class="big neg">-0.75R</span><span class="lbl">期望值</span></div>
+  <div><span class="big neg">-0.78R</span><span class="lbl">期望值</span></div>
 </div>
 <div class="card">
   <div class="ch">引擎 Edge — 有利 vs 中性/不利时的胜率
@@ -248,8 +265,8 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
     </div>
   </td>
   <td class="mono" style="font-size:11px;color:var(--dim)">
-    有利 1（0.0% 胜率，+0.00R 均值） &nbsp;·&nbsp;
-    其他 8（0.0% 胜率，-0.86R 均值）
+    有利 2（0.0% 胜率，+0.00R 均值） &nbsp;·&nbsp;
+    其他 9（0.0% 胜率，-0.88R 均值）
   </td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">Trend Health</span><span class="prov">暂定</span></td>
@@ -264,7 +281,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
   </td>
   <td class="mono" style="font-size:11px;color:var(--dim)">
     有利 6（0.0% 胜率，-0.60R 均值） &nbsp;·&nbsp;
-    其他 3（0.0% 胜率，-1.00R 均值）
+    其他 5（0.0% 胜率，-1.00R 均值）
   </td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">Volatility</span><span class="prov">暂定</span></td>
@@ -279,7 +296,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
   </td>
   <td class="mono" style="font-size:11px;color:var(--dim)">
     有利 5（0.0% 胜率，-0.75R 均值） &nbsp;·&nbsp;
-    其他 4（0.0% 胜率，-0.75R 均值）
+    其他 6（0.0% 胜率，-0.80R 均值）
   </td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">Displacement</span><span class="prov">暂定</span></td>
@@ -293,8 +310,8 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
     </div>
   </td>
   <td class="mono" style="font-size:11px;color:var(--dim)">
-    有利 4（0.0% 胜率，-0.75R 均值） &nbsp;·&nbsp;
-    其他 5（0.0% 胜率，-0.75R 均值）
+    有利 5（0.0% 胜率，-0.75R 均值） &nbsp;·&nbsp;
+    其他 6（0.0% 胜率，-0.80R 均值）
   </td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">Order Block</span><span class="prov">暂定</span></td>
@@ -308,7 +325,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
     </div>
   </td>
   <td class="mono" style="font-size:11px;color:var(--dim)">
-    有利 8（0.0% 胜率，-0.71R 均值） &nbsp;·&nbsp;
+    有利 10（0.0% 胜率，-0.75R 均值） &nbsp;·&nbsp;
     其他 1（0.0% 胜率，-1.00R 均值）
   </td>
 </tr><tr class="edge-row">
@@ -323,8 +340,8 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
     </div>
   </td>
   <td class="mono" style="font-size:11px;color:var(--dim)">
-    有利 5（0.0% 胜率，-0.80R 均值） &nbsp;·&nbsp;
-    其他 4（0.0% 胜率，-0.67R 均值）
+    有利 6（0.0% 胜率，-0.80R 均值） &nbsp;·&nbsp;
+    其他 5（0.0% 胜率，-0.75R 均值）
   </td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">Session Sweep</span><span class="prov">暂定</span></td>
@@ -339,7 +356,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
   </td>
   <td class="mono" style="font-size:11px;color:var(--dim)">
     有利 3（0.0% 胜率，-0.33R 均值） &nbsp;·&nbsp;
-    其他 6（0.0% 胜率，-1.00R 均值）
+    其他 8（0.0% 胜率，-1.00R 均值）
   </td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">Reaction Map</span><span class="prov">暂定</span></td>
@@ -353,7 +370,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
     </div>
   </td>
   <td class="mono" style="font-size:11px;color:var(--dim)">
-    有利 6（0.0% 胜率，-0.60R 均值） &nbsp;·&nbsp;
+    有利 8（0.0% 胜率，-0.67R 均值） &nbsp;·&nbsp;
     其他 3（0.0% 胜率，-1.00R 均值）
   </td>
 </tr><tr class="edge-row">
@@ -368,21 +385,21 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
     </div>
   </td>
   <td class="mono" style="font-size:11px;color:var(--dim)">
-    有利 3（0.0% 胜率，-0.33R 均值） &nbsp;·&nbsp;
-    其他 6（0.0% 胜率，-1.00R 均值）
+    有利 4（0.0% 胜率，-0.33R 均值） &nbsp;·&nbsp;
+    其他 7（0.0% 胜率，-1.00R 均值）
   </td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">Liquidity</span></td>
-  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=9 / 其他=0）</td>
+  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=11 / 其他=0）</td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">Candlestick</span></td>
-  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=0 / 其他=9）</td>
+  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=0 / 其他=11）</td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">Macro</span></td>
-  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=0 / 其他=9）</td>
+  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=0 / 其他=11）</td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">Money Flow</span></td>
-  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=0 / 其他=9）</td>
+  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=0 / 其他=11）</td>
 </tr></tbody></table></div>
 </div>
 <div class="card"><div class="ch">按市场状态</div>
@@ -394,22 +411,22 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
   <td class="mono neg">-0.83R</td>
 </tr><tr>
   <td><strong>TRANSITIONAL</strong></td>
-  <td class="mono">2</td>
+  <td class="mono">4</td>
   <td class="mono neg">0%</td>
-  <td class="mono neg">-0.50R</td>
+  <td class="mono neg">-0.67R</td>
 </tr></tbody></table></div></div>
 <div class="section-divider"></div>
 <div class="card" style="border-top:2px solid #a78bfa;background:transparent;border-left:none;border-right:none">
   <div class="fw-header" style="color:#a78bfa;border-bottom:none">TRB</div>
 </div>
 <div class="summary-grid cols3" style="border:1px solid var(--border);border-top:2px solid #a78bfa;border-radius:6px;overflow:hidden;margin-bottom:16px">
-  <div><span class="big">3</span><span class="lbl">已结束决策</span></div>
-  <div><span class="big warn">33.3%</span><span class="lbl">胜率</span></div>
-  <div><span class="big neg">-0.25R</span><span class="lbl">期望值</span></div>
+  <div><span class="big">4</span><span class="lbl">已结束决策</span></div>
+  <div><span class="big pos">50.0%</span><span class="lbl">胜率</span></div>
+  <div><span class="big pos">+0.31R</span><span class="lbl">期望值</span></div>
 </div>
 <div class="card">
   <div class="ch">引擎 Edge — 有利 vs 中性/不利时的胜率
-    <span class="prov" style="margin-left:8px">6 个引擎样本不足（20／组）</span>
+    <span class="prov" style="margin-left:8px">7 个引擎样本不足（20／组）</span>
   </div>
   <div class="table-scroll"><table class="engine-table"><tbody><tr class="edge-row">
   <td><span class="edge-name">Displacement</span><span class="prov">暂定</span></td>
@@ -423,7 +440,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
     </div>
   </td>
   <td class="mono" style="font-size:11px;color:var(--dim)">
-    有利 1（100.0% 胜率，+1.24R 均值） &nbsp;·&nbsp;
+    有利 2（100.0% 胜率，+1.62R 均值） &nbsp;·&nbsp;
     其他 2（0.0% 胜率，-1.00R 均值）
   </td>
 </tr><tr class="edge-row">
@@ -434,11 +451,11 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
         <div class="edge-bar-mid"></div>
         <div class="edge-bar-fill pos-fill" style="width:50.0%;left:50%"></div>
       </div>
-      <span class="edge-val pos">+50.0%</span>
+      <span class="edge-val pos">+66.7%</span>
     </div>
   </td>
   <td class="mono" style="font-size:11px;color:var(--dim)">
-    有利 2（50.0% 胜率，+0.12R 均值） &nbsp;·&nbsp;
+    有利 3（66.7% 胜率，+0.75R 均值） &nbsp;·&nbsp;
     其他 1（0.0% 胜率，-1.00R 均值）
   </td>
 </tr><tr class="edge-row">
@@ -449,27 +466,27 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
         <div class="edge-bar-mid"></div>
         <div class="edge-bar-fill pos-fill" style="width:50.0%;left:50%"></div>
       </div>
-      <span class="edge-val pos">+50.0%</span>
+      <span class="edge-val pos">+66.7%</span>
     </div>
   </td>
   <td class="mono" style="font-size:11px;color:var(--dim)">
-    有利 2（50.0% 胜率，+0.12R 均值） &nbsp;·&nbsp;
+    有利 3（66.7% 胜率，+0.75R 均值） &nbsp;·&nbsp;
     其他 1（0.0% 胜率，-1.00R 均值）
   </td>
 </tr><tr class="edge-row">
-  <td><span class="edge-name">Volatility</span><span class="prov">暂定</span></td>
+  <td><span class="edge-name">Market State</span><span class="prov">暂定</span></td>
   <td>
     <div class="edge-bar-wrap">
       <div class="edge-bar-track">
         <div class="edge-bar-mid"></div>
-        <div class="edge-bar-fill neg-fill" style="width:50.0%;left:calc(50% - 50.0%)"></div>
+        <div class="edge-bar-fill pos-fill" style="width:50.0%;left:50%"></div>
       </div>
-      <span class="edge-val neg">-50.0%</span>
+      <span class="edge-val pos">+66.7%</span>
     </div>
   </td>
   <td class="mono" style="font-size:11px;color:var(--dim)">
-    有利 1（0.0% 胜率，-1.00R 均值） &nbsp;·&nbsp;
-    其他 2（50.0% 胜率，+0.12R 均值）
+    有利 1（100.0% 胜率，+2.00R 均值） &nbsp;·&nbsp;
+    其他 3（33.3% 胜率，-0.25R 均值）
   </td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">Trend Health</span><span class="prov">暂定</span></td>
@@ -479,12 +496,27 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
         <div class="edge-bar-mid"></div>
         <div class="edge-bar-fill neg-fill" style="width:50.0%;left:calc(50% - 50.0%)"></div>
       </div>
-      <span class="edge-val neg">-100.0%</span>
+      <span class="edge-val neg">-66.7%</span>
     </div>
   </td>
   <td class="mono" style="font-size:11px;color:var(--dim)">
-    有利 2（0.0% 胜率，-1.00R 均值） &nbsp;·&nbsp;
+    有利 3（33.3% 胜率，+0.00R 均值） &nbsp;·&nbsp;
     其他 1（100.0% 胜率，+1.24R 均值）
+  </td>
+</tr><tr class="edge-row">
+  <td><span class="edge-name">Volatility</span><span class="prov">暂定</span></td>
+  <td>
+    <div class="edge-bar-wrap">
+      <div class="edge-bar-track">
+        <div class="edge-bar-mid"></div>
+        <div class="edge-bar-fill neg-fill" style="width:50.0%;left:calc(50% - 50.0%)"></div>
+      </div>
+      <span class="edge-val neg">-66.7%</span>
+    </div>
+  </td>
+  <td class="mono" style="font-size:11px;color:var(--dim)">
+    有利 1（0.0% 胜率，-1.00R 均值） &nbsp;·&nbsp;
+    其他 3（66.7% 胜率，+0.75R 均值）
   </td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">Order Block</span><span class="prov">暂定</span></td>
@@ -494,43 +526,40 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
         <div class="edge-bar-mid"></div>
         <div class="edge-bar-fill neg-fill" style="width:50.0%;left:calc(50% - 50.0%)"></div>
       </div>
-      <span class="edge-val neg">-100.0%</span>
+      <span class="edge-val neg">-66.7%</span>
     </div>
   </td>
   <td class="mono" style="font-size:11px;color:var(--dim)">
-    有利 2（0.0% 胜率，-1.00R 均值） &nbsp;·&nbsp;
+    有利 3（33.3% 胜率，+0.00R 均值） &nbsp;·&nbsp;
     其他 1（100.0% 胜率，+1.24R 均值）
   </td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">Structure</span></td>
-  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=0 / 其他=3）</td>
+  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=0 / 其他=4）</td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">Liquidity</span></td>
-  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=3 / 其他=0）</td>
+  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=4 / 其他=0）</td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">Session Sweep</span></td>
-  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=0 / 其他=3）</td>
+  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=0 / 其他=4）</td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">Candlestick</span></td>
-  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=0 / 其他=3）</td>
+  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=0 / 其他=4）</td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">Macro</span></td>
-  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=0 / 其他=3）</td>
-</tr><tr class="edge-row">
-  <td><span class="edge-name">Market State</span></td>
-  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=0 / 其他=3）</td>
+  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=0 / 其他=4）</td>
 </tr><tr class="edge-row">
   <td><span class="edge-name">Money Flow</span></td>
-  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=3 / 其他=0）</td>
+  <td colspan="2" class="empty" style="text-align:left;padding-left:0">数据不足（有利=4 / 其他=0）</td>
 </tr></tbody></table></div>
 </div>
 <div class="card"><div class="ch">按市场状态</div>
   <div class="table-scroll"><table><thead><tr><th>市场状态</th><th>N</th><th>Win%</th><th>期望值</th></tr></thead>
   <tbody><tr>
   <td><strong>RANGING</strong></td>
-  <td class="mono">3</td>
-  <td class="mono warn">33.3%</td>
-  <td class="mono neg">-0.25R</td>
+  <td class="mono">4</td>
+  <td class="mono pos">50.0%</td>
+  <td class="mono pos">+0.31R</td>
 </tr></tbody></table></div></div>
 <div class="section-divider"></div>
 <div class="card" style="border-top:2px solid #e2e8f0;background:transparent;border-left:none;border-right:none">
