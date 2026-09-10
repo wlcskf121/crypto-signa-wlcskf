@@ -30,7 +30,10 @@ class ExchangeError(Exception):
     pass
 
 
+PERP_MAP = {"BTC_USDT": "BTC_USDT_SWAP", "ETH_USDT": "ETH_USDT_SWAP", "SOL_USDT": "SOL_USDT_SWAP"}
 def _request_candlestick(base_url, instrument_name, timeframe, count=None, end_ts=None):
+    instrument_name = PERP_MAP.get(instrument_name, instrument_name)
+  
     """
     Esegue una singola chiamata a public/get-candlestick.
     Ritorna la lista di candele (lista di dict con o,h,l,c,v,t) ordinata
