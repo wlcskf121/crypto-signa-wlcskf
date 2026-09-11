@@ -65,34 +65,58 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
 <body>
 <header>
   <h1>加密信号引擎 — 总览</h1>
-  <div class="meta">2026-09-11 14:41 UTC &nbsp;|&nbsp; <a href="analytics_dashboard.html">分析实验室 →</a></div>
+  <div class="meta">2026-09-11 14:46 UTC &nbsp;|&nbsp; <a href="analytics_dashboard.html">分析实验室 →</a></div>
 </header>
 <div class="container">
 
   <div class="section-title tt">⚡ TT — 方向 · 位置 · 流动性</div>
   <div class="kpi-row" style="border-top:2px solid #f472b6;margin-bottom:16px">
-  <div><span class="big">0</span><span class="lbl">当前未平仓</span></div>
+  <div><span class="big">1</span><span class="lbl">当前未平仓</span></div>
   <div><span class="big">0</span><span class="lbl">累计已平仓</span></div>
   <div><span class="big neg">0%</span><span class="lbl">胜率</span></div>
   <div><span class="big neg">+0.00R</span><span class="lbl">期望值</span></div>
 </div>
-  <div class="card"><div class="ch"><span class="pulse pulse-tt"></span>活跃信号 — TT</div>
-  <table><tbody><tr class="empty-row"><td colspan="10">暂无活跃信号。等待 Early Signal。</td></tr></tbody></table></div>
+  <div class="card"><div class="ch"><span class="pulse pulse-tt"></span>活跃信号 — TT (1)</div>
+  <div style="overflow-x:auto"><table><thead><tr>
+    <th>日期</th><th>资产</th><th>方向</th><th>状态</th><th>入场</th><th>止损</th><th>止盈</th>
+    <th>R/R</th><th>POI · PD</th><th>耗时</th>
+  </tr></thead><tbody><tr>
+  <td class="mono" style="color:var(--dim);font-size:11px">11 Sep 14:46</td>
+  <td><strong>ETH</strong></td>
+  <td><span class="badge b-buy">BUY</span></td>
+  <td><span class="badge b-waiting">等待中</span></td>
+  <td class="mono">2,607.13</td>
+  <td class="mono neg">2,583.69</td>
+  <td class="mono">2,654.00</td>
+  <td class="mono">2.00</td>
+  <td style="font-size:12px;color:var(--dim)">HL · PREMIUM</td>
+  <td class="mono" style="color:var(--dim)">0.0h (0 根 K 线)</td>
+</tr></tbody></table></div></div>
 
   <div class="divider"></div>
 
   <div class="section-title el">⚡ OTE — 先找区间，再定方向</div>
   <div class="kpi-row" style="border-top:2px solid var(--accent);margin-bottom:16px">
-  <div><span class="big">29</span><span class="lbl">当前未平仓</span></div>
+  <div><span class="big">30</span><span class="lbl">当前未平仓</span></div>
   <div><span class="big">54</span><span class="lbl">累计已平仓</span></div>
   <div><span class="big warn">25.9%</span><span class="lbl">胜率</span></div>
   <div><span class="big neg">-0.20R</span><span class="lbl">期望值</span></div>
 </div>
-  <div class="card"><div class="ch"><span class="pulse"></span>活跃信号 — OTE (29)</div>
+  <div class="card"><div class="ch"><span class="pulse"></span>活跃信号 — OTE (30)</div>
   <div style="overflow-x:auto"><table><thead><tr>
     <th>日期</th><th>资产</th><th>方向</th><th>状态</th><th>入场</th><th>止损</th><th>止盈</th>
     <th>区间</th><th>耗时</th>
   </tr></thead><tbody><tr>
+  <td class="mono" style="color:var(--dim);font-size:11px">11 Sep 14:46</td>
+  <td><strong>BTC</strong></td>
+  <td>—</td>
+  <td><span class="badge b-waiting">WATCHING</span></td>
+  <td class="mono">78553.99-78265.10</td>
+  <td class="mono neg">—</td>
+  <td class="mono">—</td>
+  <td style="font-size:12px;color:var(--dim)">MODERATE</td>
+  <td class="mono" style="color:var(--dim)">0.0h</td>
+</tr><tr>
   <td class="mono" style="color:var(--dim);font-size:11px">11 Sep 14:35</td>
   <td><strong>SOL</strong></td>
   <td>—</td>
@@ -101,7 +125,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
   <td class="mono neg">—</td>
   <td class="mono">—</td>
   <td style="font-size:12px;color:var(--dim)">MODERATE</td>
-  <td class="mono" style="color:var(--dim)">0.1h</td>
+  <td class="mono" style="color:var(--dim)">0.2h</td>
 </tr><tr>
   <td class="mono" style="color:var(--dim);font-size:11px">11 Sep 14:16</td>
   <td><strong>BTC</strong></td>
@@ -111,7 +135,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
   <td class="mono neg">—</td>
   <td class="mono">—</td>
   <td style="font-size:12px;color:var(--dim)">MODERATE</td>
-  <td class="mono" style="color:var(--dim)">0.4h</td>
+  <td class="mono" style="color:var(--dim)">0.5h</td>
 </tr><tr>
   <td class="mono" style="color:var(--dim);font-size:11px">11 Sep 14:10</td>
   <td><strong>BTC</strong></td>
@@ -121,7 +145,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
   <td class="mono neg">—</td>
   <td class="mono">—</td>
   <td style="font-size:12px;color:var(--dim)">STRONG</td>
-  <td class="mono" style="color:var(--dim)">0.5h</td>
+  <td class="mono" style="color:var(--dim)">0.6h</td>
 </tr><tr>
   <td class="mono" style="color:var(--dim);font-size:11px">11 Sep 14:06</td>
   <td><strong>SOL</strong></td>
@@ -131,7 +155,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
   <td class="mono neg">—</td>
   <td class="mono">—</td>
   <td style="font-size:12px;color:var(--dim)">MODERATE</td>
-  <td class="mono" style="color:var(--dim)">0.6h</td>
+  <td class="mono" style="color:var(--dim)">0.7h</td>
 </tr><tr>
   <td class="mono" style="color:var(--dim);font-size:11px">11 Sep 14:06</td>
   <td><strong>BTC</strong></td>
@@ -141,7 +165,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
   <td class="mono neg">—</td>
   <td class="mono">—</td>
   <td style="font-size:12px;color:var(--dim)">STRONG</td>
-  <td class="mono" style="color:var(--dim)">0.6h</td>
+  <td class="mono" style="color:var(--dim)">0.7h</td>
 </tr><tr>
   <td class="mono" style="color:var(--dim);font-size:11px">11 Sep 14:01</td>
   <td><strong>BTC</strong></td>
@@ -201,7 +225,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
   <td class="mono neg">—</td>
   <td class="mono">—</td>
   <td style="font-size:12px;color:var(--dim)">MODERATE</td>
-  <td class="mono" style="color:var(--dim)">0.7h</td>
+  <td class="mono" style="color:var(--dim)">0.8h</td>
 </tr><tr>
   <td class="mono" style="color:var(--dim);font-size:11px">11 Sep 13:56</td>
   <td><strong>BTC</strong></td>
@@ -216,7 +240,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
   <td class="mono" style="color:var(--dim);font-size:11px">11 Sep 13:56</td>
   <td><strong>BTC</strong></td>
   <td>—</td>
-  <td><span class="badge b-waiting">WATCHING</span></td>
+  <td><span class="badge b-open">TOUCHED</span></td>
   <td class="mono">78704.23-78640.30</td>
   <td class="mono neg">—</td>
   <td class="mono">—</td>
@@ -231,7 +255,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
   <td class="mono neg">—</td>
   <td class="mono">—</td>
   <td style="font-size:12px;color:var(--dim)">MODERATE</td>
-  <td class="mono" style="color:var(--dim)">0.8h</td>
+  <td class="mono" style="color:var(--dim)">0.9h</td>
 </tr><tr>
   <td class="mono" style="color:var(--dim);font-size:11px">11 Sep 13:51</td>
   <td><strong>BTC</strong></td>
@@ -241,7 +265,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
   <td class="mono neg">—</td>
   <td class="mono">—</td>
   <td style="font-size:12px;color:var(--dim)">MODERATE</td>
-  <td class="mono" style="color:var(--dim)">0.8h</td>
+  <td class="mono" style="color:var(--dim)">0.9h</td>
 </tr><tr>
   <td class="mono" style="color:var(--dim);font-size:11px">11 Sep 13:51</td>
   <td><strong>BTC</strong></td>
@@ -251,7 +275,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
   <td class="mono neg">—</td>
   <td class="mono">—</td>
   <td style="font-size:12px;color:var(--dim)">MODERATE</td>
-  <td class="mono" style="color:var(--dim)">0.8h</td>
+  <td class="mono" style="color:var(--dim)">0.9h</td>
 </tr><tr>
   <td class="mono" style="color:var(--dim);font-size:11px">11 Sep 13:46</td>
   <td><strong>ETH</strong></td>
@@ -261,7 +285,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
   <td class="mono neg">—</td>
   <td class="mono">—</td>
   <td style="font-size:12px;color:var(--dim)">MODERATE</td>
-  <td class="mono" style="color:var(--dim)">0.9h</td>
+  <td class="mono" style="color:var(--dim)">1.0h</td>
 </tr><tr>
   <td class="mono" style="color:var(--dim);font-size:11px">11 Sep 13:05</td>
   <td><strong>XAU_USD</strong></td>
@@ -271,7 +295,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
   <td class="mono neg">—</td>
   <td class="mono">—</td>
   <td style="font-size:12px;color:var(--dim)">STRONG</td>
-  <td class="mono" style="color:var(--dim)">1.6h</td>
+  <td class="mono" style="color:var(--dim)">1.7h</td>
 </tr><tr>
   <td class="mono" style="color:var(--dim);font-size:11px">11 Sep 12:51</td>
   <td><strong>SOL</strong></td>
@@ -281,7 +305,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
   <td class="mono neg">—</td>
   <td class="mono">—</td>
   <td style="font-size:12px;color:var(--dim)">STRONG</td>
-  <td class="mono" style="color:var(--dim)">1.8h</td>
+  <td class="mono" style="color:var(--dim)">1.9h</td>
 </tr><tr>
   <td class="mono" style="color:var(--dim);font-size:11px">11 Sep 12:50</td>
   <td><strong>ETH</strong></td>
@@ -291,7 +315,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
   <td class="mono neg">—</td>
   <td class="mono">—</td>
   <td style="font-size:12px;color:var(--dim)">MODERATE</td>
-  <td class="mono" style="color:var(--dim)">1.8h</td>
+  <td class="mono" style="color:var(--dim)">1.9h</td>
 </tr><tr>
   <td class="mono" style="color:var(--dim);font-size:11px">11 Sep 12:50</td>
   <td><strong>XAU_USD</strong></td>
@@ -301,7 +325,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
   <td class="mono neg">—</td>
   <td class="mono">—</td>
   <td style="font-size:12px;color:var(--dim)">MODERATE</td>
-  <td class="mono" style="color:var(--dim)">1.8h</td>
+  <td class="mono" style="color:var(--dim)">1.9h</td>
 </tr><tr>
   <td class="mono" style="color:var(--dim);font-size:11px">11 Sep 12:50</td>
   <td><strong>BTC</strong></td>
@@ -311,7 +335,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
   <td class="mono neg">—</td>
   <td class="mono">—</td>
   <td style="font-size:12px;color:var(--dim)">STRONG</td>
-  <td class="mono" style="color:var(--dim)">1.8h</td>
+  <td class="mono" style="color:var(--dim)">1.9h</td>
 </tr><tr>
   <td class="mono" style="color:var(--dim);font-size:11px">11 Sep 12:50</td>
   <td><strong>BTC</strong></td>
@@ -321,7 +345,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
   <td class="mono neg">—</td>
   <td class="mono">—</td>
   <td style="font-size:12px;color:var(--dim)">STRONG</td>
-  <td class="mono" style="color:var(--dim)">1.8h</td>
+  <td class="mono" style="color:var(--dim)">1.9h</td>
 </tr><tr>
   <td class="mono" style="color:var(--dim);font-size:11px">11 Sep 12:35</td>
   <td><strong>SOL</strong></td>
@@ -331,7 +355,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
   <td class="mono neg">—</td>
   <td class="mono">—</td>
   <td style="font-size:12px;color:var(--dim)">STRONG</td>
-  <td class="mono" style="color:var(--dim)">2.1h</td>
+  <td class="mono" style="color:var(--dim)">2.2h</td>
 </tr><tr>
   <td class="mono" style="color:var(--dim);font-size:11px">11 Sep 12:31</td>
   <td><strong>ETH</strong></td>
@@ -361,7 +385,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
   <td class="mono neg">—</td>
   <td class="mono">—</td>
   <td style="font-size:12px;color:var(--dim)">STRONG</td>
-  <td class="mono" style="color:var(--dim)">2.6h</td>
+  <td class="mono" style="color:var(--dim)">2.7h</td>
 </tr><tr>
   <td class="mono" style="color:var(--dim);font-size:11px">11 Sep 14:41</td>
   <td><strong>SOL</strong></td>
@@ -371,7 +395,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
   <td class="mono neg">103.7393</td>
   <td class="mono">102.2000</td>
   <td style="font-size:12px;color:var(--dim)">MODERATE</td>
-  <td class="mono" style="color:var(--dim)">0.0h</td>
+  <td class="mono" style="color:var(--dim)">0.1h</td>
 </tr><tr>
   <td class="mono" style="color:var(--dim);font-size:11px">11 Sep 14:16</td>
   <td><strong>SOL</strong></td>
@@ -381,7 +405,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
   <td class="mono neg">104.5193</td>
   <td class="mono">101.7700</td>
   <td style="font-size:12px;color:var(--dim)">MODERATE</td>
-  <td class="mono" style="color:var(--dim)">0.4h</td>
+  <td class="mono" style="color:var(--dim)">0.5h</td>
 </tr></tbody></table></div></div>
 
   <div class="divider"></div>
