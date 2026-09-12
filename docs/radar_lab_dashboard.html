@@ -47,7 +47,7 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)
 <body>
 <header>
   <h1>雷达实验室<span class="beta">BETA</span></h1>
-  <div class="meta">2026-09-12 02:25 UTC &nbsp;|&nbsp; <a href="engine_edge_dashboard.html">&larr; 引擎 Edge 实验室</a></div>
+  <div class="meta">2026-09-12 02:31 UTC &nbsp;|&nbsp; <a href="engine_edge_dashboard.html">&larr; 引擎 Edge 实验室</a></div>
 </header>
 <div class="container">
   <p class="intro">
@@ -56,9 +56,9 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)
   </p>
   <div class="summary-grid c4">
   <div><span class="big ">11</span><span class="lbl">已发出区间</span></div>
-  <div><span class="big ">9</span><span class="lbl">已结束</span></div>
-  <div><span class="big pos">1.906</span><span class="lbl">平均 MFE（ATR）</span></div>
-  <div><span class="big neg">1.168</span><span class="lbl">平均 MAE（ATR）</span></div>
+  <div><span class="big ">10</span><span class="lbl">已结束</span></div>
+  <div><span class="big pos">1.879</span><span class="lbl">平均 MFE（ATR）</span></div>
+  <div><span class="big neg">1.106</span><span class="lbl">平均 MAE（ATR）</span></div>
 </div><div class="card"><div class="ch">按资产</div>
   <div class="table-scroll"><table><thead><tr>
     <th>资产</th><th>已发出</th><th>已结束</th><th>MFE (ATR)</th><th>MAE (ATR)</th><th>到 MFE 的 K 线数</th>
@@ -69,15 +69,15 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)
   <td class="mono">3</td><td class="mono">3</td>
   <td class="mono"><span class="pos">+2.643</span></td><td class="mono"><span class="neg">0.243</span></td>
   <td class="mono">21.333</td></tr><tr><td><strong>SOL_USDT</strong> <span class="prov">(provv.)</span></td>
-  <td class="mono">3</td><td class="mono">1</td>
-  <td class="mono"><span class="pos">+1.357</span></td><td class="mono"><span class="neg">5.338</span></td>
-  <td class="mono">23.0</td></tr><tr><td><strong>XAU_USD</strong> <span class="prov">(provv.)</span></td>
+  <td class="mono">3</td><td class="mono">2</td>
+  <td class="mono"><span class="pos">+1.495</span></td><td class="mono"><span class="neg">2.946</span></td>
+  <td class="mono">26.5</td></tr><tr><td><strong>XAU_USD</strong> <span class="prov">(provv.)</span></td>
   <td class="mono">2</td><td class="mono">2</td>
   <td class="mono"><span class="pos">+1.268</span></td><td class="mono"><span class="neg">0.585</span></td>
   <td class="mono">22.0</td></tr></tbody></table></div></div><div class="card"><div class="ch">速度假设 — 按脉冲分档的反弹表现</div>
   <div class="table-scroll"><table><thead><tr>
     <th>脉冲速度</th><th>N</th><th>MFE (ATR)</th><th>MAE (ATR)</th>
-  </tr></thead><tbody><tr><td>低于阈值 (< 0.6) ⚠</td><td class="mono">0</td><td class="empty" colspan="2" style="text-align:left">无数据</td></tr><tr><td>正常（0.6–0.8） <span class="prov">(provv.)</span></td><td class="mono">5</td><td class="mono"><span class="pos">+2.055</span></td><td class="mono"><span class="neg">1.429</span></td></tr><tr><td>快（0.8–1.0） <span class="prov">(provv.)</span></td><td class="mono">4</td><td class="mono"><span class="pos">+1.721</span></td><td class="mono"><span class="neg">0.841</span></td></tr><tr><td>极快（≥ 1.0）</td><td class="mono">0</td><td class="empty" colspan="2" style="text-align:left">无数据</td></tr></tbody></table></div>
+  </tr></thead><tbody><tr><td>低于阈值 (< 0.6) ⚠</td><td class="mono">0</td><td class="empty" colspan="2" style="text-align:left">无数据</td></tr><tr><td>正常（0.6–0.8） <span class="prov">(provv.)</span></td><td class="mono">6</td><td class="mono"><span class="pos">+1.985</span></td><td class="mono"><span class="neg">1.283</span></td></tr><tr><td>快（0.8–1.0） <span class="prov">(provv.)</span></td><td class="mono">4</td><td class="mono"><span class="pos">+1.721</span></td><td class="mono"><span class="neg">0.841</span></td></tr><tr><td>极快（≥ 1.0）</td><td class="mono">0</td><td class="empty" colspan="2" style="text-align:left">无数据</td></tr></tbody></table></div>
   <div class="note">若雷达在速度上确有 edge，速度越快的分档应显示更高的平均 MFE。样本少于 30 个的数字为暂定：是噪声，不是结论。</div></div><div class="card"><div class="ch">真实胜率 — SL 1 ATR vs TP 2 ATR（谁先到达）</div>
   <div class="summary-grid c5" style="border:none;margin:0">
     <div><span class="big ">6</span><span class="lbl">有结果的区间 <span class="prov">(provv.)</span></span></div>
@@ -110,15 +110,15 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)
 </tr></tbody></table></div>
   <div class="note">关键数字：若先触及 TP（2 ATR）再触及 SL（1 ATR），该笔交易以 +2R 获利；若先触及 SL，则以 -1R 亏损。胜率 33.3% 时为盈亏平衡。两者都未触及的区间不计入统计。</div></div><div class="card"><div class="ch">平仓管理 — TP 目标 / 保本 / 让利润奔跑</div>
   <div class="summary-grid c4" style="border:none;margin:0">
-    <div><span class="big pos">33.3%</span><span class="lbl">触及 TP（2 ATR）的区间</span></div>
-    <div><span class="big ">3</span><span class="lbl">触及 TP / 共 9</span></div>
-    <div><span class="big ">77.8%</span><span class="lbl">达到保本</span></div>
+    <div><span class="big pos">30.0%</span><span class="lbl">触及 TP（2 ATR）的区间</span></div>
+    <div><span class="big ">3</span><span class="lbl">触及 TP / 共 10</span></div>
+    <div><span class="big ">80.0%</span><span class="lbl">达到保本</span></div>
     <div><span class="big pos">1.37</span><span class="lbl">超出 TP 的幅度（ATR）</span></div>
   </div>
   <div class="note">关键数字是最后一个：触及之后行情还能延续多远 <strong>oltre</strong> （2 ATR 的 TP 目标）。该值高说明移动止盈优于固定目标；接近 0 则说明在 2 ATR 直接平仓已足够。所有价位都只做记录：不真正平仓，只测量价格的实际行为。</div></div><div class="card"><div class="ch">止损 — 「呼吸」与止损的平衡</div>
   <div class="summary-grid c4" style="border:none;margin:0">
-    <div><span class="big warn">33.3%</span><span class="lbl">触及止损的区间</span></div>
-    <div><span class="big ">3</span><span class="lbl">触及 / 共 9</span></div>
+    <div><span class="big warn">30.0%</span><span class="lbl">触及止损的区间</span></div>
+    <div><span class="big ">3</span><span class="lbl">触及 / 共 10</span></div>
     <div><span class="big pos">33.3%</span><span class="lbl">其中触及后反弹（≥1 ATR）</span></div>
     <div><span class="big ">1</span><span class="lbl">已收复的幅度</span></div>
   </div>
