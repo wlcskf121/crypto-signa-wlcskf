@@ -490,7 +490,7 @@ def v41p1_open_table(rows):
         asset = r["asset"].replace("_USDT","")
         tp1_badge = '<span class="badge b-tp" style="font-size:10px">止盈1✓</span>' if r["tp1_hit"] else ""
         body += f"""<tr>
-  <td class="mono" style="color:var(--dim);font-size:11px">{fmt_ts(r['ts'])}</td>      
+      
   <td><strong>{asset}</strong></td>
   <td>{direction_badge(r['direction'])}</td>
   <td class="mono">{fp(r['entry'])}</td>
