@@ -488,8 +488,9 @@ def v41p1_open_table(rows):
     body = ""
     for r in rows:
         asset = r["asset"].replace("_USDT","")
-        tp1_badge = '<span class="badge b-tp" style="font-size:10px">TP1✓</span>' if r["tp1_hit"] else ""
+        tp1_badge = '<span class="badge b-tp" style="font-size:10px">止盈1✓</span>' if r["tp1_hit"] else ""
         body += f"""<tr>
+  <td class="mono" style="color:var(--dim);font-size:11px">{fmt_ts(r['ts'])}</td>      
   <td><strong>{asset}</strong></td>
   <td>{direction_badge(r['direction'])}</td>
   <td class="mono">{fp(r['entry'])}</td>
@@ -503,7 +504,7 @@ def v41p1_open_table(rows):
 </tr>"""
     return f"""<div class="card"><div class="ch">未平仓信号 — V4.1 Phase 1 ({len(rows)})</div>
   <div style="overflow-x:auto"><table><thead><tr>
-    <th>资产</th><th>方向</th><th>入场</th><th>止损</th><th>止盈1</th><th>止盈2</th>
+    <th>日期</th><th>资产</th><th>方向</th><th>入场</th><th>止损</th><th>止盈1</th><th>止盈2</th>
     <th>质量</th><th>触发</th><th>MAE</th><th>开仓时间</th>
   </tr></thead><tbody>{body}</tbody></table></div></div>"""
 
