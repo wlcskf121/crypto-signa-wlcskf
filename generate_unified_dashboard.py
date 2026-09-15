@@ -18,6 +18,9 @@ from datetime import datetime, timezone, timedelta
 
 DB_PATH  = os.environ.get("DB_PATH", "data/signals.db")
 
+# Definizione fuso orario di Pechino (UTC+8)
+TZ_BJ = timezone(timedelta(hours=8))
+
 # LH: stessa costante di generate_analytics_dashboard.py -- filtra la
 # vista, non cancella lo storico. Aggiornare per un nuovo "azzeramento".
 LH_EPOCH_DATE = "2026-08-24T18:00:00"
@@ -54,16 +57,20 @@ def load_tt_open(conn):
         """, (TT_EPOCH_DATE,))
     except sqlite3.OperationalError:
         return []
-    now = datetime.now(timezone.utc)
+    now = datetime.now(TZ_BJ)
     result = []
     for r in rows:
         (sid, asset, direction, status, p_entry, p_sl, p_tp, p_rr,
          a_entry, a_sl, a_tp, poi_type, pd_zone, ql, qs, bars_waiting, bars_open, ts) = r
         try:
             setup_dt = datetime.fromisoformat(ts)
-            if setup_dt.tzinfo is None: setup_dt = setup_dt.replace(tzinfo=timezone.utc)
+            if setup_dt.tzinfo is None: 
+                setup_dt = setup_dt.replace(tzinfo=timezone.utc).astimezone(TZ_BJ)
+            else:
+                setup_dt = setup_dt.astimezone(TZ_BJ)
             elapsed_h = round((now - setup_dt).total_seconds() / 3600, 1)
-        except: elapsed_h = 0
+        except: 
+            elapsed_h = 0
         # Mostra l'ACTUAL se l'entry e' avvenuta, altrimenti il PLANNED
         entry = a_entry if a_entry is not None else p_entry
         sl = a_sl if a_sl is not None else p_sl
@@ -124,16 +131,20 @@ def load_ote_open_unified(conn):
         """)
     except sqlite3.OperationalError:
         return []
-    now = datetime.now(timezone.utc)
+    now = datetime.now(TZ_BJ)
     result = []
     for r in list(cand_rows) + list(sig_rows):
         src = r[0]
         ts = r[10]
         try:
             setup_dt = datetime.fromisoformat(ts)
-            if setup_dt.tzinfo is None: setup_dt = setup_dt.replace(tzinfo=timezone.utc)
+            if setup_dt.tzinfo is None: 
+                setup_dt = setup_dt.replace(tzinfo=timezone.utc).astimezone(TZ_BJ)
+            else:
+                setup_dt = setup_dt.astimezone(TZ_BJ)
             elapsed_h = round((now - setup_dt).total_seconds() / 3600, 1)
-        except: elapsed_h = 0
+        except: 
+            elapsed_h = 0
         if src == 'CAND':
             result.append({
                 "asset": r[2], "direction": "—", "status": r[4],
@@ -180,16 +191,20 @@ def load_v41p1_open(conn):
         """)
     except sqlite3.OperationalError:
         return []
-    now = datetime.now(timezone.utc)
+    now = datetime.now(TZ_BJ)
     result = []
     for r in rows:
         try: types = json.loads(r[8]) if r[8] else []; trigger = "+".join(types) if types else "—"
         except: trigger = "—"
         try:
             setup_dt = datetime.fromisoformat(r[15])
-            if setup_dt.tzinfo is None: setup_dt = setup_dt.replace(tzinfo=timezone.utc)
+            if setup_dt.tzinfo is None: 
+                setup_dt = setup_dt.replace(tzinfo=timezone.utc).astimezone(TZ_BJ)
+            else:
+                setup_dt = setup_dt.astimezone(TZ_BJ)
             elapsed_h = round((now - setup_dt).total_seconds() / 3600, 1)
-        except: elapsed_h = 0
+        except: 
+            elapsed_h = 0
         result.append({
             "asset":r[0],"direction":r[1],"entry":r[2],"sl":r[3],"tp1":r[4],"tp2":r[5],
             "ql":r[6],"qs":r[7],"trigger":trigger,"mae":r[9],"mfe":r[10],"tp1_hit":bool(r[11]),
@@ -225,14 +240,18 @@ def load_trb_open(conn):
         """)
     except sqlite3.OperationalError:
         return []
-    now = datetime.now(timezone.utc)
+    now = datetime.now(TZ_BJ)
     result = []
     for r in rows:
         try:
             setup_dt = datetime.fromisoformat(r[16])
-            if setup_dt.tzinfo is None: setup_dt = setup_dt.replace(tzinfo=timezone.utc)
+            if setup_dt.tzinfo is None: 
+                setup_dt = setup_dt.replace(tzinfo=timezone.utc).astimezone(TZ_BJ)
+            else:
+                setup_dt = setup_dt.astimezone(TZ_BJ)
             elapsed_h = round((now - setup_dt).total_seconds() / 3600, 1)
-        except: elapsed_h = 0
+        except: 
+            elapsed_h = 0
         result.append({
             "asset":r[0],"direction":r[1],"entry":r[2],"sl":r[3],"tp1":r[4],"tp2":r[5],
             "ql":r[6],"qs":r[7],"adx":r[8],"mae":r[9],"mfe":r[10],"tp1_hit":bool(r[11]),
@@ -269,15 +288,19 @@ def load_lh_open(conn):
         """, (LH_EPOCH_DATE,))
     except sqlite3.OperationalError:
         return []
-    now = datetime.now(timezone.utc)
+    now = datetime.now(TZ_BJ)
     result = []
     for r in rows:
         try:
             setup_dt = datetime.fromisoformat(r[16])
-            if setup_dt.tzinfo is None: setup_dt = setup_dt.replace(tzinfo=timezone.utc)
+            if setup_dt.tzinfo is None: 
+                setup_dt = setup_dt.replace(tzinfo=timezone.utc).astimezone(TZ_BJ)
+            else:
+                setup_dt = setup_dt.astimezone(TZ_BJ)
             elapsed_h = round((now - setup_dt).total_seconds() / 3600, 1)
             bars_pct  = round((r[15] or 0) / 96 * 100)
-        except: elapsed_h = 0; bars_pct = 0
+        except: 
+            elapsed_h = 0; bars_pct = 0
         result.append({
             "asset":r[0],"direction":r[1],"entry":r[2],"sl":r[3],"tp":r[4],"rr":r[5],
             "ql":r[6],"qs":r[7],"level":r[8] or "N/A","level_pri":r[9] or "N/A",
@@ -298,10 +321,6 @@ def load_lh_stats(conn):
             opn = q(conn,"SELECT COUNT(*) FROM lh_signals WHERE final_outcome='OPEN' AND timestamp_setup > ?", (LH_EPOCH_DATE,))[0][0]
             return {"n":0,"open":opn,"win":0,"exp_r":0}
         wins = sum(1 for outcome, rr in rows if outcome == "TP")
-        # R vero per ciascun trade -- non piu' (wins*2-sls)/n, che
-        # trattava silenziosamente STAGE2_HIT come 0R invece del vero
-        # +0.90R (stesso fix applicato in generate_analytics_dashboard.py
-        # l'08/09).
         vals = []
         for outcome, rr in rows:
             if outcome == "TP":
@@ -331,7 +350,9 @@ def fmt_ts(ts):
     if not ts: return "—"
     try:
         dt = datetime.fromisoformat(ts.replace("Z","+00:00"))
-        return dt.strftime("%m月%d日 %H:%M")
+        # Converte in ora di Pechino
+        dt_bj = dt.astimezone(TZ_BJ)
+        return dt_bj.strftime("%m月%d日 %H:%M")
     except: return ts[:16]
 
 def outcome_badge(o):
@@ -351,10 +372,10 @@ def kpi_row(s, color):
     wc = "pos" if s["win"]>=40 else ("neg" if s["win"]<25 else "warn")
     ec = "pos" if s["exp_r"]>0 else "neg"
     return f"""<div class="kpi-row" style="border-top:2px solid {color};margin-bottom:16px">
-  <div><span class="big">{s['open']}</span><span class="lbl">当前未平仓</span></div>
-  <div><span class="big">{s['n']}</span><span class="lbl">累计已平仓</span></div>
-  <div><span class="big {wc}">{s['win']}%</span><span class="lbl">胜率</span></div>
-  <div><span class="big {ec}">{s['exp_r']:+.2f}R</span><span class="lbl">期望值</span></div>
+ <div><span class="big">{s['open']}</span><span class="lbl">当前未平仓</span></div>
+ <div><span class="big">{s['n']}</span><span class="lbl">累计已平仓</span></div>
+ <div><span class="big {wc}">{s['win']}%</span><span class="lbl">胜率</span></div>
+ <div><span class="big {ec}">{s['exp_r']:+.2f}R</span><span class="lbl">期望值</span></div>
 </div>"""
 
 
@@ -424,7 +445,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
 def tt_open_table(rows):
     if not rows:
         return """<div class="card"><div class="ch"><span class="pulse pulse-tt"></span>活跃信号 — TT</div>
-  <table><tbody><tr class="empty-row"><td colspan="10">暂无活跃信号。等待 Early Signal。</td></tr></tbody></table></div>"""
+ <table><tbody><tr class="empty-row"><td colspan="10">暂无活跃信号。等待 Early Signal。</td></tr></tbody></table></div>"""
     body = ""
     for r in rows:
         asset = r["asset"].replace("_USDT","")
@@ -432,28 +453,28 @@ def tt_open_table(rows):
                         else f'<span class="badge b-buy">ENTRY</span>')
         bars_label = f"{r['bars_waiting']} 根 K 线" if r["status"] == "SETUP" else f"{r['bars_open']} 根 K 线"
         body += f"""<tr>
-  <td class="mono" style="color:var(--dim);font-size:11px">{fmt_ts(r['ts'])}</td>
-  <td><strong>{asset}</strong></td>
-  <td>{direction_badge(r['direction'])}</td>
-  <td>{status_badge}</td>
-  <td class="mono">{fp(r['entry'])}</td>
-  <td class="mono neg">{fp(r['sl'])}</td>
-  <td class="mono">{fp(r['tp'])}</td>
-  <td class="mono">{float(r['rr'] or 0):.2f}</td>
-  <td style="font-size:12px;color:var(--dim)">{r['poi_type']} · {r['pd_zone']}</td>
-  <td class="mono" style="color:var(--dim)">{r['elapsed_h']}h ({bars_label})</td>
+ <td class="mono" style="color:var(--dim);font-size:11px">{fmt_ts(r['ts'])}</td>
+ <td><strong>{asset}</strong></td>
+ <td>{direction_badge(r['direction'])}</td>
+ <td>{status_badge}</td>
+ <td class="mono">{fp(r['entry'])}</td>
+ <td class="mono neg">{fp(r['sl'])}</td>
+ <td class="mono">{fp(r['tp'])}</td>
+ <td class="mono">{float(r['rr'] or 0):.2f}</td>
+ <td style="font-size:12px;color:var(--dim)">{r['poi_type']} · {r['pd_zone']}</td>
+ <td class="mono" style="color:var(--dim)">{r['elapsed_h']}h ({bars_label})</td>
 </tr>"""
     return f"""<div class="card"><div class="ch"><span class="pulse pulse-tt"></span>活跃信号 — TT ({len(rows)})</div>
-  <div style="overflow-x:auto"><table><thead><tr>
+ <div style="overflow-x:auto"><table><thead><tr>
     <th>日期</th><th>资产</th><th>方向</th><th>状态</th><th>入场</th><th>止损</th><th>止盈</th>
     <th>R/R</th><th>POI · PD</th><th>耗时</th>
-  </tr></thead><tbody>{body}</tbody></table></div></div>"""
+ </tr></thead><tbody>{body}</tbody></table></div></div>"""
 
 
 def ote_open_table(rows):
     if not rows:
         return """<div class="card"><div class="ch"><span class="pulse"></span>活跃信号 — OTE</div>
-  <table><tbody><tr class="empty-row"><td colspan="9">暂无活跃信号。等待热点区间出现。</td></tr></tbody></table></div>"""
+ <table><tbody><tr class="empty-row"><td colspan="9">暂无活跃信号。等待热点区间出现。</td></tr></tbody></table></div>"""
     body = ""
     for r in rows:
         asset = r["asset"].replace("_USDT","")
@@ -465,104 +486,104 @@ def ote_open_table(rows):
             status_badge = outcome_badge(status)
             dir_show = direction_badge(r["direction"])
         body += f"""<tr>
-  <td class="mono" style="color:var(--dim);font-size:11px">{fmt_ts(r['ts'])}</td>
-  <td><strong>{asset}</strong></td>
-  <td>{dir_show}</td>
-  <td>{status_badge}</td>
-  <td class="mono">{fp(r['entry']) if isinstance(r['entry'], (int,float)) else r['entry']}</td>
-  <td class="mono neg">{fp(r['sl']) if isinstance(r['sl'], (int,float)) else r['sl']}</td>
-  <td class="mono">{fp(r['tp']) if isinstance(r['tp'], (int,float)) else r['tp']}</td>
-  <td style="font-size:12px;color:var(--dim)">{r.get('zone_strength','—')}</td>
-  <td class="mono" style="color:var(--dim)">{r['elapsed_h']}h</td>
+ <td class="mono" style="color:var(--dim);font-size:11px">{fmt_ts(r['ts'])}</td>
+ <td><strong>{asset}</strong></td>
+ <td>{dir_show}</td>
+ <td>{status_badge}</td>
+ <td class="mono">{fp(r['entry']) if isinstance(r['entry'], (int,float)) else r['entry']}</td>
+ <td class="mono neg">{fp(r['sl']) if isinstance(r['sl'], (int,float)) else r['sl']}</td>
+ <td class="mono">{fp(r['tp']) if isinstance(r['tp'], (int,float)) else r['tp']}</td>
+ <td style="font-size:12px;color:var(--dim)">{r.get('zone_strength','—')}</td>
+ <td class="mono" style="color:var(--dim)">{r['elapsed_h']}h</td>
 </tr>"""
     return f"""<div class="card"><div class="ch"><span class="pulse"></span>活跃信号 — OTE ({len(rows)})</div>
-  <div style="overflow-x:auto"><table><thead><tr>
+ <div style="overflow-x:auto"><table><thead><tr>
     <th>日期</th><th>资产</th><th>方向</th><th>状态</th><th>入场</th><th>止损</th><th>止盈</th>
     <th>区间</th><th>耗时</th>
-  </tr></thead><tbody>{body}</tbody></table></div></div>"""
+ </tr></thead><tbody>{body}</tbody></table></div></div>"""
 
 
 def v41p1_open_table(rows):
     if not rows:
         return """<div class="card"><div class="ch">未平仓信号 — V4.1 Phase 1</div>
-  <table><tbody><tr class="empty-row"><td colspan="10">暂无未平仓信号。</td></tr></tbody></table></div>"""
+ <table><tbody><tr class="empty-row"><td colspan="10">暂无未平仓信号。</td></tr></tbody></table></div>"""
     body = ""
     for r in rows:
         asset = r["asset"].replace("_USDT","")
         tp1_badge = '<span class="badge b-tp" style="font-size:10px">止盈1✓</span>' if r["tp1_hit"] else ""
         body += f"""<tr>
-  <td class="mono" style="color:var(--dim);font-size:11px">{fmt_ts(r['ts'])}</td>
-  <td><strong>{asset}</strong></td>
-  <td>{direction_badge(r['direction'])}</td>
-  <td class="mono">{fp(r['entry'])}</td>
-  <td class="mono neg">{fp(r['sl'])}</td>
-  <td class="mono">{fp(r['tp1'])} {tp1_badge}</td>
-  <td class="mono">{fp(r['tp2'])}</td>
-  <td>{ql_badge(r['ql'])}</td>
-  <td style="font-size:12px;color:var(--dim)">{r['trigger']}</td>
-  <td class="mono neg">{fp(r['mae'])}</td>
-  <td class="mono" style="color:var(--dim)">{r['elapsed_h']}h</td>
+ <td class="mono" style="color:var(--dim);font-size:11px">{fmt_ts(r['ts'])}</td>
+ <td><strong>{asset}</strong></td>
+ <td>{direction_badge(r['direction'])}</td>
+ <td class="mono">{fp(r['entry'])}</td>
+ <td class="mono neg">{fp(r['sl'])}</td>
+ <td class="mono">{fp(r['tp1'])} {tp1_badge}</td>
+ <td class="mono">{fp(r['tp2'])}</td>
+ <td>{ql_badge(r['ql'])}</td>
+ <td style="font-size:12px;color:var(--dim)">{r['trigger']}</td>
+ <td class="mono neg">{fp(r['mae'])}</td>
+ <td class="mono" style="color:var(--dim)">{r['elapsed_h']}h</td>
 </tr>"""
     return f"""<div class="card"><div class="ch">未平仓信号 — V4.1 Phase 1 ({len(rows)})</div>
-  <div style="overflow-x:auto"><table><thead><tr>
+ <div style="overflow-x:auto"><table><thead><tr>
     <th>日期</th><th>资产</th><th>方向</th><th>入场</th><th>止损</th><th>止盈1</th><th>止盈2</th>
     <th>质量</th><th>触发</th><th>MAE</th><th>开仓时间</th>
-  </tr></thead><tbody>{body}</tbody></table></div></div>"""
+ </tr></thead><tbody>{body}</tbody></table></div></div>"""
 
 
 def trb_open_table(rows):
     if not rows:
         return """<div class="card"><div class="ch"><span class="pulse pulse-trb"></span>未平仓信号 — Trend Rider Balanced</div>
-  <table><tbody><tr class="empty-row"><td colspan="11">暂无未平仓信号。等待价格回撤至 H1 EMA20。</td></tr></tbody></table></div>"""
+ <table><tbody><tr class="empty-row"><td colspan="11">暂无未平仓信号。等待价格回撤至 H1 EMA20。</td></tr></tbody></table></div>"""
     body = ""
     for r in rows:
         asset = r["asset"].replace("_USDT","")
         tp1_badge = '<span class="badge b-tp" style="font-size:10px">止盈1✓</span>' if r["tp1_hit"] else ""
         body += f"""<tr>
-  <td class="mono" style="color:var(--dim);font-size:11px">{fmt_ts(r['ts'])}</td>
-  <td><strong>{asset}</strong></td>
-  <td>{direction_badge(r['direction'])}</td>
-  <td class="mono">{fp(r['entry'])}</td>
-  <td class="mono neg">{fp(r['sl'])}</td>
-  <td class="mono">{fp(r['tp1'])} {tp1_badge}</td>
-  <td class="mono">{fp(r['tp2'])}</td>
-  <td>{ql_badge(r['ql'])}</td>
-  <td class="mono" style="color:var(--dim)">{f"{float(r['adx']):.1f}" if r['adx'] else '—'}</td>
-  <td style="font-size:12px;color:var(--dim)">{r['trend_h1'] or '—'}</td>
-  <td class="mono" style="color:var(--dim)">{r['elapsed_h']}h</td>
+ <td class="mono" style="color:var(--dim);font-size:11px">{fmt_ts(r['ts'])}</td>
+ <td><strong>{asset}</strong></td>
+ <td>{direction_badge(r['direction'])}</td>
+ <td class="mono">{fp(r['entry'])}</td>
+ <td class="mono neg">{fp(r['sl'])}</td>
+ <td class="mono">{fp(r['tp1'])} {tp1_badge}</td>
+ <td class="mono">{fp(r['tp2'])}</td>
+ <td>{ql_badge(r['ql'])}</td>
+ <td class="mono" style="color:var(--dim)">{f"{float(r['adx']):.1f}" if r['adx'] else '—'}</td>
+ <td style="font-size:12px;color:var(--dim)">{r['trend_h1'] or '—'}</td>
+ <td class="mono" style="color:var(--dim)">{r['elapsed_h']}h</td>
 </tr>"""
     return f"""<div class="card"><div class="ch"><span class="pulse pulse-trb"></span>未平仓信号 — Trend Rider Balanced ({len(rows)})</div>
-  <div style="overflow-x:auto"><table><thead><tr>
+ <div style="overflow-x:auto"><table><thead><tr>
     <th>日期</th><th>资产</th><th>方向</th><th>入场</th><th>止损</th><th>止盈1</th><th>止盈2</th>
     <th>质量</th><th>ADX</th><th>H1</th><th>开仓时间</th>
-  </tr></thead><tbody>{body}</tbody></table></div></div>"""
+ </tr></thead><tbody>{body}</tbody></table></div></div>"""
 
 
 def lh_open_table(rows):
     if not rows:
         return """<div class="card"><div class="ch"><span class="pulse pulse-lh"></span>未平仓信号 — Liquidity Hunter v1.0</div>
-  <table><tbody><tr class="empty-row"><td colspan="11">暂无未平仓信号。等待流动性池被扫。</td></tr></tbody></table></div>"""
+ <table><tbody><tr class="empty-row"><td colspan="11">暂无未平仓信号。等待流动性池被扫。</td></tr></tbody></table></div>"""
     body = ""
     for r in rows:
         asset = r["asset"].replace("_USDT","")
         body += f"""<tr>
-  <td class="mono" style="color:var(--dim);font-size:11px">{fmt_ts(r['ts'])}</td>
-  <td><strong>{asset}</strong></td>
-  <td>{direction_badge(r['direction'])}</td>
-  <td class="mono">{fp(r['entry'])}</td>
-  <td class="mono neg">{fp(r['sl'])}</td>
-  <td class="mono">{fp(r['tp'])}</td>
-  <td class="mono">{float(r['rr'] or 0):.2f}</td>
-  <td>{ql_badge(r['ql'])}</td>
-  <td style="font-size:12px;color:var(--dim)">{r['level']} ({r['level_pri']})</td>
-  <td style="font-size:12px;color:var(--dim)">{r['sweep']} → {r['trigger']}</td>
-  <td class="mono neg">{fp(r['mae'])}</td>
+ <td class="mono" style="color:var(--dim);font-size:11px">{fmt_ts(r['ts'])}</td>
+ <td><strong>{asset}</strong></td>
+ <td>{direction_badge(r['direction'])}</td>
+ <td class="mono">{fp(r['entry'])}</td>
+ <td class="mono neg">{fp(r['sl'])}</td>
+ <td class="mono">{fp(r['tp'])}</td>
+ <td class="mono">{float(r['rr'] or 0):.2f}</td>
+ <td>{ql_badge(r['ql'])}</td>
+ <td style="font-size:12px;color:var(--dim)">{r['level']} ({r['level_pri']})</td>
+ <td style="font-size:12px;color:var(--dim)">{r['sweep']} → {r['trigger']}</td>
+ <td class="mono neg">{fp(r['mae'])}</td>
 </tr>"""
     return f"""<div class="card"><div class="ch"><span class="pulse pulse-lh"></span>未平仓信号 — Liquidity Hunter v1.0 ({len(rows)})</div>
-  <div style="overflow-x:auto"><table><thead><tr>
+ <div style="overflow-x:auto"><table><thead><tr>
     <th>日期</th><th>资产</th><th>方向</th><th>入场</th><th>止损</th><th>止盈</th>
     <th>R/R</th><th>质量</th><th>价位</th><th>扫描 → 触发</th><th>MAE</th>
-  </tr></thead><tbody>{body}</tbody></table></div></div>"""
+ </tr></thead><tbody>{body}</tbody></table></div></div>"""
 
 
 # ============================================================
@@ -586,7 +607,8 @@ def generate():
 
     conn.close()
 
-    generated = datetime.now(timezone.utc).strftime("%Y年%m月%d日 %H:%M UTC")
+    # Generazione data/ora in fuso orario di Pechino
+    generated = datetime.now(TZ_BJ).strftime("%Y年%m月%d日 %H:%M 北京时间")
 
     html = f"""<!DOCTYPE html>
 <html lang="zh-CN">
@@ -636,7 +658,7 @@ def generate():
 </html>"""
 
     os.makedirs("docs", exist_ok=True)
-    with open(OUT_PATH, "w") as f:
+    with open(OUT_PATH, "w", encoding="utf-8") as f:
         f.write(html)
 
     print(
