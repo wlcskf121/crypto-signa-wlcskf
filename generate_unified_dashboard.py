@@ -331,7 +331,7 @@ def fmt_ts(ts):
     if not ts: return "—"
     try:
         dt = datetime.fromisoformat(ts.replace("Z","+00:00"))
-        return dt.strftime("%d %b %H:%M")
+        return dt.strftime("%m月%d日 %H:%M")
     except: return ts[:16]
 
 def outcome_badge(o):
@@ -586,7 +586,7 @@ def generate():
 
     conn.close()
 
-    generated = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    generated = datetime.now(timezone.utc).strftime("%Y年%m月%d日 %H:%M UTC")
 
     html = f"""<!DOCTYPE html>
 <html lang="zh-CN">
