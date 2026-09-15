@@ -194,7 +194,7 @@ def load_v41p1_open(conn):
             "asset":r[0],"direction":r[1],"entry":r[2],"sl":r[3],"tp1":r[4],"tp2":r[5],
             "ql":r[6],"qs":r[7],"trigger":trigger,"mae":r[9],"mfe":r[10],"tp1_hit":bool(r[11]),
             "source":r[12] or "N/A","target":r[13] or "N/A","em":r[14],"elapsed_h":elapsed_h,
-            "ts": ts,
+            "setup_ts": fmt_ts(r[15]),
         })
     return result
 
