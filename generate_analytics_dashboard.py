@@ -457,7 +457,7 @@ def fmt_ts(ts):
     if not ts: return "—"
     try:
         dt = datetime.fromisoformat(ts.replace("Z","+00:00"))
-        return dt.strftime("%d %b %H:%M")
+        return dt.strftime("%m月%d日 %H:%M")
     except: return ts[:16]
 
 def fmt_p(v):
@@ -484,7 +484,7 @@ def perf_table(title, d, keys, key_label, cols, stat_fn_empty):
     return f"""<div class="card">
   <div class="ch">{title}</div>
   <table><thead><tr>
-    <th>{key_label}</th><th>N</th><th>Win%</th><th>期望值</th>
+    <th>{key_label}</th><th>N</th><th>胜率</th><th>期望值</th>
     <th>Avg MAE</th><th>Avg MFE</th>
   </tr></thead><tbody>{body}</tbody></table>
 </div>"""
@@ -501,7 +501,7 @@ def section_tt(rows, recent, invalidated_count):
 
     summary = f"""<div class="summary-grid cols8" style="border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:16px">
   <div><span class="big">{s['n']}</span><span class="lbl">已平仓（TP/SL/EXP）</span></div>
-  <div><span class="big warn">{invalidated_count}</span><span class="lbl">Invalidated</span></div>
+  <div><span class="big warn">{invalidated_count}</span><span class="lbl">无效信号</span></div>
   <div><span class="big {wc}">{s['win']}%</span><span class="lbl">胜率</span></div>
   <div><span class="big neg">{s['sl']}%</span><span class="lbl">止损率</span></div>
   <div><span class="big {ec}">{s['exp_r']:+.2f}R</span><span class="lbl">期望值</span></div>
@@ -550,7 +550,7 @@ def section_tt(rows, recent, invalidated_count):
         rec_html = f"""<div class="card"><div class="ch">TT 近期信号</div>
   <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
   <table><thead><tr>
-    <th>日期</th><th>资产</th><th>方向</th><th>状态</th><th>入场</th><th>SL</th><th>TP</th>
+    <th>日期</th><th>资产</th><th>方向</th><th>状态</th><th>入场</th><th>止损</th><th>止盈</th>
     <th>R/R</th><th>POI</th><th>PD</th><th>质量</th>
   </tr></thead><tbody>{body}</tbody></table>
   </div></div>"""
@@ -630,7 +630,7 @@ def section_ote(rows, recent, cand_stats):
         rec_html = f"""<div class="card"><div class="ch">OTE 近期信号</div>
   <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
   <table><thead><tr>
-    <th>日期</th><th>资产</th><th>方向</th><th>状态</th><th>入场</th><th>SL</th><th>TP</th>
+    <th>日期</th><th>资产</th><th>方向</th><th>状态</th><th>入场</th><th>止损</th><th>止盈</th>
     <th>R/R</th><th>区间</th><th>触发</th>
   </tr></thead><tbody>{body}</tbody></table>
   </div></div>"""
@@ -667,7 +667,7 @@ def section_trb(rows, recent):
     summary = f"""<div class="summary-grid cols7" style="border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:16px">
   <div><span class="big">{s['n']}</span><span class="lbl">已平仓</span></div>
   <div><span class="big {wc}">{s['win']}%</span><span class="lbl">胜率</span></div>
-  <div><span class="big">{s['tp2']}%</span><span class="lbl">TP2 Hit</span></div>
+  <div><span class="big">{s['tp2']}%</span><span class="lbl">止盈2命中率</span></div>
   <div><span class="big neg">{s['sl']}%</span><span class="lbl">止损率</span></div>
   <div><span class="big" style="color:var(--accent5)">{s['be']}%</span><span class="lbl">BE Rate</span></div>
   <div><span class="big {ec}">{s['exp_r']:+.2f}R</span><span class="lbl">期望值</span></div>
@@ -721,8 +721,8 @@ def section_trb(rows, recent):
         rec_html = f"""<div class="card"><div class="ch">TRB 近期信号</div>
   <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
   <table><thead><tr>
-    <th>日期</th><th>资产</th><th>方向</th><th>入场</th><th>SL</th><th>TP1</th>
-    <th>TP1 in</th><th>ADX</th><th>H1</th><th>Target</th><th>结果</th>
+    <th>日期</th><th>资产</th><th>方向</th><th>入场</th><th>止损</th><th>止盈1</th>
+    <th>止盈1 in</th><th>ADX</th><th>H1</th><th>Target</th><th>结果</th>
   </tr></thead><tbody>{body}</tbody></table>
   </div></div>"""
 
@@ -911,7 +911,7 @@ def generate():
     v41p1_rows = load_v41p1_signals(conn)
     conn.close()
 
-    generated = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    generated = datetime.now(timezone.utc).strftime("%Y年%m月%d日 %H:%M UTC")
 
     html = f"""<!DOCTYPE html>
 <html lang="zh-CN">
