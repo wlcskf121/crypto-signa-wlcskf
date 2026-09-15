@@ -194,6 +194,7 @@ def load_v41p1_open(conn):
             "asset":r[0],"direction":r[1],"entry":r[2],"sl":r[3],"tp1":r[4],"tp2":r[5],
             "ql":r[6],"qs":r[7],"trigger":trigger,"mae":r[9],"mfe":r[10],"tp1_hit":bool(r[11]),
             "source":r[12] or "N/A","target":r[13] or "N/A","em":r[14],"elapsed_h":elapsed_h,
+            "ts": ts,
         })
     return result
 
@@ -490,7 +491,7 @@ def v41p1_open_table(rows):
         asset = r["asset"].replace("_USDT","")
         tp1_badge = '<span class="badge b-tp" style="font-size:10px">止盈1✓</span>' if r["tp1_hit"] else ""
         body += f"""<tr>
-      
+  <td class="mono" style="color:var(--dim);font-size:11px">{fmt_ts(r['ts'])}</td>    
   <td><strong>{asset}</strong></td>
   <td>{direction_badge(r['direction'])}</td>
   <td class="mono">{fp(r['entry'])}</td>
