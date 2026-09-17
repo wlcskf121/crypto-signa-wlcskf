@@ -185,7 +185,7 @@ TT_SCANNER:
 # Institutional Scanner V4.1 Intraday Wave Edition.
 # ============================================================
 V41_SCANNER:
-  enabled: true
+  enabled: false
   assets:
     - BTC_USDT
     - XAU_USD
