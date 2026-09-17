@@ -163,7 +163,7 @@ V3D_SCANNER:
 # Institutional Scanner Framework V4.0 Daily Edition (isolato)
 # ============================================================
 V4_SCANNER:
-  enabled: true
+  enabled: false
   assets:
     - BTC_USDT
     - XAU_USD
