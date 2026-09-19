@@ -63,7 +63,7 @@ tr.hl td{background:rgba(79,255,176,.06)}
 <body>
 <header>
   <h1>加密信号引擎 — 分析实验室</h1>
-  <div class="meta">2026年09月19日 07:35 UTC &nbsp;|&nbsp; <a href="unified_dashboard.html">&larr; Dashboard</a> &nbsp;|&nbsp; <a href="engine_edge_dashboard.html">引擎 Edge 实验室 →</a></div>
+  <div class="meta">2026年09月19日 07:41 UTC &nbsp;|&nbsp; <a href="unified_dashboard.html">&larr; Dashboard</a> &nbsp;|&nbsp; <a href="engine_edge_dashboard.html">引擎 Edge 实验室 →</a></div>
 </header>
 <div class="container">
 
@@ -76,7 +76,7 @@ tr.hl td{background:rgba(79,255,176,.06)}
   </div>
   <div class="summary-grid cols8" style="border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:16px">
   <div><span class="big">0</span><span class="lbl">已平仓（TP/SL/EXP）</span></div>
-  <div><span class="big warn">136</span><span class="lbl">无效信号</span></div>
+  <div><span class="big warn">137</span><span class="lbl">无效信号</span></div>
   <div><span class="big neg">0%</span><span class="lbl">胜率</span></div>
   <div><span class="big neg">0%</span><span class="lbl">止损率</span></div>
   <div><span class="big neg">+0.00R</span><span class="lbl">期望值</span></div>
@@ -129,10 +129,22 @@ tr.hl td{background:rgba(79,255,176,.06)}
     <th>日期</th><th>资产</th><th>方向</th><th>状态</th><th>入场</th><th>止损</th><th>止盈</th>
     <th>R/R</th><th>POI</th><th>PD</th><th>质量</th>
   </tr></thead><tbody><tr>
+  <td class="mono" style="color:var(--dim);font-size:11px">09月19日 07:41</td>
+  <td><strong>ETH</strong></td>
+  <td><span class="badge b-buy">BUY</span></td>
+  <td><span class="badge b-open">SETUP</span></td>
+  <td class="mono">2,623.67</td>
+  <td class="mono">2,619.78</td>
+  <td class="mono">2,631.26</td>
+  <td class="mono">1.95</td>
+  <td style="font-size:12px;color:var(--dim)">HL</td>
+  <td style="font-size:12px;color:var(--dim)">PREMIUM</td>
+  <td style="font-size:12px;color:var(--dim)">HIGH</td>
+</tr><tr>
   <td class="mono" style="color:var(--dim);font-size:11px">09月19日 07:01</td>
   <td><strong>SOL</strong></td>
   <td><span class="badge b-sell">SELL</span></td>
-  <td><span class="badge b-open">SETUP</span></td>
+  <td><span class="badge b-invalid">INVALIDATED</span></td>
   <td class="mono">111.8400</td>
   <td class="mono">112.1436</td>
   <td class="mono">111.2329</td>
@@ -353,18 +365,6 @@ tr.hl td{background:rgba(79,255,176,.06)}
   <td class="mono">77,107.07</td>
   <td class="mono">77,454.00</td>
   <td class="mono">1.75</td>
-  <td style="font-size:12px;color:var(--dim)">HL</td>
-  <td style="font-size:12px;color:var(--dim)">PREMIUM</td>
-  <td style="font-size:12px;color:var(--dim)">HIGH</td>
-</tr><tr>
-  <td class="mono" style="color:var(--dim);font-size:11px">09月18日 03:01</td>
-  <td><strong>ETH</strong></td>
-  <td><span class="badge b-buy">BUY</span></td>
-  <td><span class="badge b-invalid">INVALIDATED</span></td>
-  <td class="mono">2,459.99</td>
-  <td class="mono">2,456.68</td>
-  <td class="mono">2,470.89</td>
-  <td class="mono">3.29</td>
   <td style="font-size:12px;color:var(--dim)">HL</td>
   <td style="font-size:12px;color:var(--dim)">PREMIUM</td>
   <td style="font-size:12px;color:var(--dim)">HIGH</td>
@@ -1240,6 +1240,18 @@ tr.hl td{background:rgba(79,255,176,.06)}
     <th>日期</th><th>资产</th><th>方向</th><th>结果</th><th>入场</th><th>SL</th><th>TP</th>
     <th>R/R</th><th>价位</th><th>Sweep</th><th>触发</th>
   </tr></thead><tbody><tr>
+  <td class="mono" style="color:var(--dim);font-size:11px">09月19日 07:40</td>
+  <td><strong>ETH</strong></td>
+  <td><span class="badge b-sell">SELL</span></td>
+  <td><span class="badge b-open">OPEN</span></td>
+  <td class="mono">2,617.40</td>
+  <td class="mono">2,621.62</td>
+  <td class="mono">2,608.95</td>
+  <td class="mono">2.00</td>
+  <td style="font-size:12px;color:var(--dim)">impulse:ETH_USDT:BEARISH:M30:1789781400000</td>
+  <td style="font-size:12px;color:var(--dim)">SELL</td>
+  <td style="font-size:12px;color:var(--dim)">RESTART_ZONE</td>
+</tr><tr>
   <td class="mono" style="color:var(--dim);font-size:11px">09月18日 21:15</td>
   <td><strong>XAU_USD</strong></td>
   <td><span class="badge b-buy">BUY</span></td>
@@ -1465,18 +1477,6 @@ tr.hl td{background:rgba(79,255,176,.06)}
   <td class="mono">4,383.62</td>
   <td class="mono">2.34</td>
   <td style="font-size:12px;color:var(--dim)">impulse:XAU_USD:BULLISH:H1:1789646400000</td>
-  <td style="font-size:12px;color:var(--dim)">BUY</td>
-  <td style="font-size:12px;color:var(--dim)">RESTART_ZONE</td>
-</tr><tr>
-  <td class="mono" style="color:var(--dim);font-size:11px">09月17日 11:01</td>
-  <td><strong>XAU_USD</strong></td>
-  <td><span class="badge b-buy">BUY</span></td>
-  <td><span class="badge b-stage2">STAGE2_HIT</span></td>
-  <td class="mono">4,330.23</td>
-  <td class="mono">4,321.89</td>
-  <td class="mono">4,348.57</td>
-  <td class="mono">2.20</td>
-  <td style="font-size:12px;color:var(--dim)">impulse:XAU_USD:BULLISH:H1:1789628400000</td>
   <td style="font-size:12px;color:var(--dim)">BUY</td>
   <td style="font-size:12px;color:var(--dim)">RESTART_ZONE</td>
 </tr></tbody></table>
