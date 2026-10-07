@@ -63,7 +63,7 @@ tr.hl td{background:rgba(79,255,176,.06)}
 <body>
 <header>
   <h1>加密信号引擎 — 分析实验室</h1>
-  <div class="meta">2026年10月07日 20:11 UTC &nbsp;|&nbsp; <a href="unified_dashboard.html">&larr; Dashboard</a> &nbsp;|&nbsp; <a href="engine_edge_dashboard.html">引擎 Edge 实验室 →</a></div>
+  <div class="meta">2026年10月07日 20:16 UTC &nbsp;|&nbsp; <a href="unified_dashboard.html">&larr; Dashboard</a> &nbsp;|&nbsp; <a href="engine_edge_dashboard.html">引擎 Edge 实验室 →</a></div>
 </header>
 <div class="container">
 
@@ -76,7 +76,7 @@ tr.hl td{background:rgba(79,255,176,.06)}
   </div>
   <div class="summary-grid cols8" style="border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:16px">
   <div><span class="big">0</span><span class="lbl">已平仓（TP/SL/EXP）</span></div>
-  <div><span class="big warn">165</span><span class="lbl">无效信号</span></div>
+  <div><span class="big warn">166</span><span class="lbl">无效信号</span></div>
   <div><span class="big neg">0%</span><span class="lbl">胜率</span></div>
   <div><span class="big neg">0%</span><span class="lbl">止损率</span></div>
   <div><span class="big neg">+0.00R</span><span class="lbl">期望值</span></div>
@@ -132,7 +132,7 @@ tr.hl td{background:rgba(79,255,176,.06)}
   <td class="mono" style="color:var(--dim);font-size:11px">10月07日 19:45</td>
   <td><strong>BTC</strong></td>
   <td><span class="badge b-sell">SELL</span></td>
-  <td><span class="badge b-open">SETUP</span></td>
+  <td><span class="badge b-invalid">INVALIDATED</span></td>
   <td class="mono">83,408.80</td>
   <td class="mono">83,518.42</td>
   <td class="mono">83,032.10</td>
@@ -730,13 +730,13 @@ tr.hl td{background:rgba(79,255,176,.06)}
     <span style="color:var(--dim);font-size:11px;margin-left:auto">BTC · PAXG</span>
   </div>
   <div class="summary-grid cols7" style="border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:16px">
-  <div><span class="big">141</span><span class="lbl">已平仓</span></div>
-  <div><span class="big warn">38.3%</span><span class="lbl">胜率</span></div>
-  <div><span class="big">19.1%</span><span class="lbl">止盈2命中率</span></div>
-  <div><span class="big neg">39.0%</span><span class="lbl">止损率</span></div>
-  <div><span class="big" style="color:var(--accent5)">10.6%</span><span class="lbl">BE Rate</span></div>
+  <div><span class="big">143</span><span class="lbl">已平仓</span></div>
+  <div><span class="big warn">38.5%</span><span class="lbl">胜率</span></div>
+  <div><span class="big">18.9%</span><span class="lbl">止盈2命中率</span></div>
+  <div><span class="big neg">39.2%</span><span class="lbl">止损率</span></div>
+  <div><span class="big" style="color:var(--accent5)">10.5%</span><span class="lbl">BE Rate</span></div>
   <div><span class="big pos">+0.38R</span><span class="lbl">期望值</span></div>
-  <div><span class="big">27.4</span><span class="lbl">Avg ADX</span></div>
+  <div><span class="big">27.8</span><span class="lbl">Avg ADX</span></div>
 </div>
   <div class="grid-2">
     <div class="card">
@@ -753,18 +753,18 @@ tr.hl td{background:rgba(79,255,176,.06)}
   <td class="mono pos">400.0</td>
 </tr><tr>
   <td><strong>XAU_USD</strong></td>
-  <td class="mono">26</td>
-  <td class="mono warn">30.8%</td>
-  <td class="mono pos">+0.19R</td>
-  <td class="mono neg">9.0</td>
-  <td class="mono pos">20.3</td>
+  <td class="mono">27</td>
+  <td class="mono warn">33.3%</td>
+  <td class="mono pos">+0.26R</td>
+  <td class="mono neg">8.7</td>
+  <td class="mono pos">20.2</td>
 </tr><tr>
   <td><strong>ETH_USDT</strong></td>
-  <td class="mono">35</td>
-  <td class="mono warn">34.3%</td>
-  <td class="mono pos">+0.23R</td>
-  <td class="mono neg">10.8</td>
-  <td class="mono pos">15.7</td>
+  <td class="mono">36</td>
+  <td class="mono warn">33.3%</td>
+  <td class="mono pos">+0.19R</td>
+  <td class="mono neg">11.0</td>
+  <td class="mono pos">15.5</td>
 </tr><tr>
   <td><strong>SOL_USDT</strong></td>
   <td class="mono">43</td>
@@ -788,11 +788,11 @@ tr.hl td{background:rgba(79,255,176,.06)}
   <td class="mono pos">125.9</td>
 </tr><tr>
   <td><strong>SELL</strong></td>
-  <td class="mono">66</td>
-  <td class="mono warn">37.9%</td>
+  <td class="mono">68</td>
+  <td class="mono warn">38.2%</td>
   <td class="mono pos">+0.41R</td>
-  <td class="mono neg">36.4</td>
-  <td class="mono pos">98.0</td>
+  <td class="mono neg">35.6</td>
+  <td class="mono pos">95.5</td>
 </tr></tbody></table>
 </div>
   </div>
@@ -804,11 +804,11 @@ tr.hl td{background:rgba(79,255,176,.06)}
     <th>Avg MAE</th><th>Avg MFE</th>
   </tr></thead><tbody><tr>
   <td><strong>PREMIUM</strong></td>
-  <td class="mono">141</td>
-  <td class="mono warn">38.3%</td>
+  <td class="mono">143</td>
+  <td class="mono warn">38.5%</td>
   <td class="mono pos">+0.38R</td>
-  <td class="mono neg">55.9</td>
-  <td class="mono pos">112.9</td>
+  <td class="mono neg">55.2</td>
+  <td class="mono pos">111.4</td>
 </tr></tbody></table>
 </div>
     <div class="card">
@@ -832,11 +832,11 @@ tr.hl td{background:rgba(79,255,176,.06)}
   <td class="mono pos">93.2</td>
 </tr><tr>
   <td><strong>NEW_YORK</strong></td>
-  <td class="mono">44</td>
-  <td class="mono warn">25.0%</td>
-  <td class="mono pos">+0.07R</td>
-  <td class="mono neg">69.1</td>
-  <td class="mono pos">133.4</td>
+  <td class="mono">46</td>
+  <td class="mono warn">26.1%</td>
+  <td class="mono pos">+0.09R</td>
+  <td class="mono neg">66.5</td>
+  <td class="mono pos">128.1</td>
 </tr></tbody></table>
 </div>
   </div>
@@ -855,11 +855,11 @@ tr.hl td{background:rgba(79,255,176,.06)}
   <td class="mono pos">125.9</td>
 </tr><tr>
   <td><strong>BEARISH</strong></td>
-  <td class="mono">66</td>
-  <td class="mono warn">37.9%</td>
+  <td class="mono">68</td>
+  <td class="mono warn">38.2%</td>
   <td class="mono pos">+0.41R</td>
-  <td class="mono neg">36.4</td>
-  <td class="mono pos">98.0</td>
+  <td class="mono neg">35.6</td>
+  <td class="mono pos">95.5</td>
 </tr></tbody></table>
 </div>
     <div class="card">
@@ -869,11 +869,11 @@ tr.hl td{background:rgba(79,255,176,.06)}
     <th>Avg MAE</th><th>Avg MFE</th>
   </tr></thead><tbody><tr>
   <td><strong>ADX>30</strong></td>
-  <td class="mono">44</td>
-  <td class="mono pos">45.5%</td>
+  <td class="mono">46</td>
+  <td class="mono pos">45.7%</td>
   <td class="mono pos">+0.59R</td>
-  <td class="mono neg">67.3</td>
-  <td class="mono pos">191.4</td>
+  <td class="mono neg">64.8</td>
+  <td class="mono pos">183.6</td>
 </tr><tr>
   <td><strong>ADX 25-30</strong></td>
   <td class="mono">28</td>
@@ -907,7 +907,7 @@ tr.hl td{background:rgba(79,255,176,.06)}
   <td class="mono" style="color:var(--dim)">66.6</td>
   <td style="font-size:12px;color:var(--dim)">BEARISH</td>
   <td style="font-size:12px;color:var(--dim)">—</td>
-  <td><span class="badge b-open">OPEN</span></td>
+  <td><span class="badge b-sl">SL_HIT</span></td>
 </tr><tr>
   <td class="mono" style="color:var(--dim);font-size:11px">10月07日 17:45</td>
   <td><strong>XAU_USD</strong></td>
@@ -919,7 +919,7 @@ tr.hl td{background:rgba(79,255,176,.06)}
   <td class="mono" style="color:var(--dim)">47.7</td>
   <td style="font-size:12px;color:var(--dim)">BEARISH</td>
   <td style="font-size:12px;color:var(--dim)">—</td>
-  <td><span class="badge b-be">OPEN·TP1</span></td>
+  <td><span class="badge b-tp">TP1_HIT</span></td>
 </tr><tr>
   <td class="mono" style="color:var(--dim);font-size:11px">10月07日 16:45</td>
   <td><strong>BTC</strong></td>
