@@ -65,19 +65,33 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
 <body>
 <header>
   <h1>加密信号引擎 — 总览</h1>
-  <div class="meta">2026年10月15日 16:26 北京时间 &nbsp;|&nbsp; <a href="analytics_dashboard.html">分析实验室 →</a></div>
+  <div class="meta">2026年10月15日 16:31 北京时间 &nbsp;|&nbsp; <a href="analytics_dashboard.html">分析实验室 →</a></div>
 </header>
 <div class="container">
 
   <div class="section-title tt">⚡ TT — 方向 · 位置 · 流动性</div>
   <div class="kpi-row" style="border-top:2px solid #f472b6;margin-bottom:16px">
- <div><span class="big">0</span><span class="lbl">当前未平仓</span></div>
+ <div><span class="big">1</span><span class="lbl">当前未平仓</span></div>
  <div><span class="big">0</span><span class="lbl">累计已平仓</span></div>
  <div><span class="big neg">0%</span><span class="lbl">胜率</span></div>
  <div><span class="big neg">+0.00R</span><span class="lbl">期望值</span></div>
 </div>
-  <div class="card"><div class="ch"><span class="pulse pulse-tt"></span>活跃信号 — TT</div>
- <table><tbody><tr class="empty-row"><td colspan="10">暂无活跃信号。等待 Early Signal。</td></tr></tbody></table></div>
+  <div class="card"><div class="ch"><span class="pulse pulse-tt"></span>活跃信号 — TT (1)</div>
+ <div style="overflow-x:auto"><table><thead><tr>
+    <th>日期</th><th>资产</th><th>方向</th><th>状态</th><th>入场</th><th>止损</th><th>止盈</th>
+    <th>R/R</th><th>POI · PD</th><th>耗时</th>
+ </tr></thead><tbody><tr>
+ <td class="mono" style="color:var(--dim);font-size:11px">10月15日 16:31</td>
+ <td><strong>SOL</strong></td>
+ <td><span class="badge b-sell">SELL</span></td>
+ <td><span class="badge b-waiting">等待中</span></td>
+ <td class="mono">103.2900</td>
+ <td class="mono neg">103.7157</td>
+ <td class="mono">102.0500</td>
+ <td class="mono">2.91</td>
+ <td style="font-size:12px;color:var(--dim)">LH · DISCOUNT</td>
+ <td class="mono" style="color:var(--dim)">0.0h (0 根 K 线)</td>
+</tr></tbody></table></div></div>
 
   <div class="divider"></div>
 
@@ -101,7 +115,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
  <td class="mono neg">—</td>
  <td class="mono">—</td>
  <td style="font-size:12px;color:var(--dim)">MODERATE</td>
- <td class="mono" style="color:var(--dim)">0.4h</td>
+ <td class="mono" style="color:var(--dim)">0.5h</td>
 </tr><tr>
  <td class="mono" style="color:var(--dim);font-size:11px">10月15日 15:56</td>
  <td><strong>ETH</strong></td>
@@ -111,7 +125,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
  <td class="mono neg">—</td>
  <td class="mono">—</td>
  <td style="font-size:12px;color:var(--dim)">MODERATE</td>
- <td class="mono" style="color:var(--dim)">0.5h</td>
+ <td class="mono" style="color:var(--dim)">0.6h</td>
 </tr><tr>
  <td class="mono" style="color:var(--dim);font-size:11px">10月15日 15:55</td>
  <td><strong>ETH</strong></td>
@@ -121,7 +135,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
  <td class="mono neg">—</td>
  <td class="mono">—</td>
  <td style="font-size:12px;color:var(--dim)">MODERATE</td>
- <td class="mono" style="color:var(--dim)">0.5h</td>
+ <td class="mono" style="color:var(--dim)">0.6h</td>
 </tr><tr>
  <td class="mono" style="color:var(--dim);font-size:11px">10月15日 14:16</td>
  <td><strong>BTC</strong></td>
@@ -131,7 +145,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
  <td class="mono neg">—</td>
  <td class="mono">—</td>
  <td style="font-size:12px;color:var(--dim)">MODERATE</td>
- <td class="mono" style="color:var(--dim)">2.2h</td>
+ <td class="mono" style="color:var(--dim)">2.3h</td>
 </tr><tr>
  <td class="mono" style="color:var(--dim);font-size:11px">10月15日 13:16</td>
  <td><strong>SOL</strong></td>
@@ -141,7 +155,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
  <td class="mono neg">—</td>
  <td class="mono">—</td>
  <td style="font-size:12px;color:var(--dim)">MODERATE</td>
- <td class="mono" style="color:var(--dim)">3.2h</td>
+ <td class="mono" style="color:var(--dim)">3.3h</td>
 </tr><tr>
  <td class="mono" style="color:var(--dim);font-size:11px">10月15日 15:25</td>
  <td><strong>BTC</strong></td>
@@ -151,35 +165,23 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
  <td class="mono neg">80,770.46</td>
  <td class="mono">82,460.95</td>
  <td style="font-size:12px;color:var(--dim)">MODERATE</td>
- <td class="mono" style="color:var(--dim)">1.0h</td>
+ <td class="mono" style="color:var(--dim)">1.1h</td>
 </tr></tbody></table></div></div>
 
   <div class="divider"></div>
 
   <div class="section-title trb">🎯 NMC Trend Rider Balanced v1.0</div>
   <div class="kpi-row" style="border-top:2px solid var(--accent4);margin-bottom:16px">
- <div><span class="big">4</span><span class="lbl">当前未平仓</span></div>
- <div><span class="big">252</span><span class="lbl">累计已平仓</span></div>
- <div><span class="big warn">39.7%</span><span class="lbl">胜率</span></div>
+ <div><span class="big">3</span><span class="lbl">当前未平仓</span></div>
+ <div><span class="big">253</span><span class="lbl">累计已平仓</span></div>
+ <div><span class="big warn">39.5%</span><span class="lbl">胜率</span></div>
  <div><span class="big pos">+0.45R</span><span class="lbl">期望值</span></div>
 </div>
-  <div class="card"><div class="ch"><span class="pulse pulse-trb"></span>未平仓信号 — Trend Rider Balanced (4)</div>
+  <div class="card"><div class="ch"><span class="pulse pulse-trb"></span>未平仓信号 — Trend Rider Balanced (3)</div>
  <div style="overflow-x:auto"><table><thead><tr>
     <th>日期</th><th>资产</th><th>方向</th><th>入场</th><th>止损</th><th>止盈1</th><th>止盈2</th>
     <th>质量</th><th>ADX</th><th>H1</th><th>开仓时间</th>
  </tr></thead><tbody><tr>
- <td class="mono" style="color:var(--dim);font-size:11px">10月15日 15:00</td>
- <td><strong>XAU_USD</strong></td>
- <td><span class="badge b-sell">SELL</span></td>
- <td class="mono">4,144.11</td>
- <td class="mono neg">4,153.47</td>
- <td class="mono">4,134.74 </td>
- <td class="mono">4,125.38</td>
- <td><span class="badge b-premium">PREMIUM</span></td>
- <td class="mono" style="color:var(--dim)">35.5</td>
- <td style="font-size:12px;color:var(--dim)">BEARISH</td>
- <td class="mono" style="color:var(--dim)">1.4h</td>
-</tr><tr>
  <td class="mono" style="color:var(--dim);font-size:11px">10月15日 15:00</td>
  <td><strong>BTC</strong></td>
  <td><span class="badge b-sell">SELL</span></td>
@@ -190,7 +192,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
  <td><span class="badge b-premium">PREMIUM</span></td>
  <td class="mono" style="color:var(--dim)">35.7</td>
  <td style="font-size:12px;color:var(--dim)">BEARISH</td>
- <td class="mono" style="color:var(--dim)">1.4h</td>
+ <td class="mono" style="color:var(--dim)">1.5h</td>
 </tr><tr>
  <td class="mono" style="color:var(--dim);font-size:11px">10月15日 14:00</td>
  <td><strong>ETH</strong></td>
@@ -202,7 +204,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
  <td><span class="badge b-premium">PREMIUM</span></td>
  <td class="mono" style="color:var(--dim)">50.9</td>
  <td style="font-size:12px;color:var(--dim)">BEARISH</td>
- <td class="mono" style="color:var(--dim)">2.4h</td>
+ <td class="mono" style="color:var(--dim)">2.5h</td>
 </tr><tr>
  <td class="mono" style="color:var(--dim);font-size:11px">10月15日 11:15</td>
  <td><strong>SOL</strong></td>
@@ -214,7 +216,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
  <td><span class="badge b-premium">PREMIUM</span></td>
  <td class="mono" style="color:var(--dim)">29.4</td>
  <td style="font-size:12px;color:var(--dim)">BEARISH</td>
- <td class="mono" style="color:var(--dim)">5.2h</td>
+ <td class="mono" style="color:var(--dim)">5.3h</td>
 </tr></tbody></table></div></div>
 
   <div class="divider"></div>
@@ -253,7 +255,7 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
  <td><span class="badge b-med">MEDIUM</span></td>
  <td style="font-size:12px;color:var(--dim)">CHOCH</td>
  <td class="mono neg">1.3400</td>
- <td class="mono" style="color:var(--dim)">0.9h</td>
+ <td class="mono" style="color:var(--dim)">1.0h</td>
 </tr><tr>
  <td class="mono" style="color:var(--dim);font-size:11px">10月15日 13:45</td>
  <td><strong>XAU_USD</strong></td>
@@ -264,8 +266,8 @@ tr:last-child td{border-bottom:none} tr:hover td{background:rgba(255,255,255,.02
  <td class="mono">4,098.78</td>
  <td><span class="badge b-med">MEDIUM</span></td>
  <td style="font-size:12px;color:var(--dim)">BOS+CHOCH</td>
- <td class="mono neg">12.6851</td>
- <td class="mono" style="color:var(--dim)">2.7h</td>
+ <td class="mono neg">18.3849</td>
+ <td class="mono" style="color:var(--dim)">2.8h</td>
 </tr></tbody></table></div></div>
 
 </div>
