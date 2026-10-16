@@ -63,7 +63,7 @@ tr.hl td{background:rgba(79,255,176,.06)}
 <body>
 <header>
   <h1>加密信号引擎 — 分析实验室</h1>
-  <div class="meta">2026年10月16日 08:41 UTC &nbsp;|&nbsp; <a href="unified_dashboard.html">&larr; Dashboard</a> &nbsp;|&nbsp; <a href="engine_edge_dashboard.html">引擎 Edge 实验室 →</a></div>
+  <div class="meta">2026年10月16日 08:46 UTC &nbsp;|&nbsp; <a href="unified_dashboard.html">&larr; Dashboard</a> &nbsp;|&nbsp; <a href="engine_edge_dashboard.html">引擎 Edge 实验室 →</a></div>
 </header>
 <div class="container">
 
@@ -76,7 +76,7 @@ tr.hl td{background:rgba(79,255,176,.06)}
   </div>
   <div class="summary-grid cols8" style="border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:16px">
   <div><span class="big">0</span><span class="lbl">已平仓（TP/SL/EXP）</span></div>
-  <div><span class="big warn">284</span><span class="lbl">无效信号</span></div>
+  <div><span class="big warn">285</span><span class="lbl">无效信号</span></div>
   <div><span class="big neg">0%</span><span class="lbl">胜率</span></div>
   <div><span class="big neg">0%</span><span class="lbl">止损率</span></div>
   <div><span class="big neg">+0.00R</span><span class="lbl">期望值</span></div>
@@ -132,7 +132,7 @@ tr.hl td{background:rgba(79,255,176,.06)}
   <td class="mono" style="color:var(--dim);font-size:11px">10月16日 08:35</td>
   <td><strong>XAU_USD</strong></td>
   <td><span class="badge b-buy">BUY</span></td>
-  <td><span class="badge b-open">SETUP</span></td>
+  <td><span class="badge b-invalid">INVALIDATED</span></td>
   <td class="mono">4,182.32</td>
   <td class="mono">4,175.97</td>
   <td class="mono">4,194.09</td>
@@ -1492,11 +1492,11 @@ tr.hl td{background:rgba(79,255,176,.06)}
     <span class="fw-tag tag-benchmark">历史基准</span>
   </div>
   <div class="summary-grid cols5" style="border:1px solid var(--border);border-top:2px solid #ffd166;border-radius:6px;overflow:hidden;margin-bottom:16px">
-  <div><span class="big">181</span><span class="lbl">已平仓</span></div>
-  <div><span class="big neg">23.8%</span><span class="lbl">胜率</span></div>
-  <div><span class="big">42.5%</span><span class="lbl">TP1 Hit</span></div>
+  <div><span class="big">182</span><span class="lbl">已平仓</span></div>
+  <div><span class="big neg">23.6%</span><span class="lbl">胜率</span></div>
+  <div><span class="big">42.3%</span><span class="lbl">TP1 Hit</span></div>
   <div><span class="big neg">-0.27R</span><span class="lbl">期望值</span></div>
-  <div><span class="big neg">67.7</span><span class="lbl">MAE medio</span></div>
+  <div><span class="big neg">67.4</span><span class="lbl">MAE medio</span></div>
 </div>
   <div class="grid-2">
     <div class="card"><div class="ch">按触发条件</div>
@@ -1511,9 +1511,9 @@ tr.hl td{background:rgba(79,255,176,.06)}
   <td class="mono ">30.6%</td><td class="mono">55.3%</td>
   <td class="mono">30.6%</td><td class="mono neg">-0.07R</td>
 </tr><tr class="">
-  <td><strong>BOS+CHOCH</strong></td><td class="mono">38</td>
-  <td class="mono neg">10.5%</td><td class="mono">18.4%</td>
-  <td class="mono">10.5%</td><td class="mono neg">-0.68R</td>
+  <td><strong>BOS+CHOCH</strong></td><td class="mono">39</td>
+  <td class="mono neg">10.3%</td><td class="mono">17.9%</td>
+  <td class="mono">10.3%</td><td class="mono neg">-0.69R</td>
 </tr></tbody></table></div>
     <div class="card"><div class="ch">按资产</div>
   <table><thead><tr>
@@ -1523,9 +1523,9 @@ tr.hl td{background:rgba(79,255,176,.06)}
   <td class="mono ">26.8%</td><td class="mono">41.5%</td>
   <td class="mono">26.8%</td><td class="mono neg">-0.20R</td>
 </tr><tr class="">
-  <td><strong>ETH</strong></td><td class="mono">52</td>
-  <td class="mono ">26.9%</td><td class="mono">42.3%</td>
-  <td class="mono">26.9%</td><td class="mono neg">-0.19R</td>
+  <td><strong>ETH</strong></td><td class="mono">53</td>
+  <td class="mono ">26.4%</td><td class="mono">41.5%</td>
+  <td class="mono">26.4%</td><td class="mono neg">-0.21R</td>
 </tr><tr class="">
   <td><strong>SOL</strong></td><td class="mono">46</td>
   <td class="mono ">21.7%</td><td class="mono">41.3%</td>
@@ -1540,9 +1540,9 @@ tr.hl td{background:rgba(79,255,176,.06)}
   <table><thead><tr>
     <th>时段</th><th>N</th><th>Win%</th><th>TP1%</th><th>TP2%</th><th>期望值</th>
   </tr></thead><tbody><tr class="">
-  <td><strong>ASIA</strong></td><td class="mono">91</td>
-  <td class="mono ">27.5%</td><td class="mono">49.5%</td>
-  <td class="mono">27.5%</td><td class="mono neg">-0.18R</td>
+  <td><strong>ASIA</strong></td><td class="mono">92</td>
+  <td class="mono ">27.2%</td><td class="mono">48.9%</td>
+  <td class="mono">27.2%</td><td class="mono neg">-0.18R</td>
 </tr><tr class="">
   <td><strong>LONDON</strong></td><td class="mono">45</td>
   <td class="mono ">22.2%</td><td class="mono">33.3%</td>
