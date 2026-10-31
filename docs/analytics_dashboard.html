@@ -63,7 +63,7 @@ tr.hl td{background:rgba(79,255,176,.06)}
 <body>
 <header>
   <h1>加密信号引擎 — 分析实验室</h1>
-  <div class="meta">2026年10月31日 17:46 UTC &nbsp;|&nbsp; <a href="unified_dashboard.html">&larr; Dashboard</a> &nbsp;|&nbsp; <a href="engine_edge_dashboard.html">引擎 Edge 实验室 →</a></div>
+  <div class="meta">2026年10月31日 17:56 UTC &nbsp;|&nbsp; <a href="unified_dashboard.html">&larr; Dashboard</a> &nbsp;|&nbsp; <a href="engine_edge_dashboard.html">引擎 Edge 实验室 →</a></div>
 </header>
 <div class="container">
 
@@ -382,13 +382,13 @@ tr.hl td{background:rgba(79,255,176,.06)}
     <span style="color:var(--dim);font-size:11px;margin-left:auto">Sweep+Reaction · BTC · XAU</span>
   </div>
   <div class="summary-grid cols8" style="border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:16px">
-  <div><span class="big">258</span><span class="lbl">已平仓（TP/SL/EXP）</span></div>
-  <div><span class="big warn">938</span><span class="lbl">候选总数</span></div>
+  <div><span class="big">259</span><span class="lbl">已平仓（TP/SL/EXP）</span></div>
+  <div><span class="big warn">939</span><span class="lbl">候选总数</span></div>
   <div><span class="big neg">17.4%</span><span class="lbl">胜率</span></div>
-  <div><span class="big neg">78.3%</span><span class="lbl">止损率</span></div>
-  <div><span class="big neg">-0.43R</span><span class="lbl">期望值</span></div>
-  <div><span class="big">2.44</span><span class="lbl">Avg R/R</span></div>
-  <div><span class="big neg">83.9</span><span class="lbl">Avg MAE</span></div>
+  <div><span class="big neg">78.4%</span><span class="lbl">止损率</span></div>
+  <div><span class="big neg">-0.44R</span><span class="lbl">期望值</span></div>
+  <div><span class="big">2.46</span><span class="lbl">Avg R/R</span></div>
+  <div><span class="big neg">84.1</span><span class="lbl">Avg MAE</span></div>
   <div><span class="big pos">56.8</span><span class="lbl">Avg MFE</span></div>
 </div>
   <div class="grid-2">
@@ -399,11 +399,11 @@ tr.hl td{background:rgba(79,255,176,.06)}
     <th>Avg MAE</th><th>Avg MFE</th>
   </tr></thead><tbody><tr>
   <td><strong>BTC_USDT</strong></td>
-  <td class="mono">72</td>
-  <td class="mono warn">29.2%</td>
-  <td class="mono neg">-0.08R</td>
-  <td class="mono neg">279.5</td>
-  <td class="mono pos">197.1</td>
+  <td class="mono">73</td>
+  <td class="mono warn">28.8%</td>
+  <td class="mono neg">-0.10R</td>
+  <td class="mono neg">277.3</td>
+  <td class="mono pos">195.1</td>
 </tr><tr>
   <td><strong>XAU_USD</strong></td>
   <td class="mono">21</td>
@@ -441,11 +441,11 @@ tr.hl td{background:rgba(79,255,176,.06)}
   <td class="mono pos">39.3</td>
 </tr><tr>
   <td><strong>SELL</strong></td>
-  <td class="mono">106</td>
-  <td class="mono neg">21.7%</td>
-  <td class="mono neg">-0.30R</td>
-  <td class="mono neg">89.7</td>
-  <td class="mono pos">81.9</td>
+  <td class="mono">107</td>
+  <td class="mono neg">21.5%</td>
+  <td class="mono neg">-0.31R</td>
+  <td class="mono neg">90.0</td>
+  <td class="mono pos">81.7</td>
 </tr></tbody></table>
 </div>
   </div>
@@ -464,10 +464,10 @@ tr.hl td{background:rgba(79,255,176,.06)}
   <td class="mono pos">56.3</td>
 </tr><tr>
   <td><strong>MODERATE</strong></td>
-  <td class="mono">227</td>
-  <td class="mono neg">17.2%</td>
+  <td class="mono">228</td>
+  <td class="mono neg">17.1%</td>
   <td class="mono neg">-0.44R</td>
-  <td class="mono neg">92.6</td>
+  <td class="mono neg">92.7</td>
   <td class="mono pos">56.9</td>
 </tr></tbody></table>
 </div>
@@ -478,10 +478,10 @@ tr.hl td{background:rgba(79,255,176,.06)}
     <th>Avg MAE</th><th>Avg MFE</th>
   </tr></thead><tbody><tr>
   <td><strong>MEDIUM</strong></td>
-  <td class="mono">189</td>
-  <td class="mono neg">14.8%</td>
-  <td class="mono neg">-0.51R</td>
-  <td class="mono neg">80.0</td>
+  <td class="mono">190</td>
+  <td class="mono neg">14.7%</td>
+  <td class="mono neg">-0.52R</td>
+  <td class="mono neg">80.2</td>
   <td class="mono pos">51.4</td>
 </tr><tr>
   <td><strong>LOW</strong></td>
@@ -502,7 +502,7 @@ tr.hl td{background:rgba(79,255,176,.06)}
   <td class="mono" style="color:var(--dim);font-size:11px">10月31日 16:46</td>
   <td><strong>BTC</strong></td>
   <td><span class="badge b-sell">SELL</span></td>
-  <td><span class="badge b-open">ENTRY</span></td>
+  <td><span class="badge b-sl">SL</span></td>
   <td class="mono">77,574.30</td>
   <td class="mono">77,646.88</td>
   <td class="mono">77,074.05</td>
@@ -1240,6 +1240,18 @@ tr.hl td{background:rgba(79,255,176,.06)}
     <th>日期</th><th>资产</th><th>方向</th><th>结果</th><th>入场</th><th>SL</th><th>TP</th>
     <th>R/R</th><th>价位</th><th>Sweep</th><th>触发</th>
   </tr></thead><tbody><tr>
+  <td class="mono" style="color:var(--dim);font-size:11px">10月31日 17:55</td>
+  <td><strong>ETH</strong></td>
+  <td><span class="badge b-sell">SELL</span></td>
+  <td><span class="badge b-open">OPEN</span></td>
+  <td class="mono">2,254.76</td>
+  <td class="mono">2,256.58</td>
+  <td class="mono">2,251.05</td>
+  <td class="mono">2.03</td>
+  <td style="font-size:12px;color:var(--dim)">impulse:ETH_USDT:BEARISH:H1:1793466000000</td>
+  <td style="font-size:12px;color:var(--dim)">SELL</td>
+  <td style="font-size:12px;color:var(--dim)">RESTART_ZONE</td>
+</tr><tr>
   <td class="mono" style="color:var(--dim);font-size:11px">10月31日 17:11</td>
   <td><strong>ETH</strong></td>
   <td><span class="badge b-sell">SELL</span></td>
@@ -1465,18 +1477,6 @@ tr.hl td{background:rgba(79,255,176,.06)}
   <td class="mono">80,100.00</td>
   <td class="mono">2.24</td>
   <td style="font-size:12px;color:var(--dim)">impulse:BTC_USDT:BEARISH:H1:1793304000000</td>
-  <td style="font-size:12px;color:var(--dim)">SELL</td>
-  <td style="font-size:12px;color:var(--dim)">RESTART_ZONE</td>
-</tr><tr>
-  <td class="mono" style="color:var(--dim);font-size:11px">10月29日 20:16</td>
-  <td><strong>SOL</strong></td>
-  <td><span class="badge b-sell">SELL</span></td>
-  <td><span class="badge b-be">BE_HIT</span></td>
-  <td class="mono">98.9600</td>
-  <td class="mono">99.2518</td>
-  <td class="mono">98.5200</td>
-  <td class="mono">1.51</td>
-  <td style="font-size:12px;color:var(--dim)">impulse:SOL_USDT:BEARISH:M30:1793304000000</td>
   <td style="font-size:12px;color:var(--dim)">SELL</td>
   <td style="font-size:12px;color:var(--dim)">RESTART_ZONE</td>
 </tr></tbody></table>
